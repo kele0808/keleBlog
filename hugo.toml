@@ -38,8 +38,8 @@ disableScrollToTop = false
 comments = false
 hidemeta = false
 hideSummary = false
-showtoc = true
-tocopen = false
+ShowToc = true
+TocOpen = true
 
 [[params.socialIcons]]
 name = "github"
@@ -170,6 +170,6 @@ noClasses = false
 unsafe = true
 
 [markup.tableOfContents]
-endLevel = 4
+endLevel = 3
 ordered = false
 startLevel = 2
