@@ -1,9 +1,9 @@
 ---
-title: "Buscar"
+title: "Search"
 layout: "search"
 url: "/search/"
 summary: "search"
-placeholder: "Escribe una palabra clave para buscar..."
+placeholder: "Type a keyword to search posts..."
 ShowReadingTime: false
 ShowWordCount: false
 ---

@@ -109,48 +109,48 @@ title = "keleBlog"
   url = "/search/"
   weight = 50
 
-# ========== 西班牙语 ==========
-[languages.es]
-languageName = "Español"
-languageCode = "es"
+# ========== 英文 ==========
+[languages.en]
+languageName = "English"
+languageCode = "en"
 weight = 2
 title = "keleBlog"
 
-  [languages.es.params]
-  description = "Notas de estudio y blog técnico — Kafka, IA y desarrollo backend"
+  [languages.en.params]
+  description = "Study notes & technical blog — Kafka, AI, and backend engineering."
 
-    [languages.es.params.homeInfoParams]
-    Title = "¡Hola! Soy kele 👋"
-    Content = "Este es mi blog de notas de estudio y artículos técnicos. Escribo principalmente sobre análisis de código fuente de Kafka, arquitectura backend y conocimientos relacionados con IA. Se actualiza poco a poco, ¡bienvenidos a conversar!"
+    [languages.en.params.homeInfoParams]
+    Title = "Hi, I'm kele 👋"
+    Content = "This is my personal blog for study notes and technical writing. Mostly Kafka source-code analysis, backend architecture, and AI-related knowledge. Updates as I learn — feel free to reach out."
 
-  [[languages.es.menu.main]]
+  [[languages.en.menu.main]]
   identifier = "posts"
-  name = "Artículos"
-  url = "/es/posts/"
+  name = "Posts"
+  url = "/en/posts/"
   weight = 10
 
-  [[languages.es.menu.main]]
+  [[languages.en.menu.main]]
   identifier = "categories"
-  name = "Categorías"
-  url = "/es/categories/"
+  name = "Categories"
+  url = "/en/categories/"
   weight = 20
 
-  [[languages.es.menu.main]]
+  [[languages.en.menu.main]]
   identifier = "tags"
-  name = "Etiquetas"
-  url = "/es/tags/"
+  name = "Tags"
+  url = "/en/tags/"
   weight = 30
 
-  [[languages.es.menu.main]]
+  [[languages.en.menu.main]]
   identifier = "archives"
-  name = "Archivo"
-  url = "/es/archives/"
+  name = "Archives"
+  url = "/en/archives/"
   weight = 40
 
-  [[languages.es.menu.main]]
+  [[languages.en.menu.main]]
   identifier = "search"
-  name = "Buscar"
-  url = "/es/search/"
+  name = "Search"
+  url = "/en/search/"
   weight = 50
 
 # ---------- 输出与渲染 ----------
