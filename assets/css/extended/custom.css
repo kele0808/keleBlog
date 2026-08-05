@@ -114,7 +114,7 @@
   transform: translateY(-3px) scale(1.1);
 }
 
-/* 让按钮圆一点、大一点、更明显一点 */
+/* 默认：右下角（窄屏时的兜底位置） */
 .top-link {
   width: 3rem;
   height: 3rem;
@@ -133,4 +133,24 @@
 
 [data-theme="dark"] .top-link {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* 宽屏：挪到文章右侧空白区（跟左侧 TOC 对称的位置） */
+@media (min-width: 1400px) {
+  .top-link {
+    right: max(16px, calc((100vw - var(--main-width)) / 2 - 300px));
+    bottom: auto;
+    top: calc(50vh + 40px);
+  }
+}
+
+
+/* ---------------- 3. 隐藏文章底部的 tags 列表 ---------------- */
+
+/* 
+ * 上一篇/下一篇 和 分享按钮 已经在 hugo.toml 里通过 ShowPostNavLinks=false 
+ * 和 ShowShareButtons=false 关掉；tags 主题没提供开关，只能 CSS 隐藏。
+ */
+article.post-single .post-tags {
+  display: none;
 }
