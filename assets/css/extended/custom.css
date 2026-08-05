@@ -1,7 +1,6 @@
 /* =============================================================
  *  keleBlog · 自定义样式
  *  1. 文章左侧浮动目录（TOC）
- *  2. 右下角火箭回顶按钮
  * ============================================================= */
 
 /* ---------------- 1. 左侧浮动 TOC ---------------- */
@@ -86,63 +85,3 @@
 }
 
 /* 视口过窄时（<1400px）保持主题默认样式，什么都不做 */
-
-
-/* ---------------- 2. 火箭回顶按钮 ---------------- */
-
-/* 隐藏主题默认的双箭头 SVG */
-.top-link svg {
-  display: none;
-}
-
-/* 用火箭 emoji 作为图标 */
-.top-link::before {
-  content: "🚀";
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  font-size: 1.4rem;
-  line-height: 1;
-  transform: translateY(1px);
-  transition: transform 0.2s ease;
-}
-
-/* hover 时火箭"起飞"效果 */
-.top-link:hover::before {
-  transform: translateY(-3px) scale(1.1);
-}
-
-/* 默认：右下角（窄屏时的兜底位置，比原来更往左上一点） */
-.top-link {
-  width: 3rem;
-  height: 3rem;
-  padding: 0;
-  bottom: 4rem;
-  right: 4rem;
-  background: var(--tertiary);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, visibility .3s, opacity .3s;
-}
-
-.top-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-}
-
-[data-theme="dark"] .top-link {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-}
-
-/*
- * 中/宽屏：挪到文章右侧空白区（跟左侧 TOC 对称的位置）
- * clamp 保证：视口很宽时不会飘到太远；视口正好够宽时紧挨文章。
- */
-@media (min-width: 1200px) {
-  .top-link {
-    right: clamp(2rem, calc((100vw - var(--main-width)) / 2 - 200px), 12rem);
-    bottom: auto;
-    top: calc(50vh + 40px);
-  }
-}

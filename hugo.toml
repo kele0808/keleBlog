@@ -34,7 +34,7 @@ ShowWordCount = true
 ShowRssButtonInSectionTermList = true
 UseHugoToc = true
 disableSpecial1stPost = false
-disableScrollToTop = false
+disableScrollToTop = true
 comments = false
 hidemeta = false
 hideSummary = false
@@ -44,10 +44,6 @@ TocOpen = true
 [[params.socialIcons]]
 name = "github"
 url = "https://github.com/kele0808"
-
-[[params.socialIcons]]
-name = "rss"
-url = "index.xml"
 
 [params.assets]
 disableHLJS = true
@@ -114,6 +110,12 @@ title = "keleBlog"
   url = "/search/"
   weight = 50
 
+  [[languages.zh-cn.menu.main]]
+  identifier = "about"
+  name = "关于我"
+  url = "/about/"
+  weight = 60
+
 # ========== 英文 ==========
 [languages.en]
 languageName = "English"
@@ -157,6 +159,12 @@ title = "keleBlog"
   name = "Search"
   url = "/en/search/"
   weight = 50
+
+  [[languages.en.menu.main]]
+  identifier = "about"
+  name = "About"
+  url = "/en/about/"
+  weight = 60
 
 # ---------- 输出与渲染 ----------
 [outputs]
