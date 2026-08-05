@@ -19,6 +19,7 @@ minifyOutput = true
 [params]
 env = "production"
 author = "kele"
+mainSections = ["posts"]
 keywords = ["Blog", "Kafka", "AI", "后端", "源码解析"]
 DateFormat = "2006-01-02"
 defaultTheme = "auto"
