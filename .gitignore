@@ -1,0 +1,14 @@
+public/
+resources/
+.hugo_build.lock
+
+.DS_Store
+Thumbs.db
+
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+node_modules/
