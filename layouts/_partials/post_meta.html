@@ -1,0 +1,35 @@
+{{- $scratch := newScratch }}
+
+{{- if not .Date.IsZero -}}
+    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" (.Date) (.Date | time.Format (default ":date_long" site.Params.DateFormat)))) }}
+{{- end }}
+
+{{- if (.Param "ShowReadingTime") -}}
+    {{- $scratch.Add "meta" (slice (printf "<span>%s</span>" (i18n "read_time" .ReadingTime | default (printf "%d min" .ReadingTime)))) }}
+{{- end }}
+
+{{- if (.Param "ShowWordCount") -}}
+    {{- $scratch.Add "meta" (slice (printf "<span>%s</span>" (i18n "words" .WordCount | default (printf "%d words" .WordCount)))) }}
+{{- end }}
+
+{{- if not (.Param "hideAuthor") -}}
+    {{- with (partial "author.html" .) }}
+        {{- $scratch.Add "meta" (slice (printf "<span>%s</span>" .)) }}
+    {{- end }}
+{{- end }}
+
+{{/*
+  文章阅读量（不蒜子 PV）：只在单篇文章页显示，放在作者后面。
+  container span 是不蒜子必需的容器 ID；value span 会在 JS 加载后被替换成数字。
+  加载中或服务不可用时显示 "…" 占位符。
+*/}}
+{{- if (and (eq .Kind "page") (not (.Param "hidePageViews"))) -}}
+    {{- $viewLabel := "阅读" }}
+    {{- if ne site.Language.Lang "zh-cn" }}{{ $viewLabel = "Views" }}{{ end }}
+    {{- $scratch.Add "meta" (slice (printf `<span id="busuanzi_container_page_pv">%s <span id="busuanzi_value_page_pv">…</span></span>` $viewLabel)) }}
+{{- end }}
+
+{{/* Combine all meta information into a single string with separators and render it as HTML.*/}}
+{{- with ($scratch.Get "meta") }}
+    {{- delimit . "&nbsp;·&nbsp;" | safeHTML -}}
+{{- end -}}
