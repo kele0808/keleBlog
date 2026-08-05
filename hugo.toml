@@ -27,7 +27,7 @@ disableThemeToggle = false
 
 ShowReadingTime = true
 ShowShareButtons = false
-ShowPostNavLinks = false
+ShowPostNavLinks = true
 ShowBreadCrumbs = true
 ShowCodeCopyButtons = true
 ShowWordCount = true

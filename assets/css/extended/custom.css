@@ -114,13 +114,13 @@
   transform: translateY(-3px) scale(1.1);
 }
 
-/* 默认：右下角（窄屏时的兜底位置） */
+/* 默认：右下角（窄屏时的兜底位置，比原来更往左上一点） */
 .top-link {
   width: 3rem;
   height: 3rem;
   padding: 0;
-  bottom: 3rem;
-  right: 2rem;
+  bottom: 4rem;
+  right: 4rem;
   background: var(--tertiary);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s ease, box-shadow 0.2s ease, visibility .3s, opacity .3s;
@@ -135,22 +135,14 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
-/* 宽屏：挪到文章右侧空白区（跟左侧 TOC 对称的位置） */
-@media (min-width: 1400px) {
+/*
+ * 中/宽屏：挪到文章右侧空白区（跟左侧 TOC 对称的位置）
+ * clamp 保证：视口很宽时不会飘到太远；视口正好够宽时紧挨文章。
+ */
+@media (min-width: 1200px) {
   .top-link {
-    right: max(16px, calc((100vw - var(--main-width)) / 2 - 300px));
+    right: clamp(2rem, calc((100vw - var(--main-width)) / 2 - 200px), 12rem);
     bottom: auto;
     top: calc(50vh + 40px);
   }
-}
-
-
-/* ---------------- 3. 隐藏文章底部的 tags 列表 ---------------- */
-
-/* 
- * 上一篇/下一篇 和 分享按钮 已经在 hugo.toml 里通过 ShowPostNavLinks=false 
- * 和 ShowShareButtons=false 关掉；tags 主题没提供开关，只能 CSS 隐藏。
- */
-article.post-single .post-tags {
-  display: none;
 }
