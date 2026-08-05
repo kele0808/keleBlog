@@ -1,4 +1,4 @@
-baseURL = "https://<GITHUB_USERNAME>.github.io/keleBlog/"
+baseURL = "https://kele0808.github.io/keleBlog/"
 languageCode = "zh-cn"
 defaultContentLanguage = "zh-cn"
 title = "keleBlog"
@@ -47,7 +47,7 @@ Content = "这里是我的学习笔记与技术博客。主要会写 Kafka 源�
 
 [[params.socialIcons]]
 name = "github"
-url = "https://github.com/<GITHUB_USERNAME>"
+url = "https://github.com/kele0808"
 
 [[params.socialIcons]]
 name = "rss"

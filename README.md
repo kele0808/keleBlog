@@ -90,7 +90,6 @@ cover:
 
 ## 后续待办
 
-- [ ] 替换 `hugo.toml` 中的 `<GITHUB_USERNAME>` 为真实用户名
 - [ ] 添加个人 favicon（放到 `static/favicon.ico`）
 - [ ] 接入 [Giscus](https://giscus.app/) 评论系统
 - [ ] 绑定自定义域名（可选）
