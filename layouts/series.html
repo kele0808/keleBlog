@@ -1,0 +1,81 @@
+{{- define "main" }}
+
+{{- $seriesId := .Params.seriesId | default .File.ContentBaseName }}
+{{- $meta := index site.Data.series $seriesId }}
+{{- $lang := site.Language.Lang }}
+{{- $posts := partial "series_posts.html" $seriesId }}
+{{- $published := len $posts }}
+{{- $planned := $meta.plannedCount | default $published }}
+{{- if lt $planned $published }}{{- $planned = $published }}{{- end }}
+
+<header class="page-header series-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>{{ .Title }}</h1>
+  {{- if .Description }}
+  <div class="post-description">{{ .Description }}</div>
+  {{- end }}
+  <p class="series-progress">
+    {{- if eq $lang "zh-cn" }}
+    进度：已发布 <strong>{{ $published }}</strong> / 计划 {{ $planned }} 篇
+    {{- else }}
+    Progress: <strong>{{ $published }}</strong> published / {{ $planned }} planned
+    {{- end }}
+  </p>
+  <div class="series-progress-bar" aria-hidden="true">
+    <span style="width: {{ if gt $planned 0 }}{{ div (mul $published 100) $planned }}{{ else }}0{{ end }}%"></span>
+  </div>
+</header>
+
+{{- if .Content }}
+<div class="post-content md-content">
+  {{ .Content }}
+</div>
+{{- end }}
+
+<section class="series-section">
+  <h2>{{- if eq $lang "zh-cn" }}阅读路线{{- else }}Reading path{{- end }}</h2>
+  {{- with $meta.roadmap }}
+  <ol class="series-roadmap">
+    {{- range . }}
+    <li>
+      <h3>{{ index .stage $lang | default (index .stage "zh-cn") }}</h3>
+      <ul>
+        {{- range .items }}
+        <li>{{ index . $lang | default (index . "zh-cn") }}</li>
+        {{- end }}
+      </ul>
+    </li>
+    {{- end }}
+  </ol>
+  {{- end }}
+</section>
+
+<section class="series-section">
+  <h2>{{- if eq $lang "zh-cn" }}文章目录{{- else }}Table of contents{{- end }}</h2>
+  {{- if gt $published 0 }}
+  <ol class="series-toc">
+    {{- range $posts }}
+    <li>
+      <a href="{{ .Permalink }}">
+        <span class="series-toc-order">#{{ .Params.seriesOrder | default "?" }}</span>
+        <span class="series-toc-title">{{ .Title }}</span>
+      </a>
+      {{- if (.Param "ShowReadingTime") | default site.Params.ShowReadingTime }}
+      <span class="series-toc-meta">{{- if eq $lang "zh-cn" }}{{ .ReadingTime }} 分钟{{- else }}{{ .ReadingTime }} min{{- end }}</span>
+      {{- end }}
+    </li>
+    {{- end }}
+  </ol>
+  {{- else }}
+  <p class="series-empty">{{- if eq $lang "zh-cn" }}暂无已发布文章。{{- else }}No published posts yet.{{- end }}</p>
+  {{- end }}
+</section>
+
+{{- with $meta.nextPreview }}
+<section class="series-section series-next">
+  <h2>{{- if eq $lang "zh-cn" }}下一篇预告{{- else }}Up next{{- end }}</h2>
+  <p>{{ index . $lang | default (index . "zh-cn") }}</p>
+</section>
+{{- end }}
+
+{{- end }}

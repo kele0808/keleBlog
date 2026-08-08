@@ -1,0 +1,67 @@
+{{- define "main" }}
+
+{{- partial "home_info.html" . }}
+
+{{- $posts := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- $posts = where $posts "Params.hiddenInHomeList" "!=" true }}
+{{- $defaultSite := site.Sites.Default }}
+{{- if and (ne site.Language.Lang $defaultSite.Language.Lang) (eq (len $posts) 0) }}
+  {{- $posts = where $defaultSite.RegularPages "Type" "in" $defaultSite.Params.mainSections }}
+  {{- $posts = where $posts "Params.hiddenInHomeList" "!=" true }}
+{{- end }}
+
+{{- $sections := site.Params.homeSections | default dict }}
+{{- $lang := site.Language.Lang }}
+
+{{/* ---- 精选 ---- */}}
+{{- $featured := where $posts "Params.featured" true }}
+{{- if gt (len $featured) 0 }}
+<section class="home-section">
+  <header class="home-section-header">
+    <h2>{{ $sections.featuredTitle | default (cond (eq $lang "zh-cn") "精选文章" "Featured") }}</h2>
+  </header>
+  {{- range first 3 $featured }}
+    {{- partial "post_card.html" (dict "page" . "class" "post-entry") }}
+  {{- end }}
+</section>
+{{- end }}
+
+{{/* ---- 最新 ---- */}}
+<section class="home-section">
+  <header class="home-section-header">
+    <h2>{{ $sections.latestTitle | default (cond (eq $lang "zh-cn") "最新文章" "Latest") }}</h2>
+    <a class="home-section-more" href="{{ "posts/" | relLangURL }}">{{ $sections.latestMore | default (cond (eq $lang "zh-cn") "全部文章" "All posts") }} →</a>
+  </header>
+  {{- range first 5 $posts }}
+    {{- partial "post_card.html" (dict "page" . "class" "post-entry") }}
+  {{- end }}
+</section>
+
+{{/* ---- 系列 ---- */}}
+<section class="home-section">
+  <header class="home-section-header">
+    <h2>{{ $sections.seriesTitle | default (cond (eq $lang "zh-cn") "系列" "Series") }}</h2>
+  </header>
+  {{- $kafkaMeta := site.Data.series.kafka }}
+  {{- $kafkaPosts := partial "series_posts.html" "kafka" }}
+  {{- $published := len $kafkaPosts }}
+  {{- $planned := $kafkaMeta.plannedCount | default 9 }}
+  {{- $seriesURL := "/series/kafka/" }}
+  {{- with site.GetPage "/series/kafka" }}
+    {{- $seriesURL = .RelPermalink }}
+  {{- end }}
+  <a class="series-card" href="{{ $seriesURL }}">
+    <div class="series-card-body">
+      <h3>{{ index $kafkaMeta.title $lang | default (index $kafkaMeta.title "zh-cn") }}</h3>
+      <p>{{ index $kafkaMeta.description $lang | default (index $kafkaMeta.description "zh-cn") }}</p>
+      <p class="series-card-progress">
+        {{- if eq $lang "zh-cn" }}已写 {{ $published }} / {{ $planned }} 篇{{- else }}{{ $published }} / {{ $planned }} posts{{- end }}
+      </p>
+      <div class="series-progress-bar" aria-hidden="true">
+        <span style="width: {{ if gt $planned 0 }}{{ div (mul $published 100) $planned }}{{ else }}0{{ end }}%"></span>
+      </div>
+    </div>
+  </a>
+</section>
+
+{{- end }}

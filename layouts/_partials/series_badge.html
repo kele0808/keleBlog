@@ -1,0 +1,25 @@
+{{- /* 文首系列进度徽章 */ -}}
+{{- $seriesId := .Params.series }}
+{{- if $seriesId }}
+{{- $meta := index site.Data.series $seriesId }}
+{{- $lang := site.Language.Lang }}
+{{- $posts := where site.RegularPages "Params.series" $seriesId }}
+{{- $defaultSite := site.Sites.Default }}
+{{- if and (ne $lang $defaultSite.Language.Lang) (eq (len $posts) 0) }}
+  {{- $posts = where $defaultSite.RegularPages "Params.series" $seriesId }}
+{{- end }}
+{{- $posts = sort $posts "Params.seriesOrder" "asc" }}
+{{- $total := len $posts }}
+{{- $order := .Params.seriesOrder | default 1 }}
+{{- $title := index $meta.title $lang | default (index $meta.title "zh-cn") | default $seriesId }}
+{{- $seriesURL := printf "/series/%s/" $seriesId }}
+{{- with site.GetPage (printf "/series/%s" $seriesId) }}
+  {{- $seriesURL = .RelPermalink }}
+{{- end }}
+
+<p class="series-badge">
+  <a href="{{ $seriesURL }}">{{ $title }}</a>
+  <span>·</span>
+  {{- if eq $lang "zh-cn" }}第 {{ $order }}/{{ $total }} 篇{{- else }}Part {{ $order }}/{{ $total }}{{- end }}
+</p>
+{{- end }}

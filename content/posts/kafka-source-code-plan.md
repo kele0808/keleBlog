@@ -2,9 +2,13 @@
 title: "Kafka 源码解析系列 · 开篇"
 date: 2026-08-04T22:30:00+08:00
 draft: false
-tags: ["Kafka", "源码", "分布式"]
+tags: ["Kafka", "架构"]
 categories: ["Kafka 源码解析"]
-description: "Kafka 源码解析系列的开篇，聊聊为什么读源码、按什么路径读、以及本系列会覆盖哪些主题。"
+series: "kafka"
+seriesOrder: 1
+featured: true
+description: "Kafka 源码解析系列的开篇：为什么读源码、按什么路径读、以及本系列会覆盖哪些主题。"
+summary: "Kafka 源码解析系列开篇：为什么读源码、推荐阅读路线，以及 Producer / Broker / 事务等后续主题规划。"
 ---
 
 ## 为什么要读 Kafka 源码

@@ -1,0 +1,80 @@
+{{- /* 文末：同系列相邻 + 相关阅读 */ -}}
+{{- $lang := site.Language.Lang }}
+{{- $seriesId := .Params.series }}
+{{- $current := . }}
+
+{{- if $seriesId }}
+{{- $posts := partial "series_posts.html" $seriesId }}
+{{- $order := $current.Params.seriesOrder | default 0 }}
+{{- $prev := false }}
+{{- $next := false }}
+{{- range $posts }}
+  {{- if eq (.Params.seriesOrder | default 0) (sub $order 1) }}{{ $prev = . }}{{ end }}
+  {{- if eq (.Params.seriesOrder | default 0) (add $order 1) }}{{ $next = . }}{{ end }}
+{{- end }}
+
+{{- if or $prev $next }}
+<nav class="series-nav">
+  {{- with $prev }}
+  <a class="series-nav-prev" href="{{ .Permalink }}">
+    <span class="series-nav-label">{{- if eq $lang "zh-cn" }}上一篇{{- else }}Previous{{- end }}</span>
+    <span class="series-nav-title">{{ .Title }}</span>
+  </a>
+  {{- end }}
+  {{- with $next }}
+  <a class="series-nav-next" href="{{ .Permalink }}">
+    <span class="series-nav-label">{{- if eq $lang "zh-cn" }}下一篇{{- else }}Next{{- end }}</span>
+    <span class="series-nav-title">{{ .Title }}</span>
+  </a>
+  {{- end }}
+</nav>
+{{- end }}
+{{- end }}
+
+{{- /* 相关阅读：同 tags / categories，不足则用最新文章补齐，最多 3 篇 */ -}}
+{{- $related := slice }}
+{{- $seen := dict $current.RelPermalink true }}
+
+{{- range $current.GetTerms "tags" }}
+  {{- range .Pages }}
+    {{- if not (index $seen .RelPermalink) }}
+      {{- $seen = merge $seen (dict .RelPermalink true) }}
+      {{- $related = $related | append . }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{- if lt (len $related) 3 }}
+  {{- range $current.GetTerms "categories" }}
+    {{- range .Pages }}
+      {{- if and (lt (len $related) 3) (not (index $seen .RelPermalink)) }}
+        {{- $seen = merge $seen (dict .RelPermalink true) }}
+        {{- $related = $related | append . }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{- if lt (len $related) 3 }}
+  {{- $pool := where site.RegularPages "Type" "in" site.Params.mainSections }}
+  {{- if eq (len $pool) 0 }}
+    {{- $pool = where site.Sites.Default.RegularPages "Type" "in" site.Sites.Default.Params.mainSections }}
+  {{- end }}
+  {{- range $pool }}
+    {{- if and (lt (len $related) 3) (not (index $seen .RelPermalink)) }}
+      {{- $seen = merge $seen (dict .RelPermalink true) }}
+      {{- $related = $related | append . }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{- if gt (len $related) 0 }}
+<section class="related-posts">
+  <h2>{{- if eq $lang "zh-cn" }}相关阅读{{- else }}Related{{- end }}</h2>
+  <ul>
+    {{- range first 3 $related }}
+    <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}

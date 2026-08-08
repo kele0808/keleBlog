@@ -5,6 +5,7 @@ draft: false
 tags: ["随笔"]
 categories: ["站内公告"]
 description: "keleBlog 上线记录 —— 为什么写博客、会写什么、以及技术栈选型。"
+summary: "keleBlog 上线：沉淀 Kafka / 后端 / AI 学习笔记，技术栈为 Hugo + PaperMod + GitHub Pages。"
 ---
 
 ## 为什么开这个博客

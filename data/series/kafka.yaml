@@ -1,0 +1,40 @@
+id: kafka
+plannedCount: 9
+title:
+  zh-cn: Kafka 源码解析
+  en: Kafka Source Code Series
+description:
+  zh-cn: 从 Producer / Consumer 到 Broker 内部机制，按阅读路线系统拆解 Kafka 源码。
+  en: A structured walkthrough of Kafka internals — from clients to Broker.
+nextPreview:
+  zh-cn: Producer 消息发送全流程解析
+  en: Producer send path deep dive
+roadmap:
+  - stage:
+      zh-cn: 第一阶段：客户端
+      en: Phase 1 · Clients
+    items:
+      - zh-cn: Producer 消息发送全流程
+        en: Producer send path
+      - zh-cn: Consumer 拉取与 Rebalance
+        en: Consumer poll & rebalance
+  - stage:
+      zh-cn: 第二阶段：Broker
+      en: Phase 2 · Broker
+    items:
+      - zh-cn: 网络层（Reactor）
+        en: Network layer (Reactor)
+      - zh-cn: 日志存储
+        en: Log storage
+      - zh-cn: 副本机制
+        en: Replication
+  - stage:
+      zh-cn: 第三阶段：高级特性
+      en: Phase 3 · Advanced
+    items:
+      - zh-cn: Controller 与元数据（KRaft）
+        en: Controller & metadata (KRaft)
+      - zh-cn: 事务实现
+        en: Transactions
+      - zh-cn: Kafka Streams（可选）
+        en: Kafka Streams (optional)

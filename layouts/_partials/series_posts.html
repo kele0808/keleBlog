@@ -1,0 +1,8 @@
+{{- /* Returns nothing; sets $posts via scratch — use series_posts_list instead via return pattern */ -}}
+{{- /* Usage: $posts := partial "series_posts.html" "kafka" */ -}}
+{{- $seriesId := . }}
+{{- $posts := where site.RegularPages "Params.series" $seriesId }}
+{{- if eq (len $posts) 0 }}
+  {{- $posts = where site.Sites.Default.RegularPages "Params.series" $seriesId }}
+{{- end }}
+{{- return ($posts.ByParam "seriesOrder") }}

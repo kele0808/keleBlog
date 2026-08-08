@@ -1,14 +1,14 @@
 /* =============================================================
  *  keleBlog · 自定义样式
  *  1. 文章左侧浮动目录（TOC）
+ *  2. 首页 CTA 按钮 / 正在写什么
+ *  3. 首页卡片摘要与标签
+ *  4. 首页三段式与系列卡片
+ *  5. 专题页 / 相关阅读
  * ============================================================= */
 
 /* ---------------- 1. 左侧浮动 TOC ---------------- */
 
-/* 
- * 只有视口够宽的时候才切换到侧边栏形态；
- * 视口窄时回退到主题默认的顶部折叠版，避免遮挡正文。
- */
 @media (min-width: 1400px) {
   article.post-single > details.toc {
     position: fixed;
@@ -84,4 +84,362 @@
   }
 }
 
-/* 视口过窄时（<1400px）保持主题默认样式，什么都不做 */
+/* ---------------- 2. 首页 CTA ---------------- */
+
+.home-writing-now {
+  margin: 1rem 0 0.25rem;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid var(--primary);
+  background: var(--code-bg);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+[data-theme="dark"] .home-writing-now {
+  background: var(--entry);
+}
+
+.home-writing-now-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin-bottom: 0.25rem;
+}
+
+.home-writing-now-text {
+  color: var(--content);
+}
+
+.home-cta {
+  margin-top: 1.25rem !important;
+}
+
+.home-cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  border: 1px solid transparent;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  z-index: 2;
+  position: relative;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--theme) !important;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--primary) !important;
+  border-color: var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--primary);
+}
+
+/* ---------------- 3. 卡片摘要 / 标签 ---------------- */
+
+.entry-summary-clamp p {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+}
+
+.entry-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0.4rem 0 0.6rem;
+  padding: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.entry-tags a {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.78rem;
+  border-radius: 999px;
+  background: var(--code-bg);
+  color: var(--secondary);
+  text-decoration: none;
+}
+
+.entry-tags a:hover {
+  color: var(--primary);
+}
+
+[data-theme="dark"] .entry-tags a {
+  background: var(--entry);
+}
+
+.entry-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--secondary);
+}
+
+/* ---------------- 4. 首页三段式 ---------------- */
+
+.home-section {
+  margin-top: 2.5rem;
+}
+
+.home-section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.home-section-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.home-section-more {
+  font-size: 0.9rem;
+  color: var(--secondary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.home-section-more:hover {
+  color: var(--primary);
+}
+
+.series-card {
+  display: block;
+  padding: 1.25rem 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--entry);
+  text-decoration: none !important;
+  color: inherit;
+  transition: border-color 0.15s ease;
+}
+
+.series-card:hover {
+  border-color: var(--primary);
+}
+
+.series-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+  color: var(--primary);
+}
+
+.series-card p {
+  margin: 0 0 0.75rem;
+  color: var(--secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.series-card-progress {
+  font-size: 0.85rem !important;
+  color: var(--content) !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.series-progress-bar {
+  height: 6px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.series-progress-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--primary);
+  border-radius: 999px;
+}
+
+/* ---------------- 5. 专题页 / 文章系列 / 相关阅读 ---------------- */
+
+.series-header .series-progress {
+  margin: 0.75rem 0 0.5rem;
+  color: var(--secondary);
+}
+
+.series-section {
+  margin: 2rem 0;
+}
+
+.series-section h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+}
+
+.series-roadmap {
+  padding-inline-start: 1.2rem;
+}
+
+.series-roadmap h3 {
+  font-size: 1rem;
+  margin: 0.75rem 0 0.35rem;
+}
+
+.series-toc {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.series-toc li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.series-toc a {
+  display: flex;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--primary);
+}
+
+.series-toc-order {
+  color: var(--secondary);
+  font-variant-numeric: tabular-nums;
+  min-width: 1.5rem;
+}
+
+.series-toc-meta {
+  color: var(--secondary);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.series-next {
+  padding: 1rem 1.2rem;
+  border-left: 3px solid var(--primary);
+  background: var(--code-bg);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+[data-theme="dark"] .series-next {
+  background: var(--entry);
+}
+
+.series-badge {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  color: var(--secondary);
+}
+
+.series-badge a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.related-posts {
+  margin: 2.5rem 0 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.related-posts h2 {
+  font-size: 1.15rem;
+  margin-bottom: 0.75rem;
+}
+
+.related-posts ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-posts li {
+  padding: 0.45rem 0;
+}
+
+.related-posts a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.related-posts a:hover {
+  text-decoration: underline;
+}
+
+.series-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 2rem 0 1rem;
+}
+
+.series-nav a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none !important;
+  color: inherit;
+}
+
+.series-nav a:hover {
+  border-color: var(--primary);
+}
+
+.series-nav-label {
+  font-size: 0.78rem;
+  color: var(--secondary);
+}
+
+.series-nav-title {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.series-nav-next {
+  text-align: end;
+  grid-column: 2;
+}
+
+@media (max-width: 600px) {
+  .series-nav {
+    grid-template-columns: 1fr;
+  }
+  .series-nav-next {
+    grid-column: 1;
+    text-align: start;
+  }
+}
