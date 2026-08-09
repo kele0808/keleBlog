@@ -33,7 +33,11 @@
             {{- end }}
 
             {{- $lsenabled := (or (not site.Params.disableThemeToggle) (and (not site.Params.disableLangToggle) (hugo.IsMultilingual))) }}
-            {{- if $lsenabled }}
+            {{- $github := false }}
+            {{- range site.Params.socialIcons }}
+              {{- if eq .name "github" }}{{ $github = . }}{{ end }}
+            {{- end }}
+            {{- if or $lsenabled $github }}
             <div class="logo-switches">
                 {{- if (not site.Params.disableThemeToggle) }}
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
@@ -57,12 +61,19 @@
                     </svg>
                 </button>
                 {{- end }}
+
+                {{- with $github }}
+                {{- if not site.Params.disableThemeToggle }}<span class="nav-sep">|</span>{{ end }}
+                <a class="header-social-link" href="{{ trim .url " " | safeURL }}" target="_blank" rel="noopener noreferrer me"
+                    title="GitHub" aria-label="GitHub">
+                    {{ partial "svg.html" . }}
+                </a>
+                {{- end }}
                 
                 {{- if (not site.Params.disableLangToggle) }}
                     {{- $lang := .Lang}}
                     {{- with site.Home.Translations }}
-                    {{- $separator := or $label_text (not site.Params.disableThemeToggle)}}
-                    {{- if $separator }}<span class="nav-sep">|</span>{{ end }}
+                    <span class="nav-sep">|</span>
                     <ul class="lang-menu">
                         {{- range . -}}
                         {{- if ne $lang .Lang }}
