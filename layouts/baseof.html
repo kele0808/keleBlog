@@ -16,8 +16,11 @@
     {{- partial "head.html" . }}
 </head>
 
+{{- $seriesDocPage := and (eq .Kind "page") (eq .Params.series "kafka") (eq .Section "posts") -}}
 {{- if (or (ne .Kind `page` ) (eq .Layout `archives`) (eq .Layout `search`)) }}
-<body class="list" id="top">
+<body class="list{{ if $seriesDocPage }} series-doc-page{{ end }}" id="top">
+{{- else if $seriesDocPage }}
+<body class="series-doc-page" id="top">
 {{- else }}
 <body id="top">
 {{- end }}

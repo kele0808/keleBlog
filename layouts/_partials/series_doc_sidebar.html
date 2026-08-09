@@ -1,0 +1,81 @@
+{{- $seriesId := .Params.series | default "kafka" -}}
+{{- $meta := index site.Data.series $seriesId -}}
+{{- $lang := site.Language.Lang -}}
+{{- $posts := partial "series_posts.html" $seriesId -}}
+{{- $published := len $posts -}}
+{{- $planned := $meta.plannedCount | default $published -}}
+{{- if lt $planned $published }}{{- $planned = $published }}{{- end }}
+{{- $seriesTitle := index $meta.title $lang | default (index $meta.title "zh-cn") | default $seriesId -}}
+{{- $seriesURL := printf "/series/%s/" $seriesId -}}
+{{- with site.GetPage (printf "/series/%s" $seriesId) }}
+  {{- $seriesURL = .RelPermalink -}}
+{{- end }}
+
+{{- $postByRoadmapIndex := dict -}}
+{{- $.Scratch.Set "introPosts" slice -}}
+{{- range $posts -}}
+  {{- with .Params.roadmapIndex -}}
+    {{- $postByRoadmapIndex = merge $postByRoadmapIndex (dict (string .) .) -}}
+  {{- else -}}
+    {{- $.Scratch.Add "introPosts" . -}}
+  {{- end -}}
+{{- end -}}
+{{- $introPosts := $.Scratch.Get "introPosts" -}}
+{{- $roadmapIndex := 0 -}}
+
+<nav class="series-doc-sidebar" aria-label="{{- if eq $lang "zh-cn" }}系列目录{{- else }}Series contents{{- end }}">
+  <div class="series-doc-sidebar-head">
+    <a class="series-doc-sidebar-title" href="{{ $seriesURL }}">{{ $seriesTitle }}</a>
+    <p class="series-doc-sidebar-progress">
+      {{- if eq $lang "zh-cn" }}
+      已发布 <strong>{{ $published }}</strong> / 计划 {{ $planned }} 篇
+      {{- else }}
+      <strong>{{ $published }}</strong> published / {{ $planned }} planned
+      {{- end }}
+    </p>
+  </div>
+
+  {{- if gt (len $introPosts) 0 }}
+  <section class="series-doc-nav-group">
+    <p class="series-doc-nav-label">{{- if eq $lang "zh-cn" }}导读{{- else }}Intro{{- end }}</p>
+    <ul class="series-doc-nav-list">
+      {{- range $introPosts }}
+      <li class="series-doc-nav-item{{ if eq .RelPermalink $.RelPermalink }} is-active{{ end }}">
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+      </li>
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
+
+  {{- with $meta.roadmap }}
+  <section class="series-doc-nav-group">
+    <p class="series-doc-nav-label">{{- if eq $lang "zh-cn" }}阅读路线{{- else }}Reading path{{- end }}</p>
+    {{- range . }}
+    <div class="series-doc-stage">
+      <p class="series-doc-stage-title">{{ index .stage $lang | default (index .stage "zh-cn") }}</p>
+      <ul class="series-doc-nav-list">
+        {{- range .items }}
+        {{- $roadmapIndex = add $roadmapIndex 1 -}}
+        {{- $post := index $postByRoadmapIndex (string $roadmapIndex) -}}
+        {{- $label := index . $lang | default (index . "zh-cn") -}}
+        <li class="series-doc-nav-item{{ if and $post (eq $post.RelPermalink $.RelPermalink) }} is-active{{ end }}{{ if not $post }} is-pending{{ end }}">
+          {{- if $post }}
+          <a href="{{ $post.Permalink }}">
+            <span class="series-doc-nav-order">#{{ $roadmapIndex }}</span>
+            <span class="series-doc-nav-text">{{ $post.Title }}</span>
+          </a>
+          {{- else }}
+          <span class="series-doc-nav-pending">
+            <span class="series-doc-nav-order">#{{ $roadmapIndex }}</span>
+            <span class="series-doc-nav-text">{{ $label }}</span>
+          </span>
+          {{- end }}
+        </li>
+        {{- end }}
+      </ul>
+    </div>
+    {{- end }}
+  </section>
+  {{- end }}
+</nav>

@@ -10,3 +10,13 @@
 {{- $searchBundle := (slice $fusejs $modalSearch) | resources.Concat "assets/js/modal-search-bundle.js" -}}
 <script defer crossorigin="anonymous" src="{{ $searchBundle.RelPermalink }}"></script>
 {{- end -}}
+
+{{- if and (eq .Kind "page") (eq .Params.series "kafka") (eq .Section "posts") -}}
+{{- $seriesDrawer := resources.Get "js/series-drawer.js" | js.Build | resources.Minify -}}
+{{- if not site.Params.assets.disableFingerprinting -}}
+{{- $seriesDrawer = $seriesDrawer | fingerprint -}}
+<script defer crossorigin="anonymous" src="{{ $seriesDrawer.RelPermalink }}" integrity="{{ $seriesDrawer.Data.Integrity }}"></script>
+{{- else -}}
+<script defer crossorigin="anonymous" src="{{ $seriesDrawer.RelPermalink }}"></script>
+{{- end -}}
+{{- end -}}

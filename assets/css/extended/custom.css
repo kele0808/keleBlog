@@ -5,12 +5,13 @@
  *  3. 首页卡片摘要与标签
  *  4. 首页三段式与系列卡片
  *  5. 专题页 / 相关阅读
+ *  6. Kafka 系列文档三栏布局
  * ============================================================= */
 
 /* ---------------- 1. 左侧浮动 TOC ---------------- */
 
 @media (min-width: 1400px) {
-  article.post-single > details.toc {
+  article.post-single:not(.series-doc-article) > details.toc {
     position: fixed;
     top: 96px;
     left: max(16px, calc((100vw - var(--main-width)) / 2 - 300px));
@@ -25,19 +26,19 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
   }
 
-  [data-theme="dark"] article.post-single > details.toc {
+  [data-theme="dark"] article.post-single:not(.series-doc-article) > details.toc {
     background: var(--entry);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   }
 
-  article.post-single > details.toc summary {
+  article.post-single:not(.series-doc-article) > details.toc summary {
     padding: 0.6rem 1rem;
     font-weight: 600;
     font-size: 0.95rem;
     border-bottom: 1px solid var(--border);
   }
 
-  article.post-single > details.toc .inner {
+  article.post-single:not(.series-doc-article) > details.toc .inner {
     margin: 0;
     padding: 0.6rem 1rem 0.8rem 1rem;
     max-height: calc(100vh - 200px);
@@ -46,22 +47,22 @@
     line-height: 1.6;
   }
 
-  article.post-single > details.toc .inner ul {
+  article.post-single:not(.series-doc-article) > details.toc .inner ul {
     padding-inline-start: 1rem;
     margin: 0.2rem 0;
   }
 
-  article.post-single > details.toc .inner > ul {
+  article.post-single:not(.series-doc-article) > details.toc .inner > ul {
     padding-inline-start: 0;
     list-style: none;
   }
 
-  article.post-single > details.toc .inner > ul > li {
+  article.post-single:not(.series-doc-article) > details.toc .inner > ul > li {
     list-style: none;
     margin: 0.3rem 0;
   }
 
-  article.post-single > details.toc .inner a {
+  article.post-single:not(.series-doc-article) > details.toc .inner a {
     color: var(--secondary);
     text-decoration: none;
     display: inline-block;
@@ -69,16 +70,16 @@
     transition: color 0.15s ease;
   }
 
-  article.post-single > details.toc .inner a:hover {
+  article.post-single:not(.series-doc-article) > details.toc .inner a:hover {
     color: var(--primary);
     text-decoration: none;
   }
 
-  article.post-single > details.toc .inner::-webkit-scrollbar {
+  article.post-single:not(.series-doc-article) > details.toc .inner::-webkit-scrollbar {
     width: 6px;
   }
 
-  article.post-single > details.toc .inner::-webkit-scrollbar-thumb {
+  article.post-single:not(.series-doc-article) > details.toc .inner::-webkit-scrollbar-thumb {
     background: var(--border);
     border-radius: 3px;
   }
@@ -524,5 +525,257 @@ body.search-modal-open {
   .series-nav-next {
     grid-column: 1;
     text-align: start;
+  }
+}
+
+/* ---------------- 6. Kafka 系列文档布局 ---------------- */
+
+body.series-doc-page .main {
+  max-width: min(1280px, calc(100vw - 32px));
+}
+
+.series-doc-layout {
+  width: 100%;
+}
+
+.series-doc-mobile-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.series-doc-mobile-btn {
+  flex: 1;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--entry);
+  color: var(--primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.series-doc-aside-left,
+.series-doc-aside-right {
+  display: none;
+}
+
+.series-doc-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 998;
+}
+
+.series-doc-drawer[hidden] {
+  display: none;
+}
+
+.series-doc-drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.series-doc-drawer-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: min(320px, 88vw);
+  height: 100%;
+  overflow-y: auto;
+  padding: 1rem 1rem 2rem;
+  background: var(--theme);
+  border-right: 1px solid var(--border);
+  box-shadow: 8px 0 24px rgba(0, 0, 0, 0.12);
+}
+
+.series-doc-drawer-close {
+  position: sticky;
+  top: 0;
+  float: right;
+  margin: -0.25rem 0 0.5rem 0.5rem;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--entry);
+  color: var(--primary);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+body.series-doc-drawer-open {
+  overflow: hidden;
+}
+
+.series-doc-sidebar-head {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.series-doc-sidebar-title {
+  display: block;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.series-doc-sidebar-title:hover {
+  text-decoration: underline;
+}
+
+.series-doc-sidebar-progress {
+  margin: 0.35rem 0 0;
+  font-size: 0.82rem;
+  color: var(--secondary);
+}
+
+.series-doc-nav-label {
+  margin: 0 0 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.series-doc-nav-group + .series-doc-nav-group {
+  margin-top: 1rem;
+}
+
+.series-doc-stage + .series-doc-stage {
+  margin-top: 0.75rem;
+}
+
+.series-doc-stage-title {
+  margin: 0 0 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.series-doc-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.series-doc-nav-item {
+  margin: 0.15rem 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.series-doc-nav-item a,
+.series-doc-nav-pending {
+  display: flex;
+  gap: 0.35rem;
+  align-items: flex-start;
+  padding: 0.35rem 0.5rem;
+  border-radius: calc(var(--radius) - 2px);
+  text-decoration: none;
+}
+
+.series-doc-nav-item a {
+  color: var(--content);
+}
+
+.series-doc-nav-item a:hover {
+  background: var(--code-bg);
+}
+
+.series-doc-nav-item.is-active a {
+  background: var(--code-bg);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.series-doc-nav-item.is-pending .series-doc-nav-pending {
+  color: var(--secondary);
+  opacity: 0.72;
+  cursor: default;
+}
+
+.series-doc-nav-order {
+  flex: 0 0 auto;
+  font-size: 0.75rem;
+  color: var(--secondary);
+  min-width: 1.5rem;
+}
+
+.series-doc-toc-title {
+  margin: 0 0 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--secondary);
+}
+
+.series-doc-toc-inner {
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.series-doc-toc-inner ul {
+  list-style: none;
+  margin: 0;
+  padding-inline-start: 0.85rem;
+}
+
+.series-doc-toc-inner > ul {
+  padding-inline-start: 0;
+}
+
+.series-doc-toc-inner a {
+  color: var(--secondary);
+  text-decoration: none;
+}
+
+.series-doc-toc-inner a:hover {
+  color: var(--primary);
+}
+
+.series-doc-article .post-header,
+.series-doc-article .post-content {
+  max-width: none;
+}
+
+@media (min-width: 1100px) {
+  .series-doc-layout {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr) 220px;
+    gap: 28px;
+    align-items: start;
+  }
+
+  .series-doc-mobile-bar,
+  .series-doc-drawer {
+    display: none;
+  }
+
+  .series-doc-aside-left,
+  .series-doc-aside-right {
+    display: block;
+  }
+
+  .series-doc-aside-left,
+  .series-doc-aside-right {
+    position: sticky;
+    top: 84px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+  }
+
+  .series-doc-aside-left {
+    padding-right: 0.25rem;
+  }
+
+  .series-doc-aside-right {
+    padding-left: 0.25rem;
   }
 }

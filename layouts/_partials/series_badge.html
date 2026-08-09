@@ -9,8 +9,14 @@
   {{- $posts = where $defaultSite.RegularPages "Params.series" $seriesId }}
 {{- end }}
 {{- $posts = sort $posts "Params.seriesOrder" "asc" }}
-{{- $total := len $posts }}
+{{- $published := len $posts }}
 {{- $order := .Params.seriesOrder | default 1 }}
+{{- $total := $published }}
+{{- with $meta }}
+  {{- if .plannedCount }}
+    {{- $total = .plannedCount }}
+  {{- end }}
+{{- end }}
 {{- $title := index $meta.title $lang | default (index $meta.title "zh-cn") | default $seriesId }}
 {{- $seriesURL := printf "/series/%s/" $seriesId }}
 {{- with site.GetPage (printf "/series/%s" $seriesId) }}
