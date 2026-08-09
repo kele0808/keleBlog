@@ -114,6 +114,16 @@
   color: var(--content);
 }
 
+.home-social {
+  margin-top: 1rem;
+  padding-top: 0;
+}
+
+.home-social .social-icons a {
+  z-index: 2;
+  position: relative;
+}
+
 /* ---------------- 3. 卡片摘要 / 标签 ---------------- */
 
 .entry-summary-clamp p {
