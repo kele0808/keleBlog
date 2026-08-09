@@ -24,7 +24,7 @@
 {{- else }}
 <body id="top">
 {{- end }}
-    {{ partialCached "header.html" . .Page -}}
+    {{ partial "header.html" . }}
     <main class="main">
         {{- block "main" . }}{{ end }}
     </main>

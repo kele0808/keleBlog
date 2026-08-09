@@ -109,20 +109,34 @@
         {{- $currentPage := . }}
         <ul id="menu" class="menu">
             {{- range site.Menus.main }}
-            {{/*
-              i18n URL fix: 主题原来的 `.URL | absLangURL` 在 baseURL 带 subpath
-              且当前是非默认语言时，会把语言前缀错误地拼到 subpath 之前，产生
-              `/en/keleBlog/en/posts/` 之类的坏 URL。这里直接用 Hugo 已经解析好的
-              `.URL`（pageRef 会正确处理语言前缀和 subpath）。
-            */}}
+            {{- $menu_page := false }}
+            {{- $ref := .PageRef | default .Identifier }}
+            {{- if $ref }}
+              {{- $menu_page = site.GetPage $ref }}
+              {{- if not $menu_page }}
+                {{- $menu_page = site.GetPage (strings.TrimPrefix "/" $ref) }}
+              {{- end }}
+            {{- end }}
             {{- $menu_url := .URL }}
-            {{- $menu_item_url := (cond (strings.HasSuffix $menu_url "/") $menu_url (printf "%s/" $menu_url)) }}
-            {{- $page_url:= $currentPage.RelPermalink }}
-            {{- $is_search := eq (site.GetPage .KeyName).Layout `search` }}
+            {{- with $menu_page }}
+              {{- $menu_url = .RelPermalink }}
+            {{- end }}
+            {{- $is_search := and $menu_page (eq $menu_page.Layout "search") }}
+            {{- $is_active := false }}
+            {{- with $menu_page }}
+              {{- $is_active = eq .RelPermalink $currentPage.RelPermalink }}
+            {{- else }}
+              {{- $menu_path := $menu_url | relLangURL }}
+              {{- $page_path := $currentPage.RelPermalink }}
+              {{- if not (hasPrefix $menu_path "http") }}{{- $menu_path = $menu_path | absURL }}{{- end }}
+              {{- if not (hasPrefix $page_path "http") }}{{- $page_path = $page_path | absURL }}{{- end }}
+              {{- $is_active = eq (urls.Parse $menu_path).Path (urls.Parse $page_path).Path }}
+            {{- end }}
             <li>
                 <a href="{{ $menu_url }}" title="{{ .Title | default .Name }}{{- if $is_search }} (⌘K){{- end }}"
-                {{- if $is_search }} accesskey="s"{{- end }}>
-                    <span {{- if eq $menu_item_url $page_url }} class="active" {{- end }}>
+                {{- if $is_search }} accesskey="s"{{- end }}
+                {{- if $is_search }} data-open-search="true"{{- end }}>
+                    <span {{- if $is_active }} class="active" {{- end }}>
                         {{- .Pre }}
                         {{- .Name -}}
                         {{ .Post -}}

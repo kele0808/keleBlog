@@ -1,0 +1,51 @@
+{{- define "main" }}
+
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>
+    {{- $title := .Title -}}
+    {{- if not $title -}}
+      {{- if eq .Type "categories" -}}
+        {{- if eq site.Language.Lang "zh-cn" }}分类{{- else }}Categories{{- end -}}
+      {{- else if eq .Type "tags" -}}
+        {{- if eq site.Language.Lang "zh-cn" }}标签{{- else }}Tags{{- end -}}
+      {{- else -}}
+        {{- $title = .Type | title -}}{{- $title -}}
+      {{- end -}}
+    {{- else -}}
+      {{- $title -}}
+    {{- end -}}
+    {{- if (.Param "ShowRssButtonInSectionTermList") }}
+    {{- with .OutputFormats.Get "rss" }}
+    <a href="{{ .RelPermalink }}" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+    {{- end }}
+    {{- end }}
+  </h1>
+  {{- if .Description }}
+  <div class="post-description">
+    {{ .Description | markdownify }}
+  </div>
+  {{- end }}
+</header>
+
+<ul class="terms-tags">
+  {{- $type := .Type }}
+  {{- range .Data.Terms.Alphabetical }}
+    {{- $name := .Name }}
+    {{- $count := .Count }}
+    {{- with site.GetPage (printf "/%s/%s" $type $name) }}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .LinkTitle }} <sup><strong><sup>{{ $count }}</sup></strong></sup></a>
+    </li>
+    {{- end }}
+  {{- end }}
+</ul>
+
+{{- end }}

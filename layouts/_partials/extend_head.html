@@ -11,6 +11,14 @@
 <script defer crossorigin="anonymous" src="{{ $searchBundle.RelPermalink }}"></script>
 {{- end -}}
 
+{{- $menuJs := resources.Get "js/menu.js" | js.Build | resources.Minify -}}
+{{- if not site.Params.assets.disableFingerprinting -}}
+{{- $menuJs = $menuJs | fingerprint -}}
+<script defer crossorigin="anonymous" src="{{ $menuJs.RelPermalink }}" integrity="{{ $menuJs.Data.Integrity }}"></script>
+{{- else -}}
+<script defer crossorigin="anonymous" src="{{ $menuJs.RelPermalink }}"></script>
+{{- end -}}
+
 {{- if and (eq .Kind "page") (eq .Params.series "kafka") (eq .Section "posts") -}}
 {{- $seriesDrawer := resources.Get "js/series-drawer.js" | js.Build | resources.Minify -}}
 {{- if not site.Params.assets.disableFingerprinting -}}

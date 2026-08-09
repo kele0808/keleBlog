@@ -213,6 +213,29 @@ body.search-modal-open {
   overflow: hidden;
 }
 
+.header-nav {
+  row-gap: 0.35rem;
+}
+
+#menu.menu {
+  flex-wrap: wrap;
+  white-space: normal;
+  overflow-x: visible;
+  row-gap: 0.15rem;
+  max-width: 100%;
+}
+
+@media (max-width: 900px) {
+  .header-nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #menu.menu {
+    padding-bottom: 0.15rem;
+  }
+}
+
 @media (max-width: 768px) {
   .search-modal {
     padding: 0;
