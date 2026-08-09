@@ -125,6 +125,109 @@
   height: 17px;
 }
 
+.search-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.15rem;
+  border: 0;
+  background: transparent;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.search-toggle svg {
+  width: 17px;
+  height: 17px;
+}
+
+.search-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10vh 16px 16px;
+}
+
+.search-modal[hidden] {
+  display: none;
+}
+
+.search-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.search-modal-panel {
+  position: relative;
+  width: min(640px, 100%);
+  max-height: min(70vh, 560px);
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--theme);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.18);
+}
+
+.search-modal-box.searchbox input {
+  padding: 10px 14px;
+  width: 100%;
+  color: var(--primary);
+  font-size: 16px;
+  font-weight: 500;
+  border: 2px solid var(--tertiary);
+  border-radius: var(--radius);
+  background: var(--entry);
+}
+
+.search-modal-box .searchResults {
+  margin: 12px 0 0;
+  max-height: min(50vh, 420px);
+  overflow-y: auto;
+}
+
+.search-modal-hint {
+  margin: 12px 0 0;
+  color: var(--secondary);
+  font-size: 13px;
+  text-align: center;
+}
+
+.search-modal-hint kbd {
+  display: inline-block;
+  padding: 0.1em 0.45em;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--entry);
+  font-size: 12px;
+  font-family: inherit;
+}
+
+body.search-modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .search-modal {
+    padding: 0;
+    align-items: stretch;
+  }
+
+  .search-modal-panel {
+    width: 100%;
+    max-height: 100%;
+    min-height: 100%;
+    border-radius: 0;
+    border-inline: 0;
+    border-top: 0;
+  }
+}
+
 /* ---------------- 3. 卡片摘要 / 标签 ---------------- */
 
 .entry-summary-clamp p {

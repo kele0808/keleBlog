@@ -1,2 +1,12 @@
 {{/* 不蒜子访问统计（免费、无需注册，加载一次就自动统计 PV/UV） */}}
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+{{- $modalSearch := resources.Get "js/modal-search.js" | js.Build (dict "params" (dict "fuseOpts" site.Params.fuseOpts)) | resources.Minify -}}
+{{- $fusejs := resources.Get "js/fuse.basic.min.js" -}}
+{{- if not site.Params.assets.disableFingerprinting -}}
+{{- $searchBundle := (slice $fusejs $modalSearch) | resources.Concat "assets/js/modal-search-bundle.js" | fingerprint -}}
+<script defer crossorigin="anonymous" src="{{ $searchBundle.RelPermalink }}" integrity="{{ $searchBundle.Data.Integrity }}"></script>
+{{- else -}}
+{{- $searchBundle := (slice $fusejs $modalSearch) | resources.Concat "assets/js/modal-search-bundle.js" -}}
+<script defer crossorigin="anonymous" src="{{ $searchBundle.RelPermalink }}"></script>
+{{- end -}}

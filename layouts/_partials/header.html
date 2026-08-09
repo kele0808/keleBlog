@@ -37,7 +37,6 @@
             {{- range site.Params.socialIcons }}
               {{- if eq .name "github" }}{{ $github = . }}{{ end }}
             {{- end }}
-            {{- if or $lsenabled $github }}
             <div class="logo-switches">
                 {{- if (not site.Params.disableThemeToggle) }}
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
@@ -69,6 +68,19 @@
                     {{ partial "svg.html" . }}
                 </a>
                 {{- end }}
+
+                {{- $hasBeforeSearch := or (not site.Params.disableThemeToggle) $github }}
+                {{- if $hasBeforeSearch }}<span class="nav-sep">|</span>{{ end }}
+                <button type="button" id="search-open" class="search-toggle" accesskey="s"
+                    title="{{- if eq site.Language.Lang "zh-cn" }}搜索 (⌘K){{- else }}Search (⌘K){{- end }}"
+                    aria-label="{{- if eq site.Language.Lang "zh-cn" }}搜索文章{{- else }}Search posts{{- end }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
                 
                 {{- if (not site.Params.disableLangToggle) }}
                     {{- $lang := .Lang}}
@@ -93,7 +105,6 @@
                     {{- end }}
                 {{- end }}
             </div>
-            {{- end }}
         </div>
         {{- $currentPage := . }}
         <ul id="menu" class="menu">
@@ -109,8 +120,8 @@
             {{- $page_url:= $currentPage.RelPermalink }}
             {{- $is_search := eq (site.GetPage .KeyName).Layout `search` }}
             <li>
-                <a href="{{ $menu_url }}" title="{{ .Title | default .Name }} {{- cond $is_search (" (Alt + /)" | safeHTMLAttr) ("" | safeHTMLAttr ) }}"
-                {{- cond $is_search (" accesskey=/" | safeHTMLAttr) ("" | safeHTMLAttr ) }}>
+                <a href="{{ $menu_url }}" title="{{ .Title | default .Name }}{{- if $is_search }} (⌘K){{- end }}"
+                {{- if $is_search }} accesskey="s"{{- end }}>
                     <span {{- if eq $menu_item_url $page_url }} class="active" {{- end }}>
                         {{- .Pre }}
                         {{- .Name -}}
