@@ -1,0 +1,11 @@
+{{- /* 按 weight 输出全部系列卡片 */ -}}
+{{- $items := slice }}
+{{- range $id, $meta := site.Data.series }}
+  {{- $items = $items | append (dict "id" $id "meta" $meta "weight" ($meta.weight | default 100)) }}
+{{- end }}
+{{- $items = sort $items "weight" }}
+<div class="series-grid">
+  {{- range $items }}
+    {{- partial "series_card.html" . }}
+  {{- end }}
+</div>

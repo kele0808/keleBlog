@@ -1,0 +1,41 @@
+id: jvm
+weight: 30
+plannedCount: 8
+title:
+  zh-cn: JVM 原理与实践
+  en: JVM Internals
+description:
+  zh-cn: 内存模型、垃圾回收、类加载与性能排查，把 JVM 从「会配参数」推进到「能解释现象」。
+  en: Memory model, GC, classloading, and troubleshooting — from tuning knobs to real understanding.
+nextPreview:
+  zh-cn: 运行时数据区与对象创建
+  en: Runtime data areas & object creation
+roadmap:
+  - stage:
+      zh-cn: 第一阶段：内存与对象
+      en: Phase 1 · Memory & Objects
+    items:
+      - zh-cn: 运行时数据区
+        en: Runtime data areas
+      - zh-cn: 对象创建与内存布局
+        en: Object creation & layout
+      - zh-cn: 引用类型与可达性
+        en: References & reachability
+  - stage:
+      zh-cn: 第二阶段：垃圾回收
+      en: Phase 2 · GC
+    items:
+      - zh-cn: GC 算法与分代假设
+        en: GC algorithms & generations
+      - zh-cn: G1 / ZGC 要点
+        en: G1 / ZGC essentials
+      - zh-cn: GC 日志怎么读
+        en: Reading GC logs
+  - stage:
+      zh-cn: 第三阶段：类加载与调优
+      en: Phase 3 · Classloading & Tuning
+    items:
+      - zh-cn: 类加载机制与双亲委派
+        en: Classloading & delegation
+      - zh-cn: 常见排查路径（OOM / CPU）
+        en: Troubleshooting paths (OOM / CPU)

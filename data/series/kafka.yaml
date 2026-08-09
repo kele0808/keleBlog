@@ -1,4 +1,5 @@
 id: kafka
+weight: 10
 plannedCount: 9
 title:
   zh-cn: Kafka 源码解析

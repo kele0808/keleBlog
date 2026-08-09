@@ -1,5 +1,7 @@
 ---
 title: "Series"
+layout: "series-hub"
+description: "Long-form series by topic: Kafka, Java Collections, JVM, Spring Boot, and AI."
 ---
 
-Long-form series by topic. Currently featuring **Kafka Source Code**.
+Topic-based series. Each page has a reading path, progress, and post list.

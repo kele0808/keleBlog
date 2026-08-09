@@ -1,0 +1,41 @@
+id: java-collections
+weight: 20
+plannedCount: 8
+title:
+  zh-cn: Java 集合源码
+  en: Java Collections
+description:
+  zh-cn: 从 List / Map / Set 到并发容器，梳理结构选型与源码细节。
+  en: List, Map, Set and concurrent collections — structures, trade-offs, and source details.
+nextPreview:
+  zh-cn: HashMap 红黑树化与扩容机制
+  en: HashMap treeify & resize
+roadmap:
+  - stage:
+      zh-cn: 第一阶段：核心接口与 List
+      en: Phase 1 · Interfaces & List
+    items:
+      - zh-cn: Collection / List 体系概览
+        en: Collection / List overview
+      - zh-cn: ArrayList 与 LinkedList
+        en: ArrayList & LinkedList
+  - stage:
+      zh-cn: 第二阶段：Map 与 Set
+      en: Phase 2 · Map & Set
+    items:
+      - zh-cn: HashMap 结构与扩容
+        en: HashMap structure & resize
+      - zh-cn: TreeMap / LinkedHashMap
+        en: TreeMap / LinkedHashMap
+      - zh-cn: HashSet 与 LinkedHashSet
+        en: HashSet & LinkedHashSet
+  - stage:
+      zh-cn: 第三阶段：并发容器
+      en: Phase 3 · Concurrent
+    items:
+      - zh-cn: ConcurrentHashMap
+        en: ConcurrentHashMap
+      - zh-cn: CopyOnWrite 系列
+        en: CopyOnWrite family
+      - zh-cn: 选型清单与坑
+        en: Cheat sheet & pitfalls

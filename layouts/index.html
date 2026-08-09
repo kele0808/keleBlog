@@ -41,27 +41,9 @@
 <section class="home-section">
   <header class="home-section-header">
     <h2>{{ $sections.seriesTitle | default (cond (eq $lang "zh-cn") "系列" "Series") }}</h2>
+    <a class="home-section-more" href="{{ "series/" | relLangURL }}">{{- if eq $lang "zh-cn" }}全部系列{{- else }}All series{{- end }} →</a>
   </header>
-  {{- $kafkaMeta := site.Data.series.kafka }}
-  {{- $kafkaPosts := partial "series_posts.html" "kafka" }}
-  {{- $published := len $kafkaPosts }}
-  {{- $planned := $kafkaMeta.plannedCount | default 9 }}
-  {{- $seriesURL := "/series/kafka/" }}
-  {{- with site.GetPage "/series/kafka" }}
-    {{- $seriesURL = .RelPermalink }}
-  {{- end }}
-  <a class="series-card" href="{{ $seriesURL }}">
-    <div class="series-card-body">
-      <h3>{{ index $kafkaMeta.title $lang | default (index $kafkaMeta.title "zh-cn") }}</h3>
-      <p>{{ index $kafkaMeta.description $lang | default (index $kafkaMeta.description "zh-cn") }}</p>
-      <p class="series-card-progress">
-        {{- if eq $lang "zh-cn" }}已写 {{ $published }} / {{ $planned }} 篇{{- else }}{{ $published }} / {{ $planned }} posts{{- end }}
-      </p>
-      <div class="series-progress-bar" aria-hidden="true">
-        <span style="width: {{ if gt $planned 0 }}{{ div (mul $published 100) $planned }}{{ else }}0{{ end }}%"></span>
-      </div>
-    </div>
-  </a>
+  {{- partial "series_list.html" . }}
 </section>
 
 {{- end }}

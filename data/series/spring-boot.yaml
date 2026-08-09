@@ -1,0 +1,41 @@
+id: spring-boot
+weight: 40
+plannedCount: 8
+title:
+  zh-cn: Spring Boot 源码与实践
+  en: Spring Boot Series
+description:
+  zh-cn: 自动配置、启动流程、常用 Starter 与排错思路，把「能跑」升级成「知道为什么能跑」。
+  en: Auto-configuration, startup flow, common starters, and debugging — from "it works" to "why it works".
+nextPreview:
+  zh-cn: Spring Boot 启动与自动配置入口
+  en: Boot startup & auto-configuration entry
+roadmap:
+  - stage:
+      zh-cn: 第一阶段：启动与自动配置
+      en: Phase 1 · Startup & Auto-config
+    items:
+      - zh-cn: SpringApplication 启动流程
+        en: SpringApplication run path
+      - zh-cn: 自动配置原理与条件注解
+        en: Auto-config & conditionals
+      - zh-cn: 配置属性绑定
+        en: Configuration properties binding
+  - stage:
+      zh-cn: 第二阶段：Web 与数据访问
+      en: Phase 2 · Web & Data
+    items:
+      - zh-cn: Spring MVC 请求链路
+        en: Spring MVC request path
+      - zh-cn: 数据源与事务
+        en: DataSource & transactions
+  - stage:
+      zh-cn: 第三阶段：工程化
+      en: Phase 3 · Engineering
+    items:
+      - zh-cn: Actuator 与可观测性
+        en: Actuator & observability
+      - zh-cn: 常见坑与排错清单
+        en: Pitfalls & debug checklist
+      - zh-cn: 自定义 Starter
+        en: Custom starters

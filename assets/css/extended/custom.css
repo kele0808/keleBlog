@@ -237,6 +237,18 @@
   color: var(--primary);
 }
 
+.series-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 720px) {
+  .series-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .series-card {
   display: block;
   padding: 1.25rem 1.4rem;
@@ -246,6 +258,7 @@
   text-decoration: none !important;
   color: inherit;
   transition: border-color 0.15s ease;
+  height: 100%;
 }
 
 .series-card:hover {

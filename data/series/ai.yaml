@@ -1,0 +1,39 @@
+id: ai
+weight: 50
+plannedCount: 7
+title:
+  zh-cn: AI 应用实践
+  en: AI Engineering
+description:
+  zh-cn: 面向工程落地：提示工程、RAG、Agent 与评估，少讲概念，多谈可复现路径。
+  en: Practical LLM apps — prompting, RAG, agents, and evaluation, with reproducible paths.
+nextPreview:
+  zh-cn: 从 Prompt 到可维护的 LLM 应用骨架
+  en: From prompts to a maintainable LLM app skeleton
+roadmap:
+  - stage:
+      zh-cn: 第一阶段：基础能力
+      en: Phase 1 · Foundations
+    items:
+      - zh-cn: Prompt 工程的工程化
+        en: Prompting as engineering
+      - zh-cn: 模型选型与成本取舍
+        en: Model choice & cost trade-offs
+  - stage:
+      zh-cn: 第二阶段：RAG
+      en: Phase 2 · RAG
+    items:
+      - zh-cn: 切片、向量库与召回
+        en: Chunking, vectors & retrieval
+      - zh-cn: 检索质量优化
+        en: Retrieval quality tuning
+  - stage:
+      zh-cn: 第三阶段：Agent 与评估
+      en: Phase 3 · Agents & Eval
+    items:
+      - zh-cn: Agent 工具调用与编排
+        en: Tool use & orchestration
+      - zh-cn: 评估与线上监控
+        en: Evaluation & monitoring
+      - zh-cn: 安全与幻觉治理
+        en: Safety & hallucination control

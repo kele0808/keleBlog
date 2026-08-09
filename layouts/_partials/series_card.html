@@ -1,0 +1,24 @@
+{{- /* Usage: partial "series_card.html" (dict "id" "kafka" "meta" $meta) */ -}}
+{{- $id := .id }}
+{{- $meta := .meta }}
+{{- $lang := site.Language.Lang }}
+{{- $posts := partial "series_posts.html" $id }}
+{{- $published := len $posts }}
+{{- $planned := $meta.plannedCount | default 1 }}
+{{- if lt $planned $published }}{{- $planned = $published }}{{- end }}
+{{- $seriesURL := printf "/series/%s/" $id }}
+{{- with site.GetPage (printf "/series/%s" $id) }}
+  {{- $seriesURL = .RelPermalink }}
+{{- end }}
+<a class="series-card" href="{{ $seriesURL }}">
+  <div class="series-card-body">
+    <h3>{{ index $meta.title $lang | default (index $meta.title "zh-cn") }}</h3>
+    <p>{{ index $meta.description $lang | default (index $meta.description "zh-cn") }}</p>
+    <p class="series-card-progress">
+      {{- if eq $lang "zh-cn" }}已写 {{ $published }} / {{ $planned }} 篇{{- else }}{{ $published }} / {{ $planned }} posts{{- end }}
+    </p>
+    <div class="series-progress-bar" aria-hidden="true">
+      <span style="width: {{ if gt $planned 0 }}{{ div (mul $published 100) $planned }}{{ else }}0{{ end }}%"></span>
+    </div>
+  </div>
+</a>
