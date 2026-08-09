@@ -1,9 +1,21 @@
 import * as params from '@params';
 
-const searchRoot = document.getElementById('header-search');
-const searchBox = document.getElementById('headerSearchBox');
-const sInput = document.getElementById('headerSearchInput');
-const resList = document.getElementById('headerSearchResults');
+const modal = document.getElementById('search-modal');
+const backdrop = document.getElementById('search-modal-backdrop');
+const trigger = document.getElementById('header-search-trigger');
+const resList = document.getElementById('searchModalResults');
+const sInput = document.getElementById('searchModalInput');
+const searchBox = document.getElementById('searchModalBox');
+const shortcutEls = [
+    document.getElementById('headerSearchShortcut'),
+    document.getElementById('searchModalShortcut')
+].filter(Boolean);
+
+const isMac = /Mac|iPhone|iPad|iPod/.test(navigator.platform);
+const shortcutLabel = isMac ? '⌘K' : 'Ctrl K';
+shortcutEls.forEach((el) => {
+    el.textContent = shortcutLabel;
+});
 
 let fuse;
 let indexLoaded = false;
@@ -47,7 +59,7 @@ const debounce = (fn, delay) => {
     };
 };
 
-const isDropdownOpen = () => searchRoot?.classList.contains('is-open');
+const isModalOpen = () => modal && !modal.hidden;
 
 const clearResults = () => {
     currentElement = null;
@@ -55,9 +67,7 @@ const clearResults = () => {
     lastResult = null;
     if (resList) {
         resList.innerHTML = '';
-        resList.hidden = true;
     }
-    sInput?.setAttribute('aria-expanded', 'false');
 };
 
 const resetInput = () => {
@@ -68,7 +78,7 @@ const resetInput = () => {
 };
 
 const setActiveResult = (element) => {
-    document.querySelectorAll('#headerSearchResults .focus').forEach((item) => item.classList.remove('focus'));
+    document.querySelectorAll('#searchModalResults .focus').forEach((item) => item.classList.remove('focus'));
 
     if (!element) {
         return;
@@ -86,7 +96,6 @@ const renderResults = (results) => {
 
     if (!Array.isArray(results) || results.length === 0) {
         clearResults();
-        searchRoot?.classList.remove('is-open');
         return;
     }
 
@@ -122,9 +131,6 @@ const renderResults = (results) => {
     resList.appendChild(fragment);
     firstResult = resList.firstElementChild;
     lastResult = resList.lastElementChild;
-    resList.hidden = false;
-    searchRoot?.classList.add('is-open');
-    sInput?.setAttribute('aria-expanded', 'true');
 };
 
 const performSearch = () => {
@@ -144,7 +150,7 @@ const performSearch = () => {
 };
 
 const loadIndex = async () => {
-    const indexUrl = searchRoot?.dataset.indexUrl;
+    const indexUrl = modal?.dataset.indexUrl;
     if (indexLoaded || indexLoading || !indexUrl) {
         return;
     }
@@ -169,27 +175,39 @@ const loadIndex = async () => {
     }
 };
 
-const openSearch = async () => {
-    if (!searchRoot || !sInput) {
+const openModal = async () => {
+    if (!modal) {
         return;
+    }
+
+    modal.hidden = false;
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('search-modal-open');
+    trigger?.setAttribute('aria-expanded', 'true');
+
+    if (sInput) {
+        sInput.disabled = true;
     }
 
     await loadIndex();
-    sInput.focus();
-    sInput.select();
 
-    if (sInput.value.trim()) {
-        performSearch();
+    if (sInput) {
+        sInput.disabled = false;
+        sInput.focus();
     }
 };
 
-const closeSearch = () => {
-    if (!searchRoot) {
+const closeModal = () => {
+    if (!modal || modal.hidden) {
         return;
     }
 
-    searchRoot.classList.remove('is-open');
-    clearResults();
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('search-modal-open');
+    trigger?.setAttribute('aria-expanded', 'false');
+    resetInput();
+    trigger?.focus();
 };
 
 const shouldIgnoreShortcut = (target) => {
@@ -205,54 +223,42 @@ const shouldIgnoreShortcut = (target) => {
     return target.isContentEditable;
 };
 
-const inSearch = (target) => searchBox?.contains(target);
-
-sInput?.addEventListener('focus', async () => {
-    await loadIndex();
+trigger?.addEventListener('click', () => {
+    openModal();
 });
+
+backdrop?.addEventListener('click', closeModal);
 
 sInput?.addEventListener('input', debounce(performSearch, 150));
 
 sInput?.addEventListener('search', () => {
     if (!sInput.value) {
-        closeSearch();
-    }
-});
-
-document.addEventListener('click', (event) => {
-    if (!searchRoot || !isDropdownOpen()) {
-        return;
-    }
-
-    if (!searchRoot.contains(event.target)) {
-        closeSearch();
+        clearResults();
     }
 });
 
 document.addEventListener('keydown', (event) => {
     const { key } = event;
     const active = document.activeElement;
-    const focused = inSearch(active);
+    const inModal = searchBox?.contains(active);
 
     if ((event.metaKey || event.ctrlKey) && key.toLowerCase() === 'k') {
         event.preventDefault();
-        if (focused && isDropdownOpen()) {
-            closeSearch();
-            sInput?.blur();
+        if (isModalOpen()) {
+            closeModal();
         } else if (!shouldIgnoreShortcut(active)) {
-            openSearch();
+            openModal();
         }
         return;
     }
 
-    if (key === 'Escape' && (focused || isDropdownOpen())) {
+    if (key === 'Escape' && isModalOpen()) {
         event.preventDefault();
-        closeSearch();
-        sInput?.blur();
+        closeModal();
         return;
     }
 
-    if (!isDropdownOpen() || !firstResult || !focused) {
+    if (!isModalOpen() || !firstResult || !inModal) {
         return;
     }
 

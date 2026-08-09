@@ -1,16 +1,16 @@
-<div id="header-search" class="header-search" data-index-url="{{ absLangURL "index.json" }}">
-  <div id="headerSearchBox" class="header-search-box searchbox">
+<div id="header-search" class="header-search">
+  <button type="button" id="header-search-trigger" class="header-search-trigger" accesskey="s"
+    aria-label="{{- if eq site.Language.Lang "zh-cn" }}搜索文章 (⌘K){{- else }}Search posts (⌘K){{- end }}"
+    aria-haspopup="dialog" aria-controls="search-modal">
     <svg class="header-search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
       fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
       aria-hidden="true">
       <circle cx="11" cy="11" r="8"></circle>
       <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
     </svg>
-    <input id="headerSearchInput" type="search" autocomplete="off" maxlength="64" accesskey="s"
-      placeholder="{{- if eq site.Language.Lang "zh-cn" }}搜索文章…{{- else }}Search posts…{{- end }}"
-      aria-label="{{- if eq site.Language.Lang "zh-cn" }}搜索文章{{- else }}Search posts{{- end }}"
-      aria-controls="headerSearchResults" aria-expanded="false" aria-autocomplete="list">
-    <ul id="headerSearchResults" class="searchResults header-search-results" hidden
-      aria-label="{{- if eq site.Language.Lang "zh-cn" }}搜索结果{{- else }}Search results{{- end }}"></ul>
-  </div>
+    <span class="header-search-label">
+      {{- if eq site.Language.Lang "zh-cn" }}搜索文章…{{- else }}Search posts…{{- end }}
+    </span>
+    <kbd id="headerSearchShortcut" class="header-search-kbd" aria-hidden="true">⌘K</kbd>
+  </button>
 </div>

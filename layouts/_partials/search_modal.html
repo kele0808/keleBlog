@@ -1,0 +1,20 @@
+<div id="search-modal" class="search-modal" hidden aria-hidden="true"
+    data-index-url="{{ absLangURL "index.json" }}">
+    <div id="search-modal-backdrop" class="search-modal-backdrop"></div>
+    <div class="search-modal-panel" role="dialog" aria-modal="true"
+        aria-label="{{- if eq site.Language.Lang "zh-cn" }}搜索文章{{- else }}Search posts{{- end }}">
+        <div id="searchModalBox" class="searchbox search-modal-box">
+            <input id="searchModalInput" type="search" autocomplete="off" maxlength="64"
+                placeholder="{{- if eq site.Language.Lang "zh-cn" }}搜索文章…{{- else }}Search posts…{{- end }}"
+                aria-label="{{- if eq site.Language.Lang "zh-cn" }}搜索文章{{- else }}Search posts{{- end }}">
+            <ul id="searchModalResults" class="searchResults" aria-label="{{- if eq site.Language.Lang "zh-cn" }}搜索结果{{- else }}Search results{{- end }}"></ul>
+        </div>
+        <p class="search-modal-hint">
+            {{- if eq site.Language.Lang "zh-cn" }}
+            <kbd>Esc</kbd> 关闭 · <kbd id="searchModalShortcut">⌘K</kbd> 切换
+            {{- else }}
+            <kbd>Esc</kbd> to close · <kbd id="searchModalShortcut">⌘K</kbd> to toggle
+            {{- end }}
+        </p>
+    </div>
+</div>
