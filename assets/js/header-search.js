@@ -59,7 +59,7 @@ const debounce = (fn, delay) => {
     };
 };
 
-const isModalOpen = () => modal && !modal.hidden;
+const isModalOpen = () => modal?.classList.contains('is-open');
 
 const clearResults = () => {
     currentElement = null;
@@ -181,6 +181,7 @@ const openModal = async () => {
     }
 
     modal.hidden = false;
+    modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('search-modal-open');
     trigger?.setAttribute('aria-expanded', 'true');
@@ -203,8 +204,10 @@ const closeModal = () => {
     }
 
     modal.hidden = true;
+    modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('search-modal-open');
+    trigger?.setAttribute('aria-expanded', 'false');
     trigger?.setAttribute('aria-expanded', 'false');
     resetInput();
     trigger?.focus();

@@ -4,6 +4,7 @@ const openDrawer = (drawer) => {
     }
 
     drawer.hidden = false;
+    drawer.classList.add('is-open');
     drawer.setAttribute('aria-hidden', 'false');
     document.body.classList.add('series-doc-drawer-open');
 
@@ -17,9 +18,10 @@ const closeDrawer = (drawer) => {
     }
 
     drawer.hidden = true;
+    drawer.classList.remove('is-open');
     drawer.setAttribute('aria-hidden', 'true');
 
-    const openDrawers = document.querySelectorAll('.series-doc-drawer:not([hidden])');
+    const openDrawers = document.querySelectorAll('.series-doc-drawer.is-open');
     if (openDrawers.length === 0) {
         document.body.classList.remove('series-doc-drawer-open');
     }
@@ -30,7 +32,7 @@ const closeDrawer = (drawer) => {
 };
 
 const closeAllDrawers = () => {
-    document.querySelectorAll('.series-doc-drawer:not([hidden])').forEach((drawer) => {
+    document.querySelectorAll('.series-doc-drawer.is-open').forEach((drawer) => {
         closeDrawer(drawer);
     });
 };
