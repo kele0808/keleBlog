@@ -114,50 +114,6 @@
   color: var(--content);
 }
 
-.home-cta {
-  margin-top: 1.25rem !important;
-}
-
-.home-cta-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.55rem 1.1rem;
-  border-radius: 8px;
-  font-size: 0.92rem;
-  font-weight: 600;
-  text-decoration: none !important;
-  border: 1px solid transparent;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
-  z-index: 2;
-  position: relative;
-}
-
-.btn-primary {
-  background: var(--primary);
-  color: var(--theme) !important;
-}
-
-.btn-primary:hover {
-  opacity: 0.9;
-}
-
-.btn-secondary {
-  background: transparent;
-  color: var(--primary) !important;
-  border-color: var(--border);
-}
-
-.btn-secondary:hover {
-  border-color: var(--primary);
-}
-
 /* ---------------- 3. 卡片摘要 / 标签 ---------------- */
 
 .entry-summary-clamp p {

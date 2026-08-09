@@ -80,11 +80,6 @@ title = "keleBlog"
     Title = "Hi, 我是 kele 👋"
     Content = "这里是我的学习笔记与技术博客。主要会写 Kafka 源码解析、后端架构、AI 相关的知识与思考。慢慢更新，欢迎交流。"
     WritingNow = "Kafka 源码解析 · 开篇已发布，Producer 全流程写作中"
-    CtaPrimaryText = "阅读 Kafka 系列"
-    CtaPrimaryURL = "/series/kafka/"
-    CtaSecondaryText = "订阅更新"
-    CtaGitHubText = "GitHub"
-    CtaGitHubURL = "https://github.com/kele0808"
 
     [languages.zh-cn.params.footer]
     text = '本站总访问 <span id="busuanzi_container_site_pv"><span id="busuanzi_value_site_pv">…</span></span> 次 · 总访客 <span id="busuanzi_container_site_uv"><span id="busuanzi_value_site_uv">…</span></span> 人'
@@ -151,11 +146,6 @@ title = "keleBlog"
     Title = "Hi, I'm kele 👋"
     Content = "This is my personal blog for study notes and technical writing. Mostly Kafka source-code analysis, backend architecture, and AI-related knowledge. Updates as I learn — feel free to reach out."
     WritingNow = "Kafka source series · Intro published; Producer deep-dive in progress"
-    CtaPrimaryText = "Read Kafka series"
-    CtaPrimaryURL = "/series/kafka/"
-    CtaSecondaryText = "Subscribe"
-    CtaGitHubText = "GitHub"
-    CtaGitHubURL = "https://github.com/kele0808"
 
     [languages.en.params.footer]
     text = 'Site views: <span id="busuanzi_container_site_pv"><span id="busuanzi_value_site_pv">…</span></span> · Unique visitors: <span id="busuanzi_container_site_uv"><span id="busuanzi_value_site_uv">…</span></span>'

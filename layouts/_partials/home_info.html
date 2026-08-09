@@ -1,38 +1,18 @@
 {{- with site.Params.homeInfoParams }}
-{{- $cta := . }}
-{{- $primaryURL := $cta.CtaPrimaryURL | default "/series/kafka/" }}
-{{- with site.GetPage "/series/kafka" }}
-  {{- $primaryURL = .RelPermalink }}
-{{- end }}
-{{- $rss := "" }}
-{{- with site.Home.OutputFormats.Get "rss" }}
-  {{- $rss = .RelPermalink }}
-{{- end }}
-
 <article class="first-entry home-info">
     <header class="entry-header">
-        <h1>{{ $cta.Title | markdownify }}</h1>
+        <h1>{{ .Title | markdownify }}</h1>
     </header>
     <div class="entry-content md-content">
         {{ $opts := dict "display" "block" }}
-        {{ $cta.Content | $.Page.RenderString $opts }}
+        {{ .Content | $.Page.RenderString $opts }}
     </div>
 
-    {{- with $cta.WritingNow }}
+    {{- with .WritingNow }}
     <p class="home-writing-now">
         <span class="home-writing-now-label">{{- if eq site.Language.Lang "zh-cn" }}正在写什么{{- else }}Writing now{{- end }}</span>
         <span class="home-writing-now-text">{{ . }}</span>
     </p>
     {{- end }}
-
-    <footer class="entry-footer home-cta">
-        <div class="home-cta-buttons">
-            <a class="btn btn-primary" href="{{ $primaryURL }}">{{ $cta.CtaPrimaryText | default "阅读 Kafka 系列" }}</a>
-            {{- if $rss }}
-            <a class="btn btn-secondary" href="{{ $rss }}">{{ $cta.CtaSecondaryText | default "订阅更新" }}</a>
-            {{- end }}
-            <a class="btn btn-secondary" href="{{ $cta.CtaGitHubURL | default "https://github.com/kele0808" }}" target="_blank" rel="noopener noreferrer">{{ $cta.CtaGitHubText | default "GitHub" }}</a>
-        </div>
-    </footer>
 </article>
 {{- end -}}
