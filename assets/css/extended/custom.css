@@ -118,6 +118,16 @@
   display: none !important;
 }
 
+.search-modal:not(.is-open),
+.series-doc-drawer:not(.is-open) {
+  pointer-events: none !important;
+}
+
+.search-modal.is-open,
+.series-doc-drawer.is-open {
+  pointer-events: auto;
+}
+
 .search-modal-backdrop {
   position: absolute;
   inset: 0;
@@ -348,14 +358,19 @@ body.series-doc-page .main {
 }
 
 .header-social-link {
-  display: inline-flex;
+  display: inline-flex !important;
   align-items: center;
+  flex: 0 0 auto;
   padding: 0 0.15rem;
+  line-height: 0;
 }
 
 .header-social-link svg {
-  width: 17px;
-  height: 17px;
+  width: 17px !important;
+  height: 17px !important;
+  max-width: 17px;
+  max-height: 17px;
+  flex-shrink: 0;
 }
 
 #menu.menu {
@@ -777,6 +792,7 @@ body.series-doc-page .main {
 
 .series-doc-drawer.is-open {
   display: block !important;
+  pointer-events: auto;
 }
 
 .series-doc-drawer[hidden] {

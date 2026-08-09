@@ -208,7 +208,6 @@ const closeModal = () => {
     modal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('search-modal-open');
     trigger?.setAttribute('aria-expanded', 'false');
-    trigger?.setAttribute('aria-expanded', 'false');
     resetInput();
     trigger?.focus();
 };

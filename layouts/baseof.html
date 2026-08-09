@@ -28,6 +28,7 @@
     <main class="main">
         {{- block "main" . }}{{ end }}
     </main>
+    {{- block "doc_drawers" . }}{{ end }}
     {{ partialCached "footer.html" . .Layout .Kind (.Param "hideFooter") (.Param "ShowCodeCopyButtons") -}}
     {{ partial "search_modal.html" . }}
 </body>

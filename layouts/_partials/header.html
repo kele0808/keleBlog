@@ -65,7 +65,7 @@
                 {{- if not site.Params.disableThemeToggle }}<span class="nav-sep">|</span>{{ end }}
                 <a class="header-social-link" href="{{ trim .url " " | safeURL }}" target="_blank" rel="noopener noreferrer me"
                     title="GitHub" aria-label="GitHub">
-                    {{ partial "svg.html" . }}
+                    {{ partial "header_github_icon.html" . }}
                 </a>
                 {{- end }}
 

@@ -92,28 +92,6 @@
   </div>
 </div>
 
-{{- if $hasSeries }}
-<div id="series-doc-drawer-series" class="series-doc-drawer" hidden aria-hidden="true">
-  <div class="series-doc-drawer-backdrop" data-drawer-close></div>
-  <div class="series-doc-drawer-panel" role="dialog" aria-modal="true"
-    aria-label="{{- if eq site.Language.Lang "zh-cn" }}系列目录{{- else }}Series contents{{- end }}">
-    <button type="button" class="series-doc-drawer-close" data-drawer-close aria-label="{{- if eq site.Language.Lang "zh-cn" }}关闭{{- else }}Close{{- end }}">×</button>
-    {{ partial "series_doc_sidebar.html" . }}
-  </div>
-</div>
-{{- end }}
-
-{{- if not $hasSeries }}
-<div id="series-doc-drawer-toc" class="series-doc-drawer" hidden aria-hidden="true">
-  <div class="series-doc-drawer-backdrop" data-drawer-close></div>
-  <div class="series-doc-drawer-panel" role="dialog" aria-modal="true"
-    aria-label="{{- if eq site.Language.Lang "zh-cn" }}此页内容{{- else }}On this page{{- end }}">
-    <button type="button" class="series-doc-drawer-close" data-drawer-close aria-label="{{- if eq site.Language.Lang "zh-cn" }}关闭{{- else }}Close{{- end }}">×</button>
-    {{ partial "toc_sidebar.html" . }}
-  </div>
-</div>
-{{- end }}
-
 {{- else }}
 
 <article class="post-single">
@@ -186,4 +164,29 @@
 
 {{- end }}
 
+{{- end }}
+
+{{- define "doc_drawers" }}
+{{- if and (eq .Kind "page") (eq .Section "posts") }}
+{{- $hasSeries := .Params.series -}}
+{{- if $hasSeries }}
+<div id="series-doc-drawer-series" class="series-doc-drawer" hidden aria-hidden="true">
+  <div class="series-doc-drawer-backdrop" data-drawer-close></div>
+  <div class="series-doc-drawer-panel" role="dialog" aria-modal="true"
+    aria-label="{{- if eq site.Language.Lang "zh-cn" }}系列目录{{- else }}Series contents{{- end }}">
+    <button type="button" class="series-doc-drawer-close" data-drawer-close aria-label="{{- if eq site.Language.Lang "zh-cn" }}关闭{{- else }}Close{{- end }}">×</button>
+    {{ partial "series_doc_sidebar.html" . }}
+  </div>
+</div>
+{{- else }}
+<div id="series-doc-drawer-toc" class="series-doc-drawer" hidden aria-hidden="true">
+  <div class="series-doc-drawer-backdrop" data-drawer-close></div>
+  <div class="series-doc-drawer-panel" role="dialog" aria-modal="true"
+    aria-label="{{- if eq site.Language.Lang "zh-cn" }}此页内容{{- else }}On this page{{- end }}">
+    <button type="button" class="series-doc-drawer-close" data-drawer-close aria-label="{{- if eq site.Language.Lang "zh-cn" }}关闭{{- else }}Close{{- end }}">×</button>
+    {{ partial "toc_sidebar.html" . }}
+  </div>
+</div>
+{{- end }}
+{{- end }}
 {{- end }}

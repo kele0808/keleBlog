@@ -15,6 +15,9 @@ pagination.pagerSize = 10
 disableXML = true
 minifyOutput = true
 
+[minify.tdewolff.html]
+keepWhitespace = true
+
 # ---------- 语言无关的全局参数 ----------
 [params]
 env = "production"
