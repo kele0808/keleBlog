@@ -69,23 +69,10 @@
                 </a>
                 {{- end }}
 
-                {{- $hasBeforeSearch := or (not site.Params.disableThemeToggle) $github }}
-                {{- if $hasBeforeSearch }}<span class="nav-sep">|</span>{{ end }}
-                <button type="button" id="search-open" class="search-toggle" accesskey="s"
-                    title="{{- if eq site.Language.Lang "zh-cn" }}搜索 (⌘K){{- else }}Search (⌘K){{- end }}"
-                    aria-label="{{- if eq site.Language.Lang "zh-cn" }}搜索文章{{- else }}Search posts{{- end }}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        aria-hidden="true">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                </button>
-                
                 {{- if (not site.Params.disableLangToggle) }}
                     {{- $lang := .Lang}}
                     {{- with site.Home.Translations }}
-                    <span class="nav-sep">|</span>
+                    {{- if or (not site.Params.disableThemeToggle) $github }}<span class="nav-sep">|</span>{{ end }}
                     <ul class="lang-menu">
                         {{- range . -}}
                         {{- if ne $lang .Lang }}
@@ -106,52 +93,55 @@
                 {{- end }}
             </div>
         </div>
-        {{- $currentPage := . }}
-        <ul id="menu" class="menu">
-            {{- range site.Menus.main }}
-            {{- $menu_page := false }}
-            {{- $ref := .PageRef | default .Identifier }}
-            {{- if $ref }}
-              {{- $menu_page = site.GetPage $ref }}
-              {{- if not $menu_page }}
-                {{- $menu_page = site.GetPage (strings.TrimPrefix "/" $ref) }}
-              {{- end }}
-            {{- end }}
-            {{- $menu_url := .URL }}
-            {{- with $menu_page }}
-              {{- $menu_url = .RelPermalink }}
-            {{- end }}
-            {{- $is_search := and $menu_page (eq $menu_page.Layout "search") }}
-            {{- $is_active := false }}
-            {{- with $menu_page }}
-              {{- $is_active = eq .RelPermalink $currentPage.RelPermalink }}
-            {{- else }}
-              {{- $menu_path := $menu_url | relLangURL }}
-              {{- $page_path := $currentPage.RelPermalink }}
-              {{- if not (hasPrefix $menu_path "http") }}{{- $menu_path = $menu_path | absURL }}{{- end }}
-              {{- if not (hasPrefix $page_path "http") }}{{- $page_path = $page_path | absURL }}{{- end }}
-              {{- $is_active = eq (urls.Parse $menu_path).Path (urls.Parse $page_path).Path }}
-            {{- end }}
-            <li>
-                <a href="{{ $menu_url }}" title="{{ .Title | default .Name }}{{- if $is_search }} (⌘K){{- end }}"
-                {{- if $is_search }} accesskey="s"{{- end }}
-                {{- if $is_search }} data-open-search="true"{{- end }}>
-                    <span {{- if $is_active }} class="active" {{- end }}>
-                        {{- .Pre }}
-                        {{- .Name -}}
-                        {{ .Post -}}
-                    </span>
-                    {{- if (findRE "://" $menu_url) }}&nbsp;
-                    <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
-                        stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12">
-                        <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
-                        <path d="M15 3h6v6"></path>
-                        <path d="M10 14L21 3"></path>
-                    </svg>
-                    {{- end }}
-                </a>
-            </li>
-            {{- end }}
-        </ul>
+
+        <div class="header-nav-end">
+            {{- $currentPage := . }}
+            <ul id="menu" class="menu">
+                {{- range site.Menus.main }}
+                {{- if eq .Identifier "search" }}{{- continue }}{{- end }}
+                {{- $menu_page := false }}
+                {{- $ref := .PageRef | default .Identifier }}
+                {{- if $ref }}
+                  {{- $menu_page = site.GetPage $ref }}
+                  {{- if not $menu_page }}
+                    {{- $menu_page = site.GetPage (strings.TrimPrefix "/" $ref) }}
+                  {{- end }}
+                {{- end }}
+                {{- $menu_url := .URL }}
+                {{- with $menu_page }}
+                  {{- $menu_url = .RelPermalink }}
+                {{- end }}
+                {{- $is_active := false }}
+                {{- with $menu_page }}
+                  {{- $is_active = eq .RelPermalink $currentPage.RelPermalink }}
+                {{- else }}
+                  {{- $menu_path := $menu_url | relLangURL }}
+                  {{- $page_path := $currentPage.RelPermalink }}
+                  {{- if not (hasPrefix $menu_path "http") }}{{- $menu_path = $menu_path | absURL }}{{- end }}
+                  {{- if not (hasPrefix $page_path "http") }}{{- $page_path = $page_path | absURL }}{{- end }}
+                  {{- $is_active = eq (urls.Parse $menu_path).Path (urls.Parse $page_path).Path }}
+                {{- end }}
+                <li>
+                    <a href="{{ $menu_url }}" title="{{ .Title | default .Name }}">
+                        <span {{- if $is_active }} class="active" {{- end }}>
+                            {{- .Pre }}
+                            {{- .Name -}}
+                            {{ .Post -}}
+                        </span>
+                        {{- if (findRE "://" $menu_url) }}&nbsp;
+                        <svg fill="none" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2.5" viewBox="0 0 24 24" height="12" width="12">
+                            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path>
+                            <path d="M15 3h6v6"></path>
+                            <path d="M10 14L21 3"></path>
+                        </svg>
+                        {{- end }}
+                    </a>
+                </li>
+                {{- end }}
+            </ul>
+
+            {{ partial "header_search.html" . }}
+        </div>
     </nav>
 </header>

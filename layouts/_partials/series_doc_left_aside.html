@@ -1,0 +1,21 @@
+{{- $lang := site.Language.Lang -}}
+{{- $hasSeries := .Params.series -}}
+
+<div class="series-doc-left-stack{{ if not $hasSeries }} series-doc-left-stack--toc-only{{ end }}">
+  {{- if $hasSeries }}
+  {{ partial "series_doc_sidebar_head.html" . }}
+
+  <details class="series-doc-series-collapse" open>
+    <summary class="series-doc-series-collapse-summary">
+      {{- if eq $lang "zh-cn" }}系列目录{{- else }}Series contents{{- end }}
+    </summary>
+    <div class="series-doc-series-collapse-body">
+      {{ partial "series_doc_sidebar_nav.html" . }}
+    </div>
+  </details>
+  {{- else }}
+  <div class="series-doc-toc-sticky">
+    {{ partial "toc_sidebar.html" . }}
+  </div>
+  {{- end }}
+</div>

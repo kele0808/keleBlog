@@ -1,13 +1,13 @@
 {{/* 不蒜子访问统计（免费、无需注册，加载一次就自动统计 PV/UV） */}}
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-{{- $modalSearch := resources.Get "js/modal-search.js" | js.Build (dict "params" (dict "fuseOpts" site.Params.fuseOpts)) | resources.Minify -}}
+{{- $headerSearch := resources.Get "js/header-search.js" | js.Build (dict "params" (dict "fuseOpts" site.Params.fuseOpts)) | resources.Minify -}}
 {{- $fusejs := resources.Get "js/fuse.basic.min.js" -}}
 {{- if not site.Params.assets.disableFingerprinting -}}
-{{- $searchBundle := (slice $fusejs $modalSearch) | resources.Concat "assets/js/modal-search-bundle.js" | fingerprint -}}
+{{- $searchBundle := (slice $fusejs $headerSearch) | resources.Concat "assets/js/header-search-bundle.js" | fingerprint -}}
 <script defer crossorigin="anonymous" src="{{ $searchBundle.RelPermalink }}" integrity="{{ $searchBundle.Data.Integrity }}"></script>
 {{- else -}}
-{{- $searchBundle := (slice $fusejs $modalSearch) | resources.Concat "assets/js/modal-search-bundle.js" -}}
+{{- $searchBundle := (slice $fusejs $headerSearch) | resources.Concat "assets/js/header-search-bundle.js" -}}
 <script defer crossorigin="anonymous" src="{{ $searchBundle.RelPermalink }}"></script>
 {{- end -}}
 
@@ -19,12 +19,19 @@
 <script defer crossorigin="anonymous" src="{{ $menuJs.RelPermalink }}"></script>
 {{- end -}}
 
-{{- if and (eq .Kind "page") (eq .Params.series "kafka") (eq .Section "posts") -}}
+{{- if and (eq .Kind "page") (eq .Section "posts") -}}
 {{- $seriesDrawer := resources.Get "js/series-drawer.js" | js.Build | resources.Minify -}}
 {{- if not site.Params.assets.disableFingerprinting -}}
 {{- $seriesDrawer = $seriesDrawer | fingerprint -}}
 <script defer crossorigin="anonymous" src="{{ $seriesDrawer.RelPermalink }}" integrity="{{ $seriesDrawer.Data.Integrity }}"></script>
 {{- else -}}
 <script defer crossorigin="anonymous" src="{{ $seriesDrawer.RelPermalink }}"></script>
+{{- end -}}
+{{- $tocSpy := resources.Get "js/toc-scroll-spy.js" | js.Build | resources.Minify -}}
+{{- if not site.Params.assets.disableFingerprinting -}}
+{{- $tocSpy = $tocSpy | fingerprint -}}
+<script defer crossorigin="anonymous" src="{{ $tocSpy.RelPermalink }}" integrity="{{ $tocSpy.Data.Integrity }}"></script>
+{{- else -}}
+<script defer crossorigin="anonymous" src="{{ $tocSpy.RelPermalink }}"></script>
 {{- end -}}
 {{- end -}}

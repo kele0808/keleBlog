@@ -11,19 +11,3 @@ if (menu) {
         });
     });
 }
-
-document.querySelectorAll('[data-open-search="true"]').forEach((link) => {
-    link.addEventListener('click', (event) => {
-        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) {
-            return;
-        }
-
-        const openBtn = document.getElementById('search-open');
-        if (!openBtn) {
-            return;
-        }
-
-        event.preventDefault();
-        openBtn.click();
-    });
-});

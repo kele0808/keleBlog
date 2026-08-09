@@ -1,0 +1,24 @@
+{{- $seriesId := .Params.series -}}
+{{- if not $seriesId }}{{- return }}{{- end }}
+{{- $meta := index site.Data.series $seriesId -}}
+{{- $lang := site.Language.Lang -}}
+{{- $posts := partial "series_posts.html" $seriesId -}}
+{{- $published := len $posts -}}
+{{- $planned := $meta.plannedCount | default $published -}}
+{{- if lt $planned $published }}{{- $planned = $published }}{{- end }}
+{{- $seriesTitle := index $meta.title $lang | default (index $meta.title "zh-cn") | default $seriesId -}}
+{{- $seriesURL := printf "/series/%s/" $seriesId -}}
+{{- with site.GetPage (printf "/series/%s" $seriesId) }}
+  {{- $seriesURL = .RelPermalink -}}
+{{- end }}
+
+<div class="series-doc-sidebar-head">
+  <a class="series-doc-sidebar-title" href="{{ $seriesURL }}">{{ $seriesTitle }}</a>
+  <p class="series-doc-sidebar-progress">
+    {{- if eq $lang "zh-cn" }}
+    已发布 <strong>{{ $published }}</strong> / 计划 {{ $planned }} 篇
+    {{- else }}
+    <strong>{{ $published }}</strong> published / {{ $planned }} planned
+    {{- end }}
+  </p>
+</div>

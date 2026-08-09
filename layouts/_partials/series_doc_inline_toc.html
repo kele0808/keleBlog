@@ -1,0 +1,15 @@
+{{- $headers := findRE "<h[1-6].*?>(.|\n])+?</h[1-6]>" .Content -}}
+{{- $hasHeaders := ge (len $headers) 1 -}}
+{{- $showToc := .Param "ShowToc" | default site.Params.ShowToc -}}
+{{- $useHugoToc := .Param "UseHugoToc" | default site.Params.UseHugoToc -}}
+{{- if and $showToc (or (and $useHugoToc .TableOfContents) $hasHeaders) }}
+<div class="series-doc-nav-toc" aria-label="{{- if eq site.Language.Lang "zh-cn" }}此页内容{{- else }}On this page{{- end }}">
+  <div class="series-doc-toc-inner">
+    {{- if $useHugoToc }}
+      {{- .TableOfContents -}}
+    {{- else }}
+      {{- partial "toc.html" . -}}
+    {{- end }}
+  </div>
+</div>
+{{- end }}

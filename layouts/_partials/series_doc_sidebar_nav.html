@@ -1,0 +1,69 @@
+{{- $seriesId := .Params.series -}}
+{{- if not $seriesId }}{{- return }}{{- end }}
+{{- $meta := index site.Data.series $seriesId -}}
+{{- $lang := site.Language.Lang -}}
+{{- $posts := partial "series_posts.html" $seriesId -}}
+
+{{- $postByRoadmapIndex := dict -}}
+{{- $.Scratch.Set "introPosts" slice -}}
+{{- range $posts -}}
+  {{- with .Params.roadmapIndex -}}
+    {{- $postByRoadmapIndex = merge $postByRoadmapIndex (dict (string .) .) -}}
+  {{- else -}}
+    {{- $.Scratch.Add "introPosts" . -}}
+  {{- end -}}
+{{- end -}}
+{{- $introPosts := $.Scratch.Get "introPosts" -}}
+{{- $roadmapIndex := 0 -}}
+
+{{- if gt (len $introPosts) 0 }}
+<section class="series-doc-nav-group">
+  <p class="series-doc-nav-label">{{- if eq $lang "zh-cn" }}导读{{- else }}Intro{{- end }}</p>
+  <ul class="series-doc-nav-list">
+    {{- range $introPosts }}
+    {{- $isActive := eq .RelPermalink $.RelPermalink -}}
+    <li class="series-doc-nav-item{{ if $isActive }} is-active{{ end }}">
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+      {{- if $isActive }}
+      {{ partial "series_doc_inline_toc.html" $ }}
+      {{- end }}
+    </li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+
+{{- with $meta.roadmap }}
+<section class="series-doc-nav-group">
+  <p class="series-doc-nav-label">{{- if eq $lang "zh-cn" }}阅读路线{{- else }}Reading path{{- end }}</p>
+  {{- range . }}
+  <div class="series-doc-stage">
+    <p class="series-doc-stage-title">{{ index .stage $lang | default (index .stage "zh-cn") }}</p>
+    <ul class="series-doc-nav-list">
+      {{- range .items }}
+      {{- $roadmapIndex = add $roadmapIndex 1 -}}
+      {{- $post := index $postByRoadmapIndex (string $roadmapIndex) -}}
+      {{- $label := index . $lang | default (index . "zh-cn") -}}
+      {{- $isActive := and $post (eq $post.RelPermalink $.RelPermalink) -}}
+      <li class="series-doc-nav-item{{ if $isActive }} is-active{{ end }}{{ if not $post }} is-pending{{ end }}">
+        {{- if $post }}
+        <a href="{{ $post.Permalink }}">
+          <span class="series-doc-nav-order">#{{ $roadmapIndex }}</span>
+          <span class="series-doc-nav-text">{{ $post.Title }}</span>
+        </a>
+        {{- if $isActive }}
+        {{ partial "series_doc_inline_toc.html" $ }}
+        {{- end }}
+        {{- else }}
+        <span class="series-doc-nav-pending">
+          <span class="series-doc-nav-order">#{{ $roadmapIndex }}</span>
+          <span class="series-doc-nav-text">{{ $label }}</span>
+        </span>
+        {{- end }}
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+  {{- end }}
+</section>
+{{- end }}
