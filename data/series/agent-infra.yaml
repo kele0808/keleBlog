@@ -1,0 +1,67 @@
+id: agent-infra
+weight: 48
+plannedCount: 15
+title:
+  zh-cn: Agent Infra 学习路线
+  en: AI Agent & Agent Infra
+description:
+  zh-cn: 一年制系统路线：从 LLM 基础到 Agent Runtime / Infra，面向 Agent Engineer 与 AI Platform 岗位。
+  en: A one-year path from LLM basics to Agent Runtime and Infra — for Agent Engineer and AI Platform roles.
+nextPreview:
+  zh-cn: Python + LLM 基础：不依赖框架调用模型
+  en: Python & LLM basics — calling models without frameworks
+roadmap:
+  - stage:
+      zh-cn: 第 1～2 月 · Python + LLM 基础
+      en: Month 1–2 · Python & LLM
+    items:
+      - zh-cn: Python 与本地开发环境
+        en: Python & local dev setup
+      - zh-cn: LLM 基础与 CLI 项目
+        en: LLM fundamentals & CLI project
+  - stage:
+      zh-cn: 第 3～4 月 · Agent + RAG
+      en: Month 3–4 · Agent & RAG
+    items:
+      - zh-cn: Tool Calling 与 Agent 原理
+        en: Tool calling & agent loops
+      - zh-cn: RAG 全流程（Embedding / Hybrid / Rerank）
+        en: RAG end-to-end
+      - zh-cn: 企业技术知识库 Agent
+        en: Enterprise knowledge-base agent
+  - stage:
+      zh-cn: 第 5～6 月 · LangGraph + MCP + Memory
+      en: Month 5–6 · LangGraph, MCP & Memory
+    items:
+      - zh-cn: LangChain / LangGraph 与 Coding Agent
+        en: LangChain / LangGraph coding agent
+      - zh-cn: MCP 与 Backend MCP Server
+        en: MCP & backend MCP server
+      - zh-cn: Memory 与 Context Engineering
+        en: Memory & context engineering
+  - stage:
+      zh-cn: 第 7～9 月 · Runtime + Infra
+      en: Month 7–9 · Runtime & Infra
+    items:
+      - zh-cn: Agent Runtime 设计与实现
+        en: Agent runtime design
+      - zh-cn: LLM Gateway 与资源隔离
+        en: LLM gateway & isolation
+      - zh-cn: Agent Security 与 Sandbox
+        en: Agent security & sandbox
+  - stage:
+      zh-cn: 第 10 月 · 可观测与 Multi-Agent
+      en: Month 10 · Observability & Multi-Agent
+    items:
+      - zh-cn: Observability + Evaluation 平台
+        en: Observability & evaluation
+      - zh-cn: Multi-Agent 协作
+        en: Multi-agent systems
+  - stage:
+      zh-cn: 第 11～12 月 · 底层与冲刺
+      en: Month 11–12 · Foundations & Offer
+    items:
+      - zh-cn: Transformer / Inference / 微调概览
+        en: Transformer, inference & fine-tuning
+      - zh-cn: 项目打磨与面试专项
+        en: Portfolio polish & interview prep
