@@ -1,0 +1,2 @@
+{{- $tex := trim .Inner "\n \t" -}}
+<div class="math-display">$${{ $tex | safeHTML }}$$</div>

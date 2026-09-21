@@ -1107,3 +1107,27 @@ body.series-doc-drawer-open {
     max-height: none;
   }
 }
+
+/* ---------------- 7. KaTeX 公式 ---------------- */
+
+.math-display {
+  margin: 1.1em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-align: center;
+}
+
+.katex {
+  font-size: 1.08em;
+}
+
+.katex-display {
+  margin: 0.4em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.15em 0;
+}
+
+.katex-display > .katex {
+  white-space: nowrap;
+}
