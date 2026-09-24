@@ -1,6 +1,6 @@
 id: ml
 weight: 45
-plannedCount: 4
+plannedCount: 15
 title:
   zh-cn: 机器学习笔记
   en: Machine Learning Notes
@@ -8,17 +8,21 @@ description:
   zh-cn: 从线性回归到无监督学习：把模型、损失、梯度下降和评估串成一条能落地的主线。
   en: From linear regression to unsupervised learning — models, loss, gradient descent, and evaluation.
 nextPreview:
-  zh-cn: 用代码跑通线性回归与梯度下降
-  en: Linear regression and gradient descent in code
+  zh-cn: 从机器学习到深度学习：神经网络与反向传播入门
+  en: From ML to deep learning — neural networks and backprop
 roadmap:
   - stage:
       zh-cn: 第一阶段：基础主线
       en: Phase 1 · Foundations
     items:
-      - zh-cn: 概念全景：模型、三类学习、线性回归
-        en: "Landscape: models, learning types, linear regression"
-      - zh-cn: 梯度下降、预处理与评估
-        en: Gradient descent, preprocessing & evaluation
+      - zh-cn: 人工智能通识与机器学习是什么
+        en: AI landscape & what ML is
+      - zh-cn: 机器学习的三大类型
+        en: The three kinds of ML
+      - zh-cn: 线性回归与梯度下降
+        en: Linear regression & gradient descent
+      - zh-cn: 数据预处理、模型评估与拟合诊断
+        en: Preprocessing, evaluation & fitting diagnostics
   - stage:
       zh-cn: 第二阶段：分类与树模型
       en: Phase 2 · Classification & Trees
@@ -28,8 +32,10 @@ roadmap:
       - zh-cn: 决策树、随机森林与 Boosting
         en: Trees, random forests & boosting
   - stage:
-      zh-cn: 第三阶段：无监督
-      en: Phase 3 · Unsupervised
+      zh-cn: 第三阶段：无监督与总结
+      en: Phase 3 · Unsupervised & Wrap-up
     items:
-      - zh-cn: 聚类与降维（K-Means / PCA）
-        en: Clustering & dimensionality reduction
+      - zh-cn: K-Means 聚类与 PCA 降维
+        en: K-Means clustering & PCA
+      - zh-cn: 机器学习总结与工程工具
+        en: Summary & tooling
