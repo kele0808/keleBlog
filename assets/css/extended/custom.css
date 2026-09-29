@@ -1179,11 +1179,13 @@ body.series-doc-drawer-open {
 }
 
 .series-doc-nav-item a {
-  color: var(--content);
+  color: var(--doc-accent);
 }
 
 .series-doc-nav-item a:hover {
   background: var(--code-bg);
+  color: var(--doc-accent);
+  filter: brightness(1.15);
 }
 
 .series-doc-nav-item.is-active > a {
