@@ -31,11 +31,28 @@ const initTocScrollSpy = () => {
     const scrollOffset = 96;
 
     const getScrollContainer = (link) => {
-        const tocInnerEl = link.closest('.series-doc-toc-inner');
-        return tocInnerEl?.closest('.series-doc-series-collapse-body')
-            || tocInnerEl?.closest('.series-doc-toc-sticky')
-            || tocInnerEl?.closest('.series-doc-drawer-panel')
-            || tocInnerEl;
+        return link.closest('.series-doc-aside-left')
+            || link.closest('.series-doc-drawer-panel')
+            || link.closest('.series-doc-toc-sticky');
+    };
+
+    const pointerOver = new WeakSet();
+    document.querySelectorAll('.series-doc-aside-left, .series-doc-drawer-panel').forEach((panel) => {
+        panel.addEventListener('pointerenter', () => pointerOver.add(panel));
+        panel.addEventListener('pointerleave', () => pointerOver.delete(panel));
+    });
+
+    const revealLink = (link, container) => {
+        const containerRect = container.getBoundingClientRect();
+        const linkRect = link.getBoundingClientRect();
+        const padding = 12;
+        if (linkRect.top >= containerRect.top + padding && linkRect.bottom <= containerRect.bottom - padding) {
+            return;
+        }
+        const delta = linkRect.top < containerRect.top + padding
+            ? linkRect.top - containerRect.top - padding
+            : linkRect.bottom - containerRect.bottom + padding;
+        container.scrollBy({ top: delta, behavior: 'smooth' });
     };
 
     const setActive = (id) => {
@@ -55,15 +72,11 @@ const initTocScrollSpy = () => {
 
         const primaryLink = activeLinks[0];
         const tocContainer = getScrollContainer(primaryLink);
-        if (!tocContainer) {
+        if (!tocContainer || pointerOver.has(tocContainer)) {
             return;
         }
 
-        const containerRect = tocContainer.getBoundingClientRect();
-        const linkRect = primaryLink.getBoundingClientRect();
-        if (linkRect.top < containerRect.top || linkRect.bottom > containerRect.bottom) {
-            primaryLink.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-        }
+        revealLink(primaryLink, tocContainer);
     };
 
     const resolveActiveId = () => {
