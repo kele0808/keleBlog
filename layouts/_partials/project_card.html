@@ -1,5 +1,6 @@
-{{- /* Usage: partial "project_card.html" $project（data/projects.yaml 中的一项） */ -}}
-{{- $p := . }}
+{{- /* Usage: partial "project_card.html" (dict "project" $p "compact" true)；compact 用于首页，只显示概要 */ -}}
+{{- $p := .project }}
+{{- $compact := .compact | default false }}
 {{- $posts := where (where site.RegularPages "Section" "posts") "Params.project" $p.id }}
 <article class="project-card">
   <header class="project-card-header">
@@ -7,9 +8,27 @@
     {{- with $p.status }}<span class="project-card-status">{{ . }}</span>{{ end }}
   </header>
   <p class="project-card-tagline">{{ $p.tagline }}</p>
-  {{- with $p.description }}
-  <p class="project-card-desc">{{ . }}</p>
+
+  {{- if not $compact }}
+  {{- with $p.problem }}
+  <p class="project-card-desc"><strong>解决什么：</strong>{{ . }}</p>
   {{- end }}
+  {{- with $p.role }}
+  <p class="project-card-desc"><strong>我做了什么：</strong>{{ . }}</p>
+  {{- end }}
+  {{- with $p.done }}
+  <p class="project-card-list-title">已实现</p>
+  <ul class="project-card-list">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+  {{- end }}
+  {{- with $p.todo }}
+  <p class="project-card-list-title">尚未实现</p>
+  <ul class="project-card-list is-todo">{{ range . }}<li>{{ . }}</li>{{ end }}</ul>
+  {{- end }}
+  {{- with $p.boundary }}
+  <p class="project-card-desc"><strong>边界：</strong>{{ . }}</p>
+  {{- end }}
+  {{- end }}
+
   {{- with $p.stack }}
   <ul class="entry-tags project-card-stack">
     {{- range . }}<li><span>{{ . }}</span></li>{{ end }}
@@ -19,6 +38,9 @@
     <a href="{{ $p.github }}" target="_blank" rel="noopener noreferrer">GitHub →</a>
     {{- range first 2 $posts }}
     <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    {{- end }}
+    {{- if and (not $compact) $p.verified }}
+    <span class="project-card-verified">{{ $p.kind }} · 核验于 {{ $p.verified }}</span>
     {{- end }}
   </footer>
 </article>

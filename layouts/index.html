@@ -15,7 +15,7 @@
   </header>
   <div class="project-grid">
     {{- range first 4 $projects }}
-      {{- partial "project_card.html" . }}
+      {{- partial "project_card.html" (dict "project" . "compact" true) }}
     {{- end }}
   </div>
 </section>

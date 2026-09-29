@@ -689,6 +689,31 @@ body.series-doc-page .main {
   color: var(--secondary);
 }
 
+.project-card-list-title {
+  margin: 0.5rem 0 0.2rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--content);
+}
+
+.project-card-list {
+  margin: 0 0 0.5rem;
+  padding-left: 1.1rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--secondary);
+}
+
+.project-card-list.is-todo {
+  opacity: 0.75;
+}
+
+.project-card-verified {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--secondary);
+}
+
 .project-card-stack span {
   display: inline-block;
   padding: 0.15rem 0.55rem;

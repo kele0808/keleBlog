@@ -1,5 +1,6 @@
 # Projects 页数据。group 决定分组，featured 决定是否上首页。
 # 文章 front matter 写 project: <id> 即可在文末关联项目。
+# done / todo 只写能在仓库 README 或代码中核实的内容；verified 为最近一次核验日期。
 groups:
   - id: ai
     name: AI / Agent
@@ -11,28 +12,63 @@ items:
     name: RAGForge
     group: ai
     featured: true
-    status: 开发中
-    tagline: 从零搭一套可演进的企业级 RAG
-    description: 基于 PostgreSQL + pgvector，LlamaIndex 入库，向量检索 + 全文检索 + RRF 融合，规划权限过滤与带引用生成。按 spec 分步实现，对照 RAGFlow 批判性借鉴。
-    stack: [Python, PostgreSQL, pgvector, LlamaIndex, RRF]
+    kind: 原创
+    status: 进行中 · Step 5 / 12
+    tagline: 进行中的 RAG 工程实践：在 PostgreSQL 里做混合检索
+    problem: 只用 PostgreSQL + pgvector，一步步搭出可演进的 RAG，把检索、融合、权限与评测的取舍讲清楚。
+    role: 编写 12 步实施 spec，按步实现并为每一步配测试；对照 RAGFlow 做取舍，不照抄。
+    done:
+      - Markdown 切块入库（LlamaIndex）
+      - pgvector 向量检索 + 生成
+      - PostgreSQL 全文检索 + RRF 融合
+    todo:
+      - 按 owner 的 ACL
+      - Cross-encoder rerank
+      - 结构化引用
+      - FastAPI 接口
+      - PDF / DOCX 解析
+      - 小型自评测（Recall@k / MRR@k）
+    stack: [Python, PostgreSQL, pgvector, LlamaIndex]
     github: https://github.com/kele0808/RAGForge
+    verified: "2026-09-29"
 
   - id: daily-learnable
     name: daily-learnable
     group: ai
     featured: true
+    kind: 原创
     status: 每周更新
-    tagline: 每周一自动筛选值得学习的 Agent / MCP 开源项目
-    description: Cursor Agent 定时在 GitHub 搜索 Agent / MCP / coding-agent 仓库，逐个阅读 README 与近期提交，过滤空壳项目，每周保留 3–5 个写成 digest。
-    stack: [TypeScript, Next.js, Cursor Agent]
+    tagline: 学习情报自动化：每周筛选值得研究的 Agent / MCP 开源项目
+    problem: GitHub 上 Agent / MCP 项目太多，按 star 排序会混进空壳和刷星项目，需要一个每周固定产出的筛选流程。
+    role: 设计筛选规则与 Agent 工作流，搭建按日期浏览 digest 的 Next.js 页面。
+    done:
+      - 每周一由 Cursor Automation 搜索 GitHub 上的 Agent / MCP / coding-agent 仓库
+      - Agent 逐个阅读 README 与近期提交，剔除空壳项目，保留 3–5 个
+      - 结果写入 digests/ 并以 PR 提交，由我合并
+      - Next.js 页面按日期浏览历史 digest
+    boundary: Digest 是 Agent 的阅读结论，只作学习线索；GitHub Actions 中的手动 workflow 是不经审核的兜底路径。
+    stack: [TypeScript, Next.js, Cursor Automation]
     github: https://github.com/kele0808/daily-learnable
+    verified: "2026-09-29"
 
   - id: kafka-guide
     name: kafkaGuide
     group: backend
     featured: true
-    status: 早期
-    tagline: 由浅入深读 Kafka 源码，最终写出自己的 MiniKafka
-    description: 按 Passage / Stop 组织，每一步由文档 + 代码组成：先讲这一步解决什么，再实现 append-only log、稀疏索引、socket server，最后与真实 Kafka 对照。
-    stack: [Java, Kafka]
+    kind: 学习项目
+    status: 早期 · 最近提交 2026-08-03
+    tagline: 学习项目：边读 Kafka 源码边实现一个 MiniKafka
+    problem: 只读源码容易停留在“看懂了”，通过亲手实现存储层来理解 Kafka 为什么这样设计。
+    role: 按 Passage / Stop 拆分学习路线，每一步写代码与文档。
+    done:
+      - append-only 日志与消息拆包（Stop 2.2–2.3）
+      - Segment 切分（Stop 2.4）
+      - OffsetIndex 稀疏索引（Stop 2.5）
+    todo:
+      - Socket server 与简单文本协议
+      - 客户端 send / poll
+      - 与真实 Kafka 的对照
+      - Stop 2.2 起的配套文档
+    stack: [Java]
     github: https://github.com/kele0808/kafkaGuide
+    verified: "2026-09-29"
