@@ -21,7 +21,7 @@
         {{- range . }}
         {{- $external := hasPrefix .url "http" }}
         <a class="home-hero-btn{{ if .primary }} is-primary{{ end }}"
-           href="{{ if $external }}{{ .url }}{{ else }}{{ .url | relURL }}{{ end }}"
+           href="{{ if $external }}{{ .url }}{{ else }}{{ strings.TrimPrefix "/" .url | relURL }}{{ end }}"
            {{- if $external }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .name }}</a>
         {{- end }}
     </div>

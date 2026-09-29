@@ -1,0 +1,8 @@
+{{- /* 站内绝对路径（/posts/...）需要带上 baseURL 的子路径；relref 生成的链接已带前缀，不重复处理 */ -}}
+{{- $href := .Destination }}
+{{- $base := relURL "" }}
+{{- if and (hasPrefix $href "/") (not (hasPrefix $href "//")) (not (hasPrefix $href $base)) }}
+  {{- $href = strings.TrimPrefix "/" $href | relURL }}
+{{- end -}}
+<a href="{{ $href | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text }}</a>
+{{- /**/ -}}

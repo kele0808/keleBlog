@@ -1,6 +1,6 @@
 {{- /* 站内绝对路径（/images/...）需要带上 baseURL 的子路径 /keleBlog/ */ -}}
 {{- $src := .Destination }}
-{{- if hasPrefix $src "/" }}{{ $src = strings.TrimPrefix "/" $src | relURL }}{{ end -}}
+{{- if and (hasPrefix $src "/") (not (hasPrefix $src "//")) (not (hasPrefix $src (relURL ""))) }}{{ $src = strings.TrimPrefix "/" $src | relURL }}{{ end -}}
 <img src="{{ $src }}" alt="{{ .PlainText }}" loading="lazy" decoding="async"
   {{- with .Title }} title="{{ . }}"{{ end }}>
 {{- /**/ -}}
