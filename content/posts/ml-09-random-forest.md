@@ -156,7 +156,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<!-- 图：materials/img0901FeatureImportance.png -->
+![随机森林特征重要性](/images/ml/img0901FeatureImportance.webp)
 
 > **补充**
 > 当两个特征高度相关时（鸢尾花的花瓣长与花瓣宽），排列重要性会被「分摊」：打乱其中一个，模型还能从另一个获得信息，两者都显得不重要。解读时要结合相关性一起看。

@@ -165,7 +165,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<!-- 图：materials/img0401EDA.png -->
+![Titanic 数据集探索性分析](/images/ml/img0401EDA.webp)
 
 ### EDA 关键发现
 
@@ -257,7 +257,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<!-- 图：materials/img0402Boxplot.png -->
+![箱线图检测异常值](/images/ml/img0402Boxplot.webp)
 
 1. **Age**：大部分乘客集中在 20～40 岁（箱体），60～80 岁有不少离群点。这是真实存在的高龄乘客，不是数据错误
 2. **Fare**：**极度右偏**。绝大多数票价很低（箱体被压在 0～50），少数超过 500，可能是头等舱。极端值会让模型过度关注这几个高价乘客，需要处理（取对数、分箱或截断）

@@ -114,7 +114,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<!-- 图：materials/img0601FittingComparsion.png -->
+![欠拟合、良好拟合与过拟合的对比](/images/ml/img0601FittingComparsion.webp)
 
 - **图 1 欠拟合**：\(y = wx + b\)。直线无法拟合抛物线，无论怎么调斜率和截距，都捕捉不到弯曲趋势
 - **图 2 良好拟合**：\(y = w_1 x^2 + w_2 x + b\)。形式与真实规律匹配，精准捕捉抛物线趋势，不被噪声带偏
@@ -153,7 +153,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<!-- 图：materials/img0602LearningRate.png -->
+![三种拟合状态下的学习曲线](/images/ml/img0602LearningRate.webp)
 
 - **图 1 欠拟合**：验证误差始终和训练误差很接近，且都在高位（约 20～100）。模型太简单，既学不会训练数据，也泛化不好
 - **图 2 良好拟合**：初始验证误差很高，随样本增加快速下降，最后和训练误差几乎重合，都在低位（5～10）
@@ -366,7 +366,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<!-- 图：materials/img0603Regularization.png -->
+![正则化效果对比](/images/ml/img0603Regularization.webp)
 
 **拟合曲线表现**
 

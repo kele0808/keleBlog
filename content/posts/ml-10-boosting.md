@@ -42,7 +42,7 @@ Bagging 指导随机森林，全称 **自举聚集**（Bootstrap Aggregating）�
 - 累加预测：最终累加所有树的预测
 - 代表算法：GBDT、XGBoost、LightGBM、CatBoost
 
-<!-- 图：materials/img1001Golf.png -->
+![用打高尔夫解释 Boosting：每一杆补上前一杆的残差](/images/ml/img1001Golf.webp)
 
 Boosting 的精髓：**每个新模型都在拟合前面模型的残差（错误），接力合作，逐步逼近真实答案。**
 
@@ -162,7 +162,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<!-- 图：materials/img1002GBDTregression.png -->
+![GBDT 回归拟合过程](/images/ml/img1002GBDTregression.webp)
 
 每棵新树都在查漏补缺，模型一轮比一轮精准：
 
@@ -194,7 +194,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<!-- 图：materials/img1003GBDTresidual.png -->
+![GBDT 每轮残差变化](/images/ml/img1003GBDTresidual.webp)
 
 Boosting 逐步纠错：残差（橙色散点）逐轮向零线收敛。
 
@@ -400,7 +400,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<!-- 图：materials/img1004XGBoostTrain.png -->
+![XGBoost 训练曲线](/images/ml/img1004XGBoostTrain.webp)
 
 验证集 RMSE 先快速下降，然后趋于平缓，最后可能略微上升（过拟合信号）。Early Stopping 恰好在最低点附近停下来。
 

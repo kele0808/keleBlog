@@ -48,7 +48,7 @@ z &= wx + b \\
 \end{aligned}
 {{< /math >}}
 
-<!-- 图：materials/img0701Sigmoid.png -->
+![Sigmoid 函数曲线](/images/ml/img0701Sigmoid.webp)
 
 > **提示**
 > **逻辑回归 = 线性回归 + Sigmoid**
@@ -59,7 +59,7 @@ z &= wx + b \\
 2. **自带决策分界点**：\(\sigma(0) = 0.5\)。\(wx + b > 0\) → 概率大于 0.5 → 正类；\(wx + b < 0\) → 负类；\(wx + b = 0\) 是决策边界
 3. **处处可导，导数极简**：阶跃函数在跳变点不可导，阻碍梯度下降；Sigmoid 连续平滑，导数是 \(\sigma'(z) = \sigma(z)(1 - \sigma(z))\)
 
-<!-- 图：materials/img0702StepFunction.png -->
+![阶跃函数与 Sigmoid 对比](/images/ml/img0702StepFunction.webp)
 
 ## 损失函数
 
@@ -67,11 +67,11 @@ z &= wx + b \\
 
 - **线性回归 + MSE = 凸函数**：不论初始参数在哪，梯度下降都能找到全局最优
 
-  <!-- 图：materials/img0703LInearMSE.png -->
+  ![线性回归 + MSE 的凸损失曲面](/images/ml/img0703LInearMSE.webp)
 
 - **逻辑回归 + MSE = 非凸函数**：引入非线性的 Sigmoid 后，损失函数不再是单个碗形，会有 **局部最优**，还有 **梯度消失** 问题
 
-  <!-- 图：materials/img0704LogicalMSE.png -->
+  ![逻辑回归 + MSE 的非凸损失曲面](/images/ml/img0704LogicalMSE.webp)
 
   1. **局部最优**：损失曲面出现多个平缓区域，梯度下降可能卡在那里
   2. **梯度消失**：Sigmoid 输入极大或极小时，输出逼近 1 或 0，梯度里的 \(\hat{y}(1 - \hat{y})\) 接近 0。即使预测完全错误（真实 1、预测接近 0），梯度也接近 0，参数不更新，模型停止学习
@@ -97,7 +97,7 @@ z &= wx + b \\
 
 对数是指数的逆运算。机器学习常用自然对数（底 \(e \approx 2.718\)），记作 \(\ln(x)\) 或 \(\log(x)\)。
 
-<!-- 图：materials/img0705NaturalLogarithm.png -->
+![自然对数函数曲线](/images/ml/img0705NaturalLogarithm.webp)
 
 1. **单调性一致**：对数单调递增，**最大化某个概率等价于最大化它的对数**，优化更简单
 2. **防止数值下溢**：多个 (0,1) 之间的概率相乘会迅速趋近 0，计算机无法精确表示。取对数后 **乘法变加法**：\(\log(a \times b) = \log(a) + \log(b)\)
@@ -204,7 +204,7 @@ J(\theta) = -\frac{1}{m} \sum_{i=1}^{m} \left[ y_i \log(\hat{y}_i) + (1 - y_i) \
 
 用交叉熵作损失时，它对参数 \(w, b\) 是 **凸函数**。无论初始权重在哪，都能收敛到全局最优；远离最优解时梯度反而大，能引导模型快速稳定地收敛。
 
-<!-- 图：materials/img0706CrossEntropyLoss.png -->
+![交叉熵损失曲线](/images/ml/img0706CrossEntropyLoss.webp)
 
 ## 梯度下降
 
@@ -322,7 +322,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<!-- 图：materials/img0707PredictionDistribution.png -->
+![预测概率分布](/images/ml/img0707PredictionDistribution.webp)
 
 - **红色（恶性）** 集中在 0 附近：模型正确地给大部分恶性样本很低的良性概率
 - **蓝色（良性）** 集中在 1 附近
@@ -369,7 +369,7 @@ tn, fp, fn, tp = cm.ravel()
 print(f'TP={tp}  FP={fp}  FN={fn}  TN={tn}')
 ```
 
-<!-- 图：materials/img0708ConfusionMatrix.png -->
+![混淆矩阵](/images/ml/img0708ConfusionMatrix.webp)
 
 **结果分析**
 
@@ -456,7 +456,7 @@ plt.show()
 print(f'AUC = {roc_auc:.4f}')
 ```
 
-<!-- 图：materials/img0709AUC_ROC.png -->
+![ROC 曲线与 AUC](/images/ml/img0709AUC_ROC.webp)
 
 - AUC 接近 1.0，ROC 曲线紧贴左上角：模型在任意阈值下都能较好区分恶性和良性
 - 曲线越靠左上（高 TPR + 低 FPR）越好；对角虚线是随机猜测基准

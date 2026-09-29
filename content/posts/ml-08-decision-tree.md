@@ -48,7 +48,7 @@ summary: "每次分裂都让子集更纯。熵和基尼系数是两把尺子，C
 
 决策树的核心思想：通过一系列「如果…那么…」的判断，逐步得出结论。
 
-<!-- 图：materials/img0801DecisionTree.svg -->
+![决策树的判断流程示意](/images/ml/img0801DecisionTree.svg)
 
 ## 决策树
 
@@ -220,7 +220,7 @@ tree.plot_tree(clf,
 plt.show()
 ```
 
-<!-- 图：materials/img0802TreePlot.png -->
+![训练得到的决策树结构](/images/ml/img0802TreePlot.webp)
 
 节点信息解读：
 

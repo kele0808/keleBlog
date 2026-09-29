@@ -58,7 +58,7 @@ L = MSE = \frac{1}{n} \sum_{i=1}^{n} (\hat{y}_i - y_i)^2
 f'(x_0) = \lim_{\Delta x \to 0} \frac{f(x_0 + \Delta x) - f(x_0)}{\Delta x}
 {{< /math >}}
 
-<!-- 图：materials/img0301Derivative.png -->
+![导数的几何意义：切线斜率](/images/ml/img0301Derivative.webp)
 
 - 几何意义：函数曲线在该点的切线斜率
 - \(f'(x_0) > 0\)：\(f\) 在 \(x_0\) 处递增，\(x\) 增大则 \(f(x)\) 增大
@@ -274,7 +274,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<!-- 图：materials/img0302TrainLog.png -->
+运行上面的代码，可以观察到：
 
 1. 损失起初迅速下降，随后趋于平缓
 2. 参数 \(w\) 从 0 逐步逼近 238
@@ -350,8 +350,8 @@ plt.tight_layout()
 plt.show()
 ```
 
-<!-- 图：materials/img0303ParamChange.png -->
-<!-- 图：materials/img0304LossTrajectory.png -->
+![参数 w、b 随迭代次数的变化](/images/ml/img0303ParamChange.webp)
+![梯度下降在损失曲线上的轨迹](/images/ml/img0304LossTrajectory.webp)
 
 对于 \(y = x^2\)，梯度是 \(2x\)，更新公式是 \(x := x - lr \cdot 2x = x(1 - 2\,lr)\)。每一步 \(x\) 乘上因子 \((1 - 2\,lr)\)：
 
@@ -466,7 +466,7 @@ history = adam_optimizer(areas, prices, lr=0.1, epochs=50000)
 print(f"\n最终结果: 房价 = {history['w'][-1] / 100:.3f} × 面积(平米) + {history['b'][-1]:.2f}")
 ```
 
-<!-- 图：materials/img0305AdamTrainLog.png -->
+![Adam 优化器训练过程](/images/ml/img0305AdamTrainLog.webp)
 
 对比前面的普通梯度下降，Adam 收敛明显更快：普通梯度下降在 2 万轮之后才收敛，Adam 在 2 万轮之前就已收敛。
 

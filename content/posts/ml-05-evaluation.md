@@ -224,7 +224,7 @@ print(f"残差标准差: {residuals.std():.4f}")
 print(f"残差偏度: {pd.Series(residuals).skew():.4f}")
 ```
 
-<!-- 图：materials/img0501Residual.png -->
+![残差分析图](/images/ml/img0501Residual.webp)
 
 ### 预测值与真实值对比图
 

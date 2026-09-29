@@ -47,20 +47,20 @@ summary: "PCA 在数学空间里找「最能看清全貌」的角度。去中心
 
 PCA 就是在数学空间里寻找最佳观察角度的算法，用最少的角度最大程度展示全貌。这些角度就是所谓的 **主成分**。
 
-<!-- 图：materials/img1201teapot.png -->
+![从不同角度观察茶壶：主成分的直觉](/images/ml/img1201teapot.webp)
 
 ### 身高体重示例
 
 假设构建健康风险预测模型，数据集中有身高和体重两个特征。画到二维坐标系上，横轴身高，纵轴体重：
 
-<!-- 图：materials/img1202HWrelationship.png -->
+![身高与体重的正相关关系](/images/ml/img1202HWrelationship.webp)
 
 - 身高越高，体重往往越重
 - 数据点大致沿左下到右上的对角线排布
 
 身高与体重存在强烈的 **正相关**，携带重叠的信息。
 
-<!-- 图：materials/img1203HWproject.png -->
+![身高体重数据投影到主成分方向](/images/ml/img1203HWproject.webp)
 
 PCA 会找到最能反映数据走势的那条对角线，然后把所有数据点投影到这条线上：
 
@@ -127,7 +127,7 @@ PCA 自动分析相关性，把 6 个特征压缩成少量综合成分（以下�
 
 PCA 的底层逻辑建立在协方差矩阵和特征值分解之上。假设数据矩阵 \(X\) 有 \(n\) 个样本、\(d\) 个特征（\(n \times d\)），要降到 \(k\) 维。
 
-<!-- 图：materials/img1204PCAstep.png -->
+![PCA 计算步骤](/images/ml/img1204PCAstep.webp)
 
 ### 数据去中心化
 
@@ -433,7 +433,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<!-- 图：materials/img1205Scree&Projection.png -->
+![碎石图与降维投影结果](/images/ml/img1205ScreeAndProjection.webp)
 
 ## 随机森林特征选择 vs PCA
 

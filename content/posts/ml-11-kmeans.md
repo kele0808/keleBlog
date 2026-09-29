@@ -129,7 +129,7 @@ plt.title("初始化数据")
 plt.show()
 ```
 
-<!-- 图：materials/img1101InitialData.png -->
+![K-Means 初始数据分布](/images/ml/img1101InitialData.webp)
 
 ### 初始化中心
 
@@ -146,7 +146,7 @@ plt.title("初始化中心: 随机选择 k 个点")
 plt.show()
 ```
 
-<!-- 图：materials/img1102InitialCentroids.png -->
+![初始质心位置](/images/ml/img1102InitialCentroids.webp)
 
 ### 逐轮迭代
 
@@ -185,7 +185,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<!-- 图：materials/img1103Iteration.png -->
+![K-Means 迭代过程](/images/ml/img1103Iteration.webp)
 
 复现过程与 [原作笔记演示](https://www.yuque.com/qx2io/machine-learning/gt0x5gv29g7t4alv#PUZHp) 不同，这里 5 次迭代即收敛（取决于随机到的初始点）。
 
@@ -216,7 +216,7 @@ K-Means 的一大问题是簇数 K 要预先指定。**肘部法则**（Elbow Me
 
 **斜率显著减小、曲线趋于平缓的拐点** 称为肘部，是 K 值的较优选择。
 
-<!-- 图：materials/img1104ElbowMethod.png -->
+![肘部法则选择 K 值](/images/ml/img1104ElbowMethod.webp)
 
 > **补充**
 > 肘部经常不明显。一个更量化的补充指标是 **轮廓系数**（Silhouette Score，`sklearn.metrics.silhouette_score`），取值 \([-1, 1]\)，衡量样本「离自己簇有多近、离最近的别的簇有多远」，越大越好；对不同 K 各算一次取最大。
@@ -290,7 +290,7 @@ print(f"SSE: {kmeans.inertia_:.2f}")
 print(f"迭代次数: {kmeans.n_iter_}")
 ```
 
-<!-- 图：materials/img1105KMeans++Elbow.png -->
+![K-Means++ 聚类结果与肘部曲线](/images/ml/img1105KMeansppElbow.webp)
 
 - SSE: 362.47
 - 迭代次数: 3
@@ -346,7 +346,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-<!-- 图：materials/img1107CompressedImg.png -->
+![K-Means 图像颜色压缩：原图与 K=4/16/64](/images/ml/img1107CompressedImg.webp)
 
 每个像素是 RGB 三维空间中的一个点，K 个质心就是 K 种「代表色」，每个像素用离它最近的代表色替换。
 
