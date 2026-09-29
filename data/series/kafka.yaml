@@ -1,5 +1,6 @@
 id: kafka
 weight: 10
+status: active
 plannedCount: 9
 title:
   zh-cn: Kafka 源码解析

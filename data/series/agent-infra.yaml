@@ -1,5 +1,6 @@
 id: agent-infra
 weight: 48
+status: active
 plannedCount: 15
 title:
   zh-cn: Agent Infra 学习路线

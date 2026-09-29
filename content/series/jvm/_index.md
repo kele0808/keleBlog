@@ -6,6 +6,9 @@ description: "内存模型、垃圾回收、类加载与性能排查，把 JVM �
 ShowReadingTime: false
 ShowWordCount: false
 hidemeta: true
+build:
+  render: never
+  list: never
 ---
 
 面向日常排查与面试都用得上的 JVM 笔记：先建立模型，再落到 GC 日志与常见故障路径。

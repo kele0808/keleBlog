@@ -1,5 +1,6 @@
 id: java-collections
 weight: 20
+status: planned
 plannedCount: 8
 title:
   zh-cn: Java 集合源码

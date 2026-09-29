@@ -1,7 +1,9 @@
-{{- /* 按 weight 输出全部系列卡片 */ -}}
+{{- /* 按 weight 输出系列卡片；status: planned 的系列不展示 */ -}}
 {{- $items := slice }}
 {{- range $id, $meta := site.Data.series }}
+  {{- if ne $meta.status "planned" }}
   {{- $items = $items | append (dict "id" $id "meta" $meta "weight" ($meta.weight | default 100)) }}
+  {{- end }}
 {{- end }}
 {{- $items = sort $items "weight" }}
 <div class="series-grid">

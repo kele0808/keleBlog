@@ -1,5 +1,6 @@
 id: jvm
 weight: 30
+status: planned
 plannedCount: 8
 title:
   zh-cn: JVM 原理与实践

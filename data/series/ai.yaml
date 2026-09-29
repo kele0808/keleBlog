@@ -1,5 +1,6 @@
 id: ai
 weight: 50
+status: planned
 plannedCount: 7
 title:
   zh-cn: AI 应用实践

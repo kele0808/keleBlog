@@ -503,6 +503,21 @@ body.series-doc-page .main {
   line-height: 1.5;
 }
 
+.series-card-status {
+  margin-left: 0.4rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  vertical-align: middle;
+  background: var(--code-bg);
+  color: var(--secondary);
+}
+
+.series-card-status.is-active {
+  color: var(--doc-accent);
+}
+
 .series-card-progress {
   font-size: 0.85rem !important;
   color: var(--content) !important;

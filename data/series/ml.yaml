@@ -1,5 +1,6 @@
 id: ml
 weight: 45
+status: done
 plannedCount: 15
 title:
   zh-cn: 机器学习笔记

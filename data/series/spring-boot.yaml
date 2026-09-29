@@ -1,5 +1,6 @@
 id: spring-boot
 weight: 40
+status: planned
 plannedCount: 8
 title:
   zh-cn: Spring Boot 源码与实践

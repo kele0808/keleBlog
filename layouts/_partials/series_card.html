@@ -12,7 +12,12 @@
 {{- end }}
 <a class="series-card" href="{{ $seriesURL }}">
   <div class="series-card-body">
-    <h3>{{ index $meta.title $lang | default (index $meta.title "zh-cn") }}</h3>
+    <h3>
+      {{ index $meta.title $lang | default (index $meta.title "zh-cn") }}
+      {{- with index (dict "done" "已完结" "active" "连载中") ($meta.status | default "") }}
+      <span class="series-card-status is-{{ $meta.status }}">{{ . }}</span>
+      {{- end }}
+    </h3>
     <p>{{ index $meta.description $lang | default (index $meta.description "zh-cn") }}</p>
     <p class="series-card-progress">
       {{- if eq $lang "zh-cn" }}已写 {{ $published }} / {{ $planned }} 篇{{- else }}{{ $published }} / {{ $planned }} posts{{- end }}
