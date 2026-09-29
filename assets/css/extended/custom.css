@@ -774,6 +774,29 @@ body.series-doc-page .main {
   text-decoration: none;
 }
 
+.prerequisites {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.5rem;
+  margin: 0 0 1.5rem;
+  padding: 0.6rem 0.9rem;
+  border-left: 3px solid var(--doc-accent);
+  background: var(--code-bg);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 0.9rem;
+}
+
+.prerequisites-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--secondary);
+}
+
+.prerequisites-sep {
+  color: var(--secondary);
+}
+
 /* ---------------- 4.3 文章二级导航 ---------------- */
 
 .posts-tabs {

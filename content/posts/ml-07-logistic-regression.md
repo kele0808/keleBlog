@@ -7,6 +7,7 @@ tags: ["机器学习", "逻辑回归", "分类", "交叉熵", "混淆矩阵"]
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 8
+prerequisites: ["posts/ml-02-linear-regression", "posts/ml-03-gradient-descent"]
 description: "逻辑回归 = 线性回归 + Sigmoid。从为什么不用 MSE、伯努利分布、最大似然推导出交叉熵；乳腺癌数据集实战；混淆矩阵、精确率 / 召回率 / F1、ROC / AUC；Softmax 与神经网络的联系。"
 summary: "分类问题解决「是哪类」。Sigmoid 把线性输出压成概率，交叉熵让优化保持凸性，梯度公式和线性回归长得一模一样。"
 ---

@@ -7,6 +7,7 @@ tags: ["机器学习", "Boosting", "GBDT", "XGBoost", "LightGBM", "CatBoost"]
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 11
+prerequisites: ["posts/ml-08-decision-tree", "posts/ml-09-random-forest"]
 description: "Bagging 并行投票，Boosting 串行纠错。从函数空间的梯度下降理解 GBDT，用 30 行代码手搓一个，再看 XGBoost / LightGBM / CatBoost 各自改进了什么，最后在加州房价上对比随机森林与 XGBoost。"
 summary: "每棵新树都在拟合前面模型的残差。MSE 下负梯度恰好就是残差，换别的损失函数照样能算。"
 ---

@@ -1,0 +1,19 @@
+{{- /* 前置知识：front matter prerequisites 填文章路径，如 "posts/ml-02-linear-regression" */ -}}
+{{- $current := . }}
+{{- $pages := slice }}
+{{- range .Params.prerequisites }}
+  {{- with site.GetPage . }}
+    {{- $pages = $pages | append . }}
+  {{- else }}
+    {{- warnf "%s: prerequisite page %q not found" $current.File.Path . }}
+  {{- end }}
+{{- end }}
+{{- with $pages }}
+<aside class="prerequisites">
+  <span class="prerequisites-label">建议先读</span>
+  {{- range $i, $p := . }}
+  {{- if $i }}<span class="prerequisites-sep">·</span>{{ end }}
+  <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
+  {{- end }}
+</aside>
+{{- end }}

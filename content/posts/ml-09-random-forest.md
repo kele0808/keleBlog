@@ -7,6 +7,7 @@ tags: ["机器学习", "随机森林", "集成学习", "Bagging", "特征重要�
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 10
+prerequisites: ["posts/ml-08-decision-tree"]
 description: "随机森林 = 很多棵不一样的决策树投票。样本随机（Bootstrap）+ 特征随机制造多样性，袋外样本提供免费验证集，MDI 与排列重要性两种方式解读特征贡献。"
 summary: "个体不必完美，多样性构建稳定。约 36.8% 的样本抽不到，正好拿来当验证集。"
 ---

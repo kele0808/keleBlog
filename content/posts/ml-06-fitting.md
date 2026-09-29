@@ -7,6 +7,7 @@ tags: ["机器学习", "过拟合", "欠拟合", "正则化", "学习曲线"]
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 7
+prerequisites: ["posts/ml-05-evaluation"]
 description: "泛化能力是目标，欠拟合和过拟合是两大障碍。用多项式回归和学习曲线做诊断，再分别给出解法：特征工程与复杂模型对付欠拟合，L1 / L2 正则化等对付过拟合。"
 summary: "欠拟合做加法，过拟合做减法。学习曲线一眼看出是哪种问题；Ridge 把权重压小，Lasso 把权重压成零。"
 ---

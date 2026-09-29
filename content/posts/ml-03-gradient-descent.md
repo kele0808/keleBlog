@@ -7,6 +7,7 @@ tags: ["机器学习", "梯度下降", "优化器", "Adam"]
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 4
+prerequisites: ["posts/ml-02-linear-regression"]
 description: "从导数、偏导数到梯度，推导线性回归的梯度公式并手写实现；实验不同学习率的效果；对比 Momentum / AdaGrad / RMSProp / Adam，以及 BGD / SGD / Mini-batch 三种变体。"
 summary: "梯度指向函数上升最快的方向，沿反方向按学习率走一步就是梯度下降。手搓实现、学习率实验、优化器演进和小批量变体，这一章一次讲完。"
 ---
