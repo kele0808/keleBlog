@@ -27,6 +27,9 @@
     {{ .Description | markdownify }}
   </div>
   {{- end }}
+  {{- if or (and (eq .Kind "section") (eq .Section "posts")) (eq .Kind "term") }}
+  {{- partial "posts_tabs.html" . }}
+  {{- end }}
 </header>
 {{- end }}
 

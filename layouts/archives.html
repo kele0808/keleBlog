@@ -25,6 +25,7 @@
     {{ .Description }}
   </div>
   {{- end }}
+  {{- partial "posts_tabs.html" . }}
 </header>
 
 {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}

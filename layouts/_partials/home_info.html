@@ -1,16 +1,35 @@
 {{- with site.Params.homeInfoParams }}
-<article class="first-entry home-info">
+<article class="first-entry home-info home-hero">
     <header class="entry-header">
         <h1>{{ .Title | markdownify }}</h1>
+        {{- with .Role }}
+        <p class="home-hero-role">{{ . }}</p>
+        {{- end }}
     </header>
+
+    {{- with .Topics }}
+    <p class="home-hero-topics">{{ delimit . " · " }}</p>
+    {{- end }}
+
     <div class="entry-content md-content">
         {{ $opts := dict "display" "block" }}
         {{ .Content | $.Page.RenderString $opts }}
     </div>
 
-    {{- with .WritingNow }}
+    {{- with .Buttons }}
+    <div class="home-hero-buttons">
+        {{- range . }}
+        {{- $external := hasPrefix .url "http" }}
+        <a class="home-hero-btn{{ if .primary }} is-primary{{ end }}"
+           href="{{ if $external }}{{ .url }}{{ else }}{{ .url | relURL }}{{ end }}"
+           {{- if $external }} target="_blank" rel="noopener noreferrer"{{ end }}>{{ .name }}</a>
+        {{- end }}
+    </div>
+    {{- end }}
+
+    {{- with .Now }}
     <p class="home-writing-now">
-        <span class="home-writing-now-label">{{- if eq site.Language.Lang "zh-cn" }}正在写什么{{- else }}Writing now{{- end }}</span>
+        <span class="home-writing-now-label">最近在做</span>
         <span class="home-writing-now-text">{{ . }}</span>
     </p>
     {{- end }}

@@ -1,0 +1,16 @@
+{{- /* 文章 / 分类 / 标签 / 归档 四个入口的二级导航 */ -}}
+{{- $current := . }}
+{{- $tabs := slice
+  (dict "name" "全部" "ref" "/posts")
+  (dict "name" "分类" "ref" "/categories")
+  (dict "name" "标签" "ref" "/tags")
+  (dict "name" "归档" "ref" "/archives") }}
+<nav class="posts-tabs" aria-label="文章导航">
+  {{- range $tabs }}
+  {{- $name := .name }}
+  {{- with site.GetPage .ref }}
+  {{- $active := or (eq .RelPermalink $current.RelPermalink) (and (eq $current.Kind "term") (eq .Type $current.Type)) }}
+  <a href="{{ .RelPermalink }}"{{ if $active }} class="active" aria-current="page"{{ end }}>{{ $name }}</a>
+  {{- end }}
+  {{- end }}
+</nav>

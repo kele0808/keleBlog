@@ -1,0 +1,20 @@
+{{- /* 技术主线：数据见 data/path.yaml */ -}}
+{{- $labels := dict "done" "已沉淀" "active" "进行中" "planned" "计划中" }}
+<ol class="learning-path">
+  {{- range site.Data.path }}
+  {{- $url := "" }}
+  {{- with .series }}
+    {{- if gt (len (partial "series_posts.html" .)) 0 }}
+      {{- with site.GetPage (printf "/series/%s" .) }}{{ $url = .RelPermalink }}{{ end }}
+    {{- end }}
+  {{- end }}
+  <li class="learning-path-step is-{{ .status }}">
+    {{- if $url }}
+    <a href="{{ $url }}">{{ .name }}</a>
+    {{- else }}
+    <span>{{ .name }}</span>
+    {{- end }}
+    <small>{{ index $labels .status }}</small>
+  </li>
+  {{- end }}
+</ol>

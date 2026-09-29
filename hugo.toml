@@ -23,7 +23,7 @@ keepWhitespace = true
 env = "production"
 author = "kele"
 mainSections = ["posts"]
-keywords = ["Blog", "Kafka", "AI", "后端", "源码解析"]
+keywords = ["Java", "Kafka", "分布式系统", "机器学习", "RAG", "Agent", "Agent Infra", "源码解析"]
 DateFormat = "2006-01-02"
 defaultTheme = "auto"
 disableThemeToggle = false
@@ -66,10 +66,9 @@ minMatchCharLength = 0
 limit = 10
 keys = ["title", "permalink", "summary", "content"]
 
-# ---------- 多语言配置 ----------
+# ---------- 语言与站点 ----------
 [languages]
 
-# ========== 中文（默认） ==========
 [languages.zh-cn]
 languageName = "中文"
 languageCode = "zh-cn"
@@ -77,21 +76,30 @@ weight = 1
 title = "keleBlog"
 
   [languages.zh-cn.params]
-  description = "学习笔记与技术博客 —— Kafka、AI 与后端那些事"
+  description = "kele 的技术博客：Java 后端与分布式系统出发，深入 LLM、RAG、Agent 与 Agent Infra。"
 
     [languages.zh-cn.params.homeInfoParams]
     Title = "Hi, 我是 kele 👋"
-    Content = "这里是我的学习笔记与技术博客。主要会写 Kafka 源码解析、后端架构、AI 相关的知识与思考。慢慢更新，欢迎交流。"
-    WritingNow = "Kafka 源码解析 · 开篇已发布，Producer 全流程写作中"
+    Role = "Java 后端工程师 → AI / Agent Infra"
+    Topics = ["分布式系统", "Kafka 源码", "机器学习", "RAG", "Agent"]
+    Content = "从 Java 后端和分布式系统出发，沿着 ML → LLM → RAG → Agent 这条线往下走。这里放源码解析、实验记录和我在做的项目。"
+    Now = "RAGForge 混合检索（向量 + 全文 + RRF）· Kafka Producer 源码"
+
+      [[languages.zh-cn.params.homeInfoParams.Buttons]]
+      name = "项目"
+      url = "/projects/"
+      primary = true
+
+      [[languages.zh-cn.params.homeInfoParams.Buttons]]
+      name = "文章"
+      url = "/posts/"
+
+      [[languages.zh-cn.params.homeInfoParams.Buttons]]
+      name = "GitHub"
+      url = "https://github.com/kele0808"
 
     [languages.zh-cn.params.footer]
     text = '[GitHub](https://github.com/kele0808) · [RSS](/keleBlog/index.xml)'
-
-    [languages.zh-cn.params.homeSections]
-    featuredTitle = "精选文章"
-    latestTitle = "最新文章"
-    latestMore = "全部文章"
-    seriesTitle = "系列"
 
   [[languages.zh-cn.menu.main]]
   identifier = "posts"
@@ -103,31 +111,19 @@ title = "keleBlog"
   identifier = "series"
   name = "系列"
   pageRef = "/series"
-  weight = 15
-
-  [[languages.zh-cn.menu.main]]
-  identifier = "categories"
-  name = "分类"
-  pageRef = "/categories"
   weight = 20
 
   [[languages.zh-cn.menu.main]]
-  identifier = "tags"
-  name = "标签"
-  pageRef = "/tags"
+  identifier = "projects"
+  name = "项目"
+  pageRef = "/projects"
   weight = 30
 
   [[languages.zh-cn.menu.main]]
-  identifier = "archives"
-  name = "归档"
-  pageRef = "/archives"
-  weight = 40
-
-  [[languages.zh-cn.menu.main]]
   identifier = "about"
-  name = "关于我"
+  name = "关于"
   pageRef = "/about"
-  weight = 60
+  weight = 40
 
 # ---------- 输出与渲染 ----------
 [outputs]

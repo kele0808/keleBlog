@@ -1,0 +1,19 @@
+# 首页「技术主线」。status: done | active | planned
+# series: 可选，填 data/series 下的 id，有已发布文章时渲染为链接
+- name: Java 后端
+  status: done
+- name: 分布式系统
+  status: active
+  series: kafka
+- name: 机器学习
+  status: done
+  series: ml
+- name: LLM
+  status: active
+- name: RAG
+  status: active
+- name: Agent
+  status: planned
+  series: agent-infra
+- name: Agent Infra
+  status: planned
