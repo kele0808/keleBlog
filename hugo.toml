@@ -113,6 +113,12 @@ title = "keleBlog"
   weight = 20
 
   [[languages.zh-cn.menu.main]]
+  identifier = "knowledge"
+  name = "知识"
+  pageRef = "/knowledge"
+  weight = 25
+
+  [[languages.zh-cn.menu.main]]
   identifier = "projects"
   name = "项目"
   pageRef = "/projects"
