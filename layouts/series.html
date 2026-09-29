@@ -48,7 +48,7 @@
     {{- range $posts }}
     <li>
       <a href="{{ .Permalink }}">
-        <span class="series-toc-order">#{{ .Params.seriesOrder | default "?" }}</span>
+        <span class="series-toc-order">{{- if .Params.seriesIntro }}导读{{- else }}#{{ .Params.seriesOrder | default "?" }}{{- end }}</span>
         <span class="series-toc-title">{{ .Title }}</span>
       </a>
       {{- if (.Param "ShowReadingTime") | default site.Params.ShowReadingTime }}

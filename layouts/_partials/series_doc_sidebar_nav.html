@@ -6,14 +6,24 @@
 
 {{- $postByRoadmapIndex := dict -}}
 {{- $.Scratch.Set "introPosts" slice -}}
+{{- $.Scratch.Set "chapterPosts" slice -}}
+{{- $hasIntro := false -}}
 {{- range $posts -}}
-  {{- with .Params.roadmapIndex -}}
-    {{- $postByRoadmapIndex = merge $postByRoadmapIndex (dict (string .) .) -}}
+  {{- if .Params.seriesIntro }}{{ $hasIntro = true }}{{ end -}}
+{{- end -}}
+{{- range $posts -}}
+  {{- if .Params.seriesIntro -}}
+    {{- $.Scratch.Add "introPosts" . -}}
+  {{- else if .Params.roadmapIndex -}}
+    {{- $postByRoadmapIndex = merge $postByRoadmapIndex (dict (string .Params.roadmapIndex) .) -}}
+  {{- else if $hasIntro -}}
+    {{- $.Scratch.Add "chapterPosts" . -}}
   {{- else -}}
     {{- $.Scratch.Add "introPosts" . -}}
   {{- end -}}
 {{- end -}}
 {{- $introPosts := $.Scratch.Get "introPosts" -}}
+{{- $chapterPosts := $.Scratch.Get "chapterPosts" -}}
 {{- $roadmapIndex := 0 -}}
 
 {{- if gt (len $introPosts) 0 }}
@@ -21,6 +31,23 @@
   <p class="series-doc-nav-label">{{- if eq $lang "zh-cn" }}导读{{- else }}Intro{{- end }}</p>
   <ul class="series-doc-nav-list">
     {{- range $introPosts }}
+    {{- $isActive := eq .RelPermalink $.RelPermalink -}}
+    <li class="series-doc-nav-item{{ if $isActive }} is-active{{ end }}">
+      <a href="{{ .Permalink }}"{{ if $isActive }} data-toc-toggle{{ end }}>{{ .Title }}</a>
+      {{- if $isActive }}
+      {{ partial "series_doc_inline_toc.html" $ }}
+      {{- end }}
+    </li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+
+{{- if gt (len $chapterPosts) 0 }}
+<section class="series-doc-nav-group">
+  <p class="series-doc-nav-label">{{- if eq $lang "zh-cn" }}正文{{- else }}Chapters{{- end }}</p>
+  <ul class="series-doc-nav-list">
+    {{- range $chapterPosts }}
     {{- $isActive := eq .RelPermalink $.RelPermalink -}}
     <li class="series-doc-nav-item{{ if $isActive }} is-active{{ end }}">
       <a href="{{ .Permalink }}"{{ if $isActive }} data-toc-toggle{{ end }}>{{ .Title }}</a>
