@@ -80,9 +80,8 @@ title = "keleBlog"
 
     [languages.zh-cn.params.homeInfoParams]
     Title = "Hi, 我是 kele 👋"
-    Role = "Java 后端工程师 → AI / Agent Infra"
-    Topics = ["分布式系统", "Kafka 源码", "机器学习", "RAG", "Agent"]
-    Content = "从 Java 后端和分布式系统出发，沿着 ML → LLM → RAG → Agent 这条线往下走。这里放源码解析、实验记录和我在做的项目。"
+    Role = "从 Java 后端与分布式系统出发，探索 LLM、RAG 与 Agent 工程。"
+    Content = "通过源码阅读、可复现实验和项目实践，记录技术理解与设计取舍。"
     Now = "RAGForge 混合检索（向量 + 全文 + RRF）· Kafka Producer 源码"
 
       [[languages.zh-cn.params.homeInfoParams.Buttons]]

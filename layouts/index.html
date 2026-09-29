@@ -5,23 +5,12 @@
 {{- $posts := where site.RegularPages "Type" "in" site.Params.mainSections }}
 {{- $posts = where $posts "Params.hiddenInHomeList" "!=" true }}
 
-{{/* ---- 技术主线 ---- */}}
-{{- with site.Data.path }}
-<section class="home-section">
-  <header class="home-section-header">
-    <h2>技术主线</h2>
-    <a class="home-section-more" href="{{ "series/" | relLangURL }}">全部系列 →</a>
-  </header>
-  {{- partial "learning_path.html" . }}
-</section>
-{{- end }}
-
-{{/* ---- 项目 ---- */}}
+{{/* ---- 代表项目 ---- */}}
 {{- $projects := where site.Data.projects.items "featured" true }}
 {{- if gt (len $projects) 0 }}
 <section class="home-section">
   <header class="home-section-header">
-    <h2>项目</h2>
+    <h2>代表项目</h2>
     <a class="home-section-more" href="{{ "projects/" | relLangURL }}">全部项目 →</a>
   </header>
   <div class="project-grid">
