@@ -539,6 +539,36 @@ body.series-doc-page .main {
   color: var(--primary);
 }
 
+.home-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.home-list li {
+  margin: 0;
+  padding: 0.28rem 0;
+  line-height: 1.55;
+}
+
+.home-list a {
+  color: var(--doc-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.home-list a:hover {
+  text-decoration: underline;
+}
+
+.home-list span {
+  color: var(--secondary);
+}
+
+.home-list span::before {
+  content: "：";
+}
+
 .series-grid {
   display: grid;
   grid-template-columns: 1fr;

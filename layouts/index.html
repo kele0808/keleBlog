@@ -2,47 +2,75 @@
 
 {{- partial "home_info.html" . }}
 
-{{- $posts := where site.RegularPages "Type" "in" site.Params.mainSections }}
-{{- $posts = where $posts "Params.hiddenInHomeList" "!=" true }}
+{{- $lang := site.Language.Lang }}
 
-{{/* ---- 代表项目 ---- */}}
+{{/* ---- 系列 ---- */}}
+{{- $series := slice }}
+{{- range $id, $meta := site.Data.series }}
+  {{- if ne $meta.status "planned" }}
+    {{- $url := printf "/series/%s/" $id | relLangURL }}
+    {{- with site.GetPage (printf "/series/%s" $id) }}{{ $url = .RelPermalink }}{{ end }}
+    {{- $series = $series | append (dict
+      "title" (index $meta.title $lang | default (index $meta.title "zh-cn"))
+      "desc" (index $meta.description $lang | default (index $meta.description "zh-cn"))
+      "url" $url
+      "weight" ($meta.weight | default 100)) }}
+  {{- end }}
+{{- end }}
+{{- with sort $series "weight" }}
+<section class="home-section">
+  <header class="home-section-header">
+    <h2>系列</h2>
+    <a class="home-section-more" href="{{ "series/" | relLangURL }}">全部系列 →</a>
+  </header>
+  <ul class="home-list">
+    {{- range . }}
+    <li><a href="{{ .url }}">{{ .title }}</a><span>{{ .desc }}</span></li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+
+{{/* ---- 项目 ---- */}}
 {{- $projects := where site.Data.projects.items "featured" true }}
 {{- if gt (len $projects) 0 }}
 <section class="home-section">
   <header class="home-section-header">
-    <h2>代表项目</h2>
+    <h2>项目</h2>
     <a class="home-section-more" href="{{ "projects/" | relLangURL }}">全部项目 →</a>
   </header>
-  <div class="project-grid">
-    {{- range first 4 $projects }}
-      {{- partial "project_card.html" (dict "project" . "compact" true) }}
+  <ul class="home-list">
+    {{- range $projects }}
+    <li><a href="{{ printf "%s#%s" ("projects/" | relLangURL) .id }}">{{ .name }}</a><span>{{ .tagline }}</span></li>
     {{- end }}
-  </div>
+  </ul>
 </section>
 {{- end }}
 
-{{/* ---- 精选 ---- */}}
-{{- $featured := where $posts "Params.featured" true }}
-{{- if gt (len $featured) 0 }}
-<section class="home-section">
-  <header class="home-section-header">
-    <h2>精选文章</h2>
-  </header>
-  {{- range first 4 $featured }}
-    {{- partial "post_card.html" (dict "page" . "class" "post-entry") }}
+{{/* ---- 文章：精选优先，再用最新补到 6 篇 ---- */}}
+{{- $posts := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- $posts = where $posts "Params.hiddenInHomeList" "!=" true }}
+{{- $picked := where $posts "Params.featured" true | first 4 }}
+{{- $seen := dict }}
+{{- range $picked }}{{ $seen = merge $seen (dict .RelPermalink true) }}{{ end }}
+{{- range $posts }}
+  {{- if and (lt (len $picked) 6) (not (index $seen .RelPermalink)) }}
+    {{- $seen = merge $seen (dict .RelPermalink true) }}
+    {{- $picked = $picked | append . }}
   {{- end }}
-</section>
 {{- end }}
-
-{{/* ---- 最新 ---- */}}
+{{- if gt (len $picked) 0 }}
 <section class="home-section">
   <header class="home-section-header">
-    <h2>最新文章</h2>
+    <h2>文章</h2>
     <a class="home-section-more" href="{{ "posts/" | relLangURL }}">全部文章 →</a>
   </header>
-  {{- range first 5 $posts }}
-    {{- partial "post_card.html" (dict "page" . "class" "post-entry") }}
-  {{- end }}
+  <ul class="home-list">
+    {{- range $picked }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a><span>{{ .Description | default (.Summary | plainify) }}</span></li>
+    {{- end }}
+  </ul>
 </section>
+{{- end }}
 
 {{- end }}
