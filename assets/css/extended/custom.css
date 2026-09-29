@@ -805,18 +805,10 @@ body.series-doc-page .main {
   margin-bottom: 0.5rem !important;
 }
 
-.series-progress-bar {
-  height: 6px;
-  background: var(--border);
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.series-progress-bar > span {
-  display: block;
-  height: 100%;
-  background: var(--primary);
-  border-radius: 999px;
+.series-planned {
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--secondary);
 }
 
 /* ---------------- 5. 专题页 / 文章系列 / 相关阅读 ---------------- */

@@ -5,8 +5,6 @@
 {{- $lang := site.Language.Lang }}
 {{- $posts := partial "series_posts.html" $seriesId }}
 {{- $published := len $posts }}
-{{- $planned := $meta.plannedCount | default $published }}
-{{- if lt $planned $published }}{{- $planned = $published }}{{- end }}
 
 <header class="page-header series-header">
   {{- partial "breadcrumbs.html" . }}
@@ -15,15 +13,8 @@
   <div class="post-description">{{ .Description }}</div>
   {{- end }}
   <p class="series-progress">
-    {{- if eq $lang "zh-cn" }}
-    进度：已发布 <strong>{{ $published }}</strong> / 计划 {{ $planned }} 篇
-    {{- else }}
-    Progress: <strong>{{ $published }}</strong> published / {{ $planned }} planned
-    {{- end }}
+    已发布 <strong>{{ $published }}</strong> 篇{{ if eq $meta.status "done" }} · 已完结{{ end }}
   </p>
-  <div class="series-progress-bar" aria-hidden="true">
-    <span style="width: {{ if gt $planned 0 }}{{ div (mul $published 100) $planned }}{{ else }}0{{ end }}%"></span>
-  </div>
 </header>
 
 {{- if .Content }}

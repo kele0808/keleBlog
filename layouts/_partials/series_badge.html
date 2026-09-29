@@ -11,12 +11,6 @@
 {{- $posts = sort $posts "Params.seriesOrder" "asc" }}
 {{- $published := len $posts }}
 {{- $order := .Params.seriesOrder | default 1 }}
-{{- $total := $published }}
-{{- with $meta }}
-  {{- if .plannedCount }}
-    {{- $total = .plannedCount }}
-  {{- end }}
-{{- end }}
 {{- $title := index $meta.title $lang | default (index $meta.title "zh-cn") | default $seriesId }}
 {{- $seriesURL := printf "/series/%s/" $seriesId }}
 {{- with site.GetPage (printf "/series/%s" $seriesId) }}
@@ -26,6 +20,6 @@
 <p class="series-badge">
   <a href="{{ $seriesURL }}">{{ $title }}</a>
   <span>·</span>
-  {{- if eq $lang "zh-cn" }}第 {{ $order }}/{{ $total }} 篇{{- else }}Part {{ $order }}/{{ $total }}{{- end }}
+  {{- if eq $meta.status "done" }}第 {{ $order }}/{{ $published }} 篇{{- else }}第 {{ $order }} 篇{{- end }}
 </p>
 {{- end }}
