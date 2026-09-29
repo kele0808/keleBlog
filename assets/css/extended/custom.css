@@ -428,6 +428,38 @@ body.series-doc-page .main {
   max-width: 100%;
 }
 
+/* 正文链接：和小林笔记一样，用蓝色 + 下划线，和普通文字分开。
+   标题锚点、代码块里的链接不算正文链接。 */
+.post-content a,
+.md-content a {
+  color: var(--doc-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+}
+
+.post-content a:hover,
+.md-content a:hover {
+  filter: brightness(1.12);
+}
+
+.post-content .anchor,
+.md-content .anchor,
+.post-content pre a,
+.md-content pre a,
+.post-content .highlight a,
+.md-content .highlight a {
+  color: inherit;
+  text-decoration: none;
+  filter: none;
+}
+
+.prerequisites a {
+  color: var(--doc-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
 /* ---------------- 3. 卡片摘要 / 标签 ---------------- */
 
 .entry-summary-clamp p {
@@ -872,12 +904,13 @@ body.series-doc-page .main {
 }
 
 .related-posts a {
-  color: var(--primary);
-  text-decoration: none;
+  color: var(--doc-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 
 .related-posts a:hover {
-  text-decoration: underline;
+  filter: brightness(1.12);
 }
 
 .series-nav {
@@ -1179,13 +1212,11 @@ body.series-doc-drawer-open {
 }
 
 .series-doc-nav-item a {
-  color: var(--doc-accent);
+  color: var(--content);
 }
 
 .series-doc-nav-item a:hover {
   background: var(--code-bg);
-  color: var(--doc-accent);
-  filter: brightness(1.15);
 }
 
 .series-doc-nav-item.is-active > a {
