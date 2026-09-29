@@ -847,6 +847,11 @@ body.series-doc-page .main {
   color: var(--primary);
 }
 
+.series-toc a:hover,
+.series-toc a:hover .series-toc-order {
+  color: var(--doc-accent);
+}
+
 .series-toc-order {
   color: var(--secondary);
   font-variant-numeric: tabular-nums;
