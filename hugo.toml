@@ -129,66 +129,6 @@ title = "keleBlog"
   pageRef = "/about"
   weight = 60
 
-# ========== 英文 ==========
-[languages.en]
-languageName = "English"
-languageCode = "en"
-weight = 2
-title = "keleBlog"
-
-  [languages.en.params]
-  description = "Study notes & technical blog — Kafka, AI, and backend engineering."
-
-    [languages.en.params.homeInfoParams]
-    Title = "Hi, I'm kele 👋"
-    Content = "This is my personal blog for study notes and technical writing. Mostly Kafka source-code analysis, backend architecture, and AI-related knowledge. Updates as I learn — feel free to reach out."
-    WritingNow = "Kafka source series · Intro published; Producer deep-dive in progress"
-
-    [languages.en.params.footer]
-    text = 'Site views: <span id="busuanzi_container_site_pv"><span id="busuanzi_value_site_pv">…</span></span> · Unique visitors: <span id="busuanzi_container_site_uv"><span id="busuanzi_value_site_uv">…</span></span>'
-
-    [languages.en.params.homeSections]
-    featuredTitle = "Featured"
-    latestTitle = "Latest"
-    latestMore = "All posts"
-    seriesTitle = "Series"
-
-  [[languages.en.menu.main]]
-  identifier = "posts"
-  name = "Posts"
-  pageRef = "/posts"
-  weight = 10
-
-  [[languages.en.menu.main]]
-  identifier = "series"
-  name = "Series"
-  pageRef = "/series"
-  weight = 15
-
-  [[languages.en.menu.main]]
-  identifier = "categories"
-  name = "Categories"
-  pageRef = "/categories"
-  weight = 20
-
-  [[languages.en.menu.main]]
-  identifier = "tags"
-  name = "Tags"
-  pageRef = "/tags"
-  weight = 30
-
-  [[languages.en.menu.main]]
-  identifier = "archives"
-  name = "Archives"
-  pageRef = "/archives"
-  weight = 40
-
-  [[languages.en.menu.main]]
-  identifier = "about"
-  name = "About"
-  pageRef = "/about"
-  weight = 60
-
 # ---------- 输出与渲染 ----------
 [outputs]
 home = ["HTML", "RSS", "JSON"]
