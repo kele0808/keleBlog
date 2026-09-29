@@ -1,0 +1,34 @@
+{{- define "main" }}
+
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}
+  <div class="post-description">{{ . }}</div>
+  {{- end }}
+</header>
+
+{{- if .Content }}
+<div class="post-content md-content">
+  {{ .Content }}
+</div>
+{{- end }}
+
+{{- $items := site.Data.projects.items }}
+{{- range site.Data.projects.groups }}
+  {{- $group := where $items "group" .id }}
+  {{- if gt (len $group) 0 }}
+  <section class="home-section">
+    <header class="home-section-header">
+      <h2>{{ .name }}</h2>
+    </header>
+    <div class="project-grid">
+      {{- range $group }}
+      <div id="{{ .id }}">{{ partial "project_card.html" . }}</div>
+      {{- end }}
+    </div>
+  </section>
+  {{- end }}
+{{- end }}
+
+{{- end }}

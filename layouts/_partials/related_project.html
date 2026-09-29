@@ -1,0 +1,11 @@
+{{- with .Params.project }}
+{{- $id := . }}
+{{- range where site.Data.projects.items "id" $id }}
+<aside class="related-project">
+  <span class="related-project-label">关联项目</span>
+  <a class="related-project-name" href="{{ .github }}" target="_blank" rel="noopener noreferrer">{{ .name }}</a>
+  <span class="related-project-tagline">{{ .tagline }}</span>
+  <a class="related-project-more" href="{{ "projects/" | relLangURL }}#{{ .id }}">全部项目 →</a>
+</aside>
+{{- end }}
+{{- end }}

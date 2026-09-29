@@ -64,6 +64,7 @@
       {{- end }}
 
       {{- partial "extend_post_content.html" . }}
+      {{- partial "related_project.html" . }}
       {{- partial "related_posts.html" . }}
 
       <footer class="post-footer">
@@ -140,7 +141,6 @@
   {{- end }}
 
   {{- partial "extend_post_content.html" . }}
-  {{- partial "related_posts.html" . }}
 
   <footer class="post-footer">
     {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}

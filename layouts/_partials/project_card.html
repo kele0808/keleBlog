@@ -1,0 +1,24 @@
+{{- /* Usage: partial "project_card.html" $project（data/projects.yaml 中的一项） */ -}}
+{{- $p := . }}
+{{- $posts := where (where site.RegularPages "Section" "posts") "Params.project" $p.id }}
+<article class="project-card">
+  <header class="project-card-header">
+    <h3><a href="{{ $p.github }}" target="_blank" rel="noopener noreferrer">{{ $p.name }}</a></h3>
+    {{- with $p.status }}<span class="project-card-status">{{ . }}</span>{{ end }}
+  </header>
+  <p class="project-card-tagline">{{ $p.tagline }}</p>
+  {{- with $p.description }}
+  <p class="project-card-desc">{{ . }}</p>
+  {{- end }}
+  {{- with $p.stack }}
+  <ul class="entry-tags project-card-stack">
+    {{- range . }}<li><span>{{ . }}</span></li>{{ end }}
+  </ul>
+  {{- end }}
+  <footer class="project-card-links">
+    <a href="{{ $p.github }}" target="_blank" rel="noopener noreferrer">GitHub →</a>
+    {{- range first 2 $posts }}
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    {{- end }}
+  </footer>
+</article>

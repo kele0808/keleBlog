@@ -518,6 +518,126 @@ body.series-doc-page .main {
   color: var(--doc-accent);
 }
 
+/* ---------------- 4.2 项目卡片 ---------------- */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 720px) {
+  .project-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--entry);
+}
+
+.project-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.project-card-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.project-card-header h3 a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.project-card-status {
+  font-size: 0.75rem;
+  color: var(--secondary);
+  white-space: nowrap;
+}
+
+.project-card-tagline {
+  margin: 0.35rem 0 0.5rem;
+  font-weight: 500;
+  color: var(--content);
+}
+
+.project-card-desc {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--secondary);
+}
+
+.project-card-stack span {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.75rem;
+  border-radius: 999px;
+  background: var(--code-bg);
+  color: var(--secondary);
+}
+
+.project-card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  font-size: 0.88rem;
+}
+
+.project-card-links a {
+  color: var(--secondary);
+  text-decoration: none;
+}
+
+.project-card-links a:hover {
+  color: var(--primary);
+}
+
+.related-project {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+  margin: 2rem 0 0;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--doc-accent);
+  border-radius: var(--radius);
+  font-size: 0.92rem;
+}
+
+.related-project-label {
+  font-size: 0.75rem;
+  color: var(--secondary);
+}
+
+.related-project-name {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.related-project-tagline {
+  color: var(--secondary);
+}
+
+.related-project-more {
+  margin-left: auto;
+  color: var(--secondary);
+  text-decoration: none;
+}
+
 .series-card-progress {
   font-size: 0.85rem !important;
   color: var(--content) !important;

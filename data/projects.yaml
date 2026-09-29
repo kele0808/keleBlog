@@ -1,0 +1,38 @@
+# Projects 页数据。group 决定分组，featured 决定是否上首页。
+# 文章 front matter 写 project: <id> 即可在文末关联项目。
+groups:
+  - id: ai
+    name: AI / Agent
+  - id: backend
+    name: 后端 / 基础设施
+
+items:
+  - id: ragforge
+    name: RAGForge
+    group: ai
+    featured: true
+    status: 开发中
+    tagline: 从零搭一套可演进的企业级 RAG
+    description: 基于 PostgreSQL + pgvector，LlamaIndex 入库，向量检索 + 全文检索 + RRF 融合，规划权限过滤与带引用生成。按 spec 分步实现，对照 RAGFlow 批判性借鉴。
+    stack: [Python, PostgreSQL, pgvector, LlamaIndex, RRF]
+    github: https://github.com/kele0808/RAGForge
+
+  - id: daily-learnable
+    name: daily-learnable
+    group: ai
+    featured: true
+    status: 每周更新
+    tagline: 每周一自动筛选值得学习的 Agent / MCP 开源项目
+    description: Cursor Agent 定时在 GitHub 搜索 Agent / MCP / coding-agent 仓库，逐个阅读 README 与近期提交，过滤空壳项目，每周保留 3–5 个写成 digest。
+    stack: [TypeScript, Next.js, Cursor Agent]
+    github: https://github.com/kele0808/daily-learnable
+
+  - id: kafka-guide
+    name: kafkaGuide
+    group: backend
+    featured: true
+    status: 早期
+    tagline: 由浅入深读 Kafka 源码，最终写出自己的 MiniKafka
+    description: 按 Passage / Stop 组织，每一步由文档 + 代码组成：先讲这一步解决什么，再实现 append-only log、稀疏索引、socket server，最后与真实 Kafka 对照。
+    stack: [Java, Kafka]
+    github: https://github.com/kele0808/kafkaGuide
