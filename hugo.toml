@@ -85,7 +85,7 @@ title = "keleBlog"
     WritingNow = "Kafka 源码解析 · 开篇已发布，Producer 全流程写作中"
 
     [languages.zh-cn.params.footer]
-    text = '本站总访问 <span id="busuanzi_container_site_pv"><span id="busuanzi_value_site_pv">…</span></span> 次 · 总访客 <span id="busuanzi_container_site_uv"><span id="busuanzi_value_site_uv">…</span></span> 人'
+    text = '[GitHub](https://github.com/kele0808) · [RSS](/keleBlog/index.xml)'
 
     [languages.zh-cn.params.homeSections]
     featuredTitle = "精选文章"
