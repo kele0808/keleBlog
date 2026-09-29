@@ -6,7 +6,7 @@ math: true
 tags: ["机器学习", "人工智能", "深度学习"]
 categories: ["机器学习"]
 series: "ml"
-seriesOrder: 2
+seriesOrder: 1
 description: "机器学习系列的开篇：AI 的发展脉络、什么是智能、为什么是语言模型，以及 AI / ML / DL 的关系、模型与算法的区别、特征与权重。"
 summary: "从 1956 年到大语言模型的发展脉络，AI / ML / DL 三者关系，模型是学习结果、算法是学习方法，以及机器学习的本质是寻找最优权重。"
 ---

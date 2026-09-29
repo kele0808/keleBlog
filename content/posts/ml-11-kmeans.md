@@ -6,7 +6,7 @@ math: true
 tags: ["机器学习", "无监督学习", "聚类", "K-Means"]
 categories: ["机器学习"]
 series: "ml"
-seriesOrder: 13
+seriesOrder: 12
 description: "无监督学习让数据物以类聚。K-Means 在「分配样本」和「更新质心」之间循环直到收敛；用 numpy 逐轮复现迭代，再用 K-Means++ 和肘部法则优化，最后做一次图像颜色压缩。"
 summary: "选中心 → 分簇 → 更新中心 → 再分簇 → 直到稳定。SSE 越小簇越紧凑；K 要自己选，初始点要选得散。"
 ---

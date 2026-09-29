@@ -6,7 +6,7 @@ math: true
 tags: ["机器学习", "数据预处理", "特征工程", "Pandas", "scikit-learn"]
 categories: ["机器学习"]
 series: "ml"
-seriesOrder: 6
+seriesOrder: 5
 description: "以 Titanic 数据集为例走一遍预处理全流程：先划分再预处理、EDA、缺失值与异常值处理、序数 / 独热 / 标签三种编码、特征构造、标准化与归一化，最后用 Pipeline 封装。"
 summary: "Garbage in, garbage out。数据预处理决定模型上限：防泄漏、EDA 驱动、Pipeline 封装，这三条原则贯穿全章。"
 ---

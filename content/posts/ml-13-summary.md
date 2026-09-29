@@ -6,7 +6,7 @@ math: true
 tags: ["机器学习", "总结", "AutoML", "深度学习"]
 categories: ["机器学习"]
 series: "ml"
-seriesOrder: 15
+seriesOrder: 14
 description: "把整个系列压成一张地图：三类任务、核心概念、监督学习算法、训练与评估流程、集成学习、无监督学习、工业工具链，以及从机器学习走向深度学习的分界线。"
 summary: "机器学习不是算法清单，是「用数据解决问题」的完整工程方法。"
 ---

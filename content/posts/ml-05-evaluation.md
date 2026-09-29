@@ -6,7 +6,7 @@ math: true
 tags: ["机器学习", "模型评估", "交叉验证", "回归指标"]
 categories: ["机器学习"]
 series: "ml"
-seriesOrder: 7
+seriesOrder: 6
 description: "以加州房价为例：先跑 Baseline，再用 MAE / MSE / RMSE / R² 四个回归指标评估，做残差分析，最后用 K 折交叉验证消除单次划分的随机性。"
 summary: "评估要回答三个问题：预测和真实差多少、怎么量化、这个分数可信吗。指标给全局数字，残差图给具体表现，交叉验证给统计稳定性。"
 ---

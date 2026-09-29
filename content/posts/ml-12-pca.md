@@ -6,7 +6,7 @@ math: true
 tags: ["机器学习", "无监督学习", "降维", "PCA", "线性代数"]
 categories: ["机器学习"]
 series: "ml"
-seriesOrder: 14
+seriesOrder: 13
 description: "维度灾难为什么可怕，特征选择与特征提取的区别，PCA 如何用协方差矩阵的特征分解找到方差最大的方向。5 个人的身高 / 坐高 / 体重手算一遍，再用 sklearn 把鸢尾花降到二维。"
 summary: "PCA 在数学空间里找「最能看清全貌」的角度。去中心化 → 协方差矩阵 → 特征分解 → 按特征值排序 → 投影。"
 ---
