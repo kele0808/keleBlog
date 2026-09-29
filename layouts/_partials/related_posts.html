@@ -2,12 +2,12 @@
 {{- $lang := site.Language.Lang }}
 {{- $seriesId := .Params.series }}
 {{- $current := . }}
+{{- $prev := false }}
+{{- $next := false }}
 
 {{- if $seriesId }}
 {{- $posts := partial "series_posts.html" $seriesId }}
 {{- $order := $current.Params.seriesOrder | default 0 }}
-{{- $prev := false }}
-{{- $next := false }}
 {{- range $posts }}
   {{- if eq (.Params.seriesOrder | default 0) (sub $order 1) }}{{ $prev = . }}{{ end }}
   {{- if eq (.Params.seriesOrder | default 0) (add $order 1) }}{{ $next = . }}{{ end }}
@@ -31,12 +31,36 @@
 {{- end }}
 {{- end }}
 
-{{- /* 相关阅读：同 tags / categories，不足则用最新文章补齐，最多 3 篇 */ -}}
-{{- $related := slice }}
+{{- /*
+  相关阅读，最多 3 篇，凑不满就少展示：
+  1. front matter related 人工指定
+  2. 同一 project 的文章
+  3. 与当前文章共享 tag 的系列外文章（按共享数排序）
+  已在上一篇 / 下一篇、前置知识中出现的文章不重复展示。
+*/ -}}
 {{- $seen := dict $current.RelPermalink true }}
+{{- with $prev }}{{ $seen = merge $seen (dict .RelPermalink true) }}{{ end }}
+{{- with $next }}{{ $seen = merge $seen (dict .RelPermalink true) }}{{ end }}
+{{- range $current.Params.prerequisites }}
+  {{- with site.GetPage . }}{{ $seen = merge $seen (dict .RelPermalink true) }}{{ end }}
+{{- end }}
 
-{{- range $current.GetTerms "tags" }}
-  {{- range .Pages }}
+{{- $related := slice }}
+{{- range $current.Params.related }}
+  {{- with site.GetPage . }}
+    {{- if not (index $seen .RelPermalink) }}
+      {{- $seen = merge $seen (dict .RelPermalink true) }}
+      {{- $related = $related | append . }}
+    {{- end }}
+  {{- else }}
+    {{- warnf "%s: related page %q not found" $current.File.Path . }}
+  {{- end }}
+{{- end }}
+
+{{- $pool := where site.RegularPages "Section" "posts" }}
+
+{{- with $current.Params.project }}
+  {{- range where $pool "Params.project" . }}
     {{- if not (index $seen .RelPermalink) }}
       {{- $seen = merge $seen (dict .RelPermalink true) }}
       {{- $related = $related | append . }}
@@ -44,28 +68,18 @@
   {{- end }}
 {{- end }}
 
-{{- if lt (len $related) 3 }}
-  {{- range $current.GetTerms "categories" }}
-    {{- range .Pages }}
-      {{- if and (lt (len $related) 3) (not (index $seen .RelPermalink)) }}
-        {{- $seen = merge $seen (dict .RelPermalink true) }}
-        {{- $related = $related | append . }}
-      {{- end }}
-    {{- end }}
+{{- $myTags := $current.Params.tags | default slice }}
+{{- $scored := slice }}
+{{- range $pool.ByDate.Reverse }}
+  {{- if index $seen .RelPermalink }}{{ continue }}{{ end }}
+  {{- if and $seriesId (eq .Params.series $seriesId) }}{{ continue }}{{ end }}
+  {{- $shared := len (intersect $myTags (.Params.tags | default slice)) }}
+  {{- if gt $shared 0 }}
+    {{- $scored = $scored | append (dict "page" . "score" $shared) }}
   {{- end }}
 {{- end }}
-
-{{- if lt (len $related) 3 }}
-  {{- $pool := where site.RegularPages "Type" "in" site.Params.mainSections }}
-  {{- if eq (len $pool) 0 }}
-    {{- $pool = where site.Sites.Default.RegularPages "Type" "in" site.Sites.Default.Params.mainSections }}
-  {{- end }}
-  {{- range $pool }}
-    {{- if and (lt (len $related) 3) (not (index $seen .RelPermalink)) }}
-      {{- $seen = merge $seen (dict .RelPermalink true) }}
-      {{- $related = $related | append . }}
-    {{- end }}
-  {{- end }}
+{{- range sort $scored "score" "desc" }}
+  {{- $related = $related | append .page }}
 {{- end }}
 
 {{- if gt (len $related) 0 }}
