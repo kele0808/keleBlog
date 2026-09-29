@@ -31,6 +31,13 @@
 {{- else -}}
 <script defer crossorigin="anonymous" src="{{ $seriesDrawer.RelPermalink }}"></script>
 {{- end -}}
+{{- $navToggle := resources.Get "js/series-nav-toggle.js" | js.Build | resources.Minify -}}
+{{- if not site.Params.assets.disableFingerprinting -}}
+{{- $navToggle = $navToggle | fingerprint -}}
+<script defer crossorigin="anonymous" src="{{ $navToggle.RelPermalink }}" integrity="{{ $navToggle.Data.Integrity }}"></script>
+{{- else -}}
+<script defer crossorigin="anonymous" src="{{ $navToggle.RelPermalink }}"></script>
+{{- end -}}
 {{- $tocSpy := resources.Get "js/toc-scroll-spy.js" | js.Build | resources.Minify -}}
 {{- if not site.Params.assets.disableFingerprinting -}}
 {{- $tocSpy = $tocSpy | fingerprint -}}

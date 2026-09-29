@@ -1192,6 +1192,22 @@ body.series-doc-drawer-open {
   font-weight: 600;
 }
 
+.series-doc-nav-item > a[aria-expanded]::after {
+  content: "▾";
+  margin-left: auto;
+  padding-left: 0.35rem;
+  font-weight: 400;
+  color: var(--secondary);
+}
+
+.series-doc-nav-item > a[aria-expanded="false"]::after {
+  content: "▸";
+}
+
+.series-doc-nav-toc[hidden] {
+  display: none;
+}
+
 .series-doc-nav-toc .series-doc-toc-inner a {
   color: var(--secondary);
   font-weight: 400;
