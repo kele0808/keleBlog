@@ -1,0 +1,37 @@
+{{- /* 文章评论：Giscus，讨论存在 keleBlog 仓库的 GitHub Discussions / General。 */ -}}
+<div class="giscus-wrap">
+<script>
+(function () {
+  var theme = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+  var s = document.createElement("script");
+  s.src = "https://giscus.app/client.js";
+  s.async = true;
+  s.crossOrigin = "anonymous";
+  s.setAttribute("data-repo", "kele0808/keleBlog");
+  s.setAttribute("data-repo-id", "R_kgDOTuveEA");
+  s.setAttribute("data-category", "General");
+  s.setAttribute("data-category-id", "DIC_kwDOTuveEM4DGvUM");
+  s.setAttribute("data-mapping", "pathname");
+  s.setAttribute("data-strict", "0");
+  s.setAttribute("data-reactions-enabled", "0");
+  s.setAttribute("data-emit-metadata", "0");
+  s.setAttribute("data-input-position", "bottom");
+  s.setAttribute("data-theme", theme);
+  s.setAttribute("data-lang", "zh-CN");
+  s.setAttribute("data-loading", "lazy");
+  document.currentScript.parentNode.insertBefore(s, document.currentScript.nextSibling);
+
+  function applyTheme() {
+    var frame = document.querySelector("iframe.giscus-frame");
+    if (!frame || !frame.contentWindow) return;
+    var next = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+    frame.contentWindow.postMessage({ giscus: { setConfig: { theme: next } } }, "https://giscus.app");
+  }
+
+  new MutationObserver(applyTheme).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"]
+  });
+})();
+</script>
+</div>

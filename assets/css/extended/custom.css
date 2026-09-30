@@ -956,6 +956,10 @@ body.series-doc-page .main {
   filter: brightness(1.12);
 }
 
+.giscus-wrap {
+  margin: 2.5rem 0 0.5rem;
+}
+
 /* ---------------- 6. 系列文档布局 ---------------- */
 
 .series-doc-layout {

@@ -87,7 +87,9 @@
         {{- end }}
       </footer>
 
-      {{- if (.Param "comments") }}
+      {{- $showComments := true }}
+      {{- if isset .Params "comments" }}{{ $showComments = .Params.comments }}{{ end }}
+      {{- if $showComments }}
       {{- partial "comments.html" . }}
       {{- end }}
     </article>
