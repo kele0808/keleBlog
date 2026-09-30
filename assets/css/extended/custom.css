@@ -956,53 +956,6 @@ body.series-doc-page .main {
   filter: brightness(1.12);
 }
 
-.series-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin: 2rem 0 1rem;
-}
-
-.series-nav a {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding: 0.9rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  text-decoration: none !important;
-  color: inherit;
-}
-
-.series-nav a:hover {
-  border-color: var(--primary);
-}
-
-.series-nav-label {
-  font-size: 0.78rem;
-  color: var(--secondary);
-}
-
-.series-nav-title {
-  color: var(--primary);
-  font-weight: 600;
-}
-
-.series-nav-next {
-  text-align: end;
-  grid-column: 2;
-}
-
-@media (max-width: 600px) {
-  .series-nav {
-    grid-template-columns: 1fr;
-  }
-  .series-nav-next {
-    grid-column: 1;
-    text-align: start;
-  }
-}
-
 /* ---------------- 6. 系列文档布局 ---------------- */
 
 .series-doc-layout {

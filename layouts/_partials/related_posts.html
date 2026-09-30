@@ -1,35 +1,7 @@
-{{- /* 文末：同系列相邻 + 相关阅读 */ -}}
+{{- /* 文末相关阅读。系列前后篇由 series_nav_links.html 按已发布顺序渲染。 */ -}}
 {{- $lang := site.Language.Lang }}
 {{- $seriesId := .Params.series }}
 {{- $current := . }}
-{{- $prev := false }}
-{{- $next := false }}
-
-{{- if $seriesId }}
-{{- $posts := partial "series_posts.html" $seriesId }}
-{{- $order := $current.Params.seriesOrder | default 0 }}
-{{- range $posts }}
-  {{- if eq (.Params.seriesOrder | default 0) (sub $order 1) }}{{ $prev = . }}{{ end }}
-  {{- if eq (.Params.seriesOrder | default 0) (add $order 1) }}{{ $next = . }}{{ end }}
-{{- end }}
-
-{{- if or $prev $next }}
-<nav class="series-nav">
-  {{- with $prev }}
-  <a class="series-nav-prev" href="{{ .Permalink }}">
-    <span class="series-nav-label">{{- if eq $lang "zh-cn" }}上一篇{{- else }}Previous{{- end }}</span>
-    <span class="series-nav-title">{{ .Title }}</span>
-  </a>
-  {{- end }}
-  {{- with $next }}
-  <a class="series-nav-next" href="{{ .Permalink }}">
-    <span class="series-nav-label">{{- if eq $lang "zh-cn" }}下一篇{{- else }}Next{{- end }}</span>
-    <span class="series-nav-title">{{ .Title }}</span>
-  </a>
-  {{- end }}
-</nav>
-{{- end }}
-{{- end }}
 
 {{- /*
   相关阅读，最多 3 篇，凑不满就少展示：
@@ -39,8 +11,23 @@
   已在上一篇 / 下一篇、前置知识中出现的文章不重复展示。
 */ -}}
 {{- $seen := dict $current.RelPermalink true }}
+{{- if $seriesId }}
+{{- $posts := partial "series_posts.html" $seriesId }}
+{{- $currentOrder := $current.Params.seriesOrder | default 0 }}
+{{- $prev := false }}
+{{- $next := false }}
+{{- range $posts }}
+  {{- $order := .Params.seriesOrder | default 0 }}
+  {{- if and (lt $order $currentOrder) (or (not $prev) (gt $order ($prev.Params.seriesOrder | default 0))) }}
+    {{- $prev = . }}
+  {{- end }}
+  {{- if and (gt $order $currentOrder) (or (not $next) (lt $order ($next.Params.seriesOrder | default 999))) }}
+    {{- $next = . }}
+  {{- end }}
+{{- end }}
 {{- with $prev }}{{ $seen = merge $seen (dict .RelPermalink true) }}{{ end }}
 {{- with $next }}{{ $seen = merge $seen (dict .RelPermalink true) }}{{ end }}
+{{- end }}
 {{- range $current.Params.prerequisites }}
   {{- with site.GetPage . }}{{ $seen = merge $seen (dict .RelPermalink true) }}{{ end }}
 {{- end }}

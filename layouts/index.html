@@ -47,26 +47,40 @@
 </section>
 {{- end }}
 
-{{/* ---- 文章：精选优先，再用最新补到 6 篇 ---- */}}
+{{/* ---- 文章：精选与最新分开，合计不超过 6 篇 ---- */}}
 {{- $posts := where site.RegularPages "Type" "in" site.Params.mainSections }}
 {{- $posts = where $posts "Params.hiddenInHomeList" "!=" true }}
-{{- $picked := where $posts "Params.featured" true | first 4 }}
+{{- $featured := where $posts "Params.featured" true }}
+{{- $latestLimit := sub 6 (len $featured) }}
+{{- if lt $latestLimit 0 }}{{ $latestLimit = 0 }}{{ end }}
 {{- $seen := dict }}
-{{- range $picked }}{{ $seen = merge $seen (dict .RelPermalink true) }}{{ end }}
-{{- range $posts }}
-  {{- if and (lt (len $picked) 6) (not (index $seen .RelPermalink)) }}
-    {{- $seen = merge $seen (dict .RelPermalink true) }}
-    {{- $picked = $picked | append . }}
+{{- range $featured }}{{ $seen = merge $seen (dict .RelPermalink true) }}{{ end }}
+{{- $latest := slice }}
+{{- range $posts.ByDate.Reverse }}
+  {{- if and (lt (len $latest) $latestLimit) (not (index $seen .RelPermalink)) }}
+    {{- $latest = $latest | append . }}
   {{- end }}
 {{- end }}
-{{- if gt (len $picked) 0 }}
+{{- if gt (len $featured) 0 }}
 <section class="home-section">
   <header class="home-section-header">
-    <h2>文章</h2>
+    <h2>精选</h2>
+  </header>
+  <ul class="home-list">
+    {{- range $featured }}
+    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a><span>{{ .Description | default (.Summary | plainify) }}</span></li>
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+{{- if gt (len $latest) 0 }}
+<section class="home-section">
+  <header class="home-section-header">
+    <h2>最新</h2>
     <a class="home-section-more" href="{{ "posts/" | relLangURL }}">全部文章 →</a>
   </header>
   <ul class="home-list">
-    {{- range $picked }}
+    {{- range $latest }}
     <li><a href="{{ .RelPermalink }}">{{ .Title }}</a><span>{{ .Description | default (.Summary | plainify) }}</span></li>
     {{- end }}
   </ul>
