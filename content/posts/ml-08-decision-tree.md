@@ -3,6 +3,7 @@ title: "机器学习笔记 08 · 决策树"
 date: 2026-09-24T10:20:00+08:00
 draft: false
 math: true
+tags: ["决策树", "信息增益", "基尼系数", "剪枝"]
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 9

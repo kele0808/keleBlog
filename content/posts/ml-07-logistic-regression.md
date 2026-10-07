@@ -3,6 +3,7 @@ title: "机器学习笔记 07 · 逻辑回归"
 date: 2026-09-24T10:10:00+08:00
 draft: false
 math: true
+tags: ["逻辑回归", "分类", "交叉熵", "混淆矩阵"]
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 8

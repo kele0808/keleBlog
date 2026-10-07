@@ -3,7 +3,7 @@ title: "机器学习笔记 01 · 机器学习的类型"
 date: 2026-09-24T09:10:00+08:00
 draft: false
 math: true
-tags: ["监督学习", "无监督学习"]
+tags: ["监督学习", "无监督学习", "强化学习"]
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 2

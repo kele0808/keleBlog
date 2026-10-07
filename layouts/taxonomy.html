@@ -36,36 +36,6 @@
   {{- partial "posts_tabs.html" . }}
 </header>
 
-{{- if eq .Type "tags" }}
-{{- $palette := slice "#2563eb" "#0369a1" "#0f766e" "#15803d" "#c2410c" "#be185d" "#7e22ce" "#4338ca" "#0e7490" "#b45309" "#9f1239" "#6d28d9" }}
-{{- $maxCount := 1 }}
-{{- range .Data.Terms }}
-  {{- if and (ge .Count 2) (gt .Count $maxCount) }}{{ $maxCount = .Count }}{{ end }}
-{{- end }}
-<ul class="tag-cloud" data-tag-cloud>
-  {{- $type := .Type }}
-  {{- range .Data.Terms.Alphabetical }}
-    {{- $name := .Name }}
-    {{- $count := .Count }}
-    {{- if ge $count 2 }}
-    {{- $ratio := 1.0 }}
-    {{- if gt $maxCount 1 }}
-      {{- $ratio = math.Pow (div (float $count) (float $maxCount)) 0.62 }}
-    {{- end }}
-    {{- $size := add 86.0 (mul 78.0 $ratio) }}
-    {{- $color := index $palette (mod (int (hash.FNV32a $name)) (len $palette)) }}
-    {{- with site.GetPage (printf "/%s/%s" $type $name) }}
-    <li class="tag-bubble" style="--size: {{ printf "%.0f" $size }}px; --color: {{ $color }};" data-name="{{ .LinkTitle }}">
-      <a href="{{ .RelPermalink }}" aria-label="{{ .LinkTitle }}，{{ $count }} 篇">
-        <span class="tag-bubble-name">{{ .LinkTitle }}</span>
-        <span class="tag-bubble-count">{{ $count }}</span>
-      </a>
-    </li>
-    {{- end }}
-    {{- end }}
-  {{- end }}
-</ul>
-{{- else }}
 <ul class="terms-tags">
   {{- $type := .Type }}
   {{- range .Data.Terms.Alphabetical }}
@@ -78,6 +48,5 @@
     {{- end }}
   {{- end }}
 </ul>
-{{- end }}
 
 {{- end }}

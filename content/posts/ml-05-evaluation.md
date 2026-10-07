@@ -3,6 +3,7 @@ title: "机器学习笔记 05 · 模型评估"
 date: 2026-09-24T09:50:00+08:00
 draft: false
 math: true
+tags: ["模型评估", "交叉验证", "回归指标"]
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 6

@@ -23,16 +23,6 @@
 <script defer crossorigin="anonymous" src="{{ $menuJs.RelPermalink }}"></script>
 {{- end -}}
 
-{{- if and (eq .Kind "taxonomy") (eq .Type "tags") -}}
-{{- $tagCloud := resources.Get "js/tag-cloud.js" | js.Build | resources.Minify -}}
-{{- if not site.Params.assets.disableFingerprinting -}}
-{{- $tagCloud = $tagCloud | fingerprint -}}
-<script defer crossorigin="anonymous" src="{{ $tagCloud.RelPermalink }}" integrity="{{ $tagCloud.Data.Integrity }}"></script>
-{{- else -}}
-<script defer crossorigin="anonymous" src="{{ $tagCloud.RelPermalink }}"></script>
-{{- end -}}
-{{- end -}}
-
 {{- if and (eq .Kind "page") (eq .Section "posts") -}}
 {{- $seriesDrawer := resources.Get "js/series-drawer.js" | js.Build | resources.Minify -}}
 {{- if not site.Params.assets.disableFingerprinting -}}

@@ -2,6 +2,7 @@
 title: "Agent Infra 学习路线 · 开篇"
 date: 2026-08-19T21:00:00+08:00
 draft: false
+tags: ["AI", "Agent", "Agent Infra"]
 categories: ["Agent Infra"]
 series: "agent-infra"
 seriesOrder: 1

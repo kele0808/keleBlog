@@ -3,6 +3,7 @@ title: "机器学习笔记 06 · 拟合诊断"
 date: 2026-09-24T10:00:00+08:00
 draft: false
 math: true
+tags: ["过拟合", "欠拟合", "正则化", "学习曲线"]
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 7

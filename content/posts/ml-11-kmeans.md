@@ -3,7 +3,7 @@ title: "机器学习笔记 11 · K-Means 聚类"
 date: 2026-09-24T10:50:00+08:00
 draft: false
 math: true
-tags: ["无监督学习"]
+tags: ["无监督学习", "聚类", "K-Means"]
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 12
