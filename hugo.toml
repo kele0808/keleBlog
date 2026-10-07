@@ -26,11 +26,6 @@ keepWhitespace = true
 [params]
 env = "production"
 author = "kele"
-
-[params.label]
-text = "keleBlog"
-icon = "favicon.svg"
-iconHeight = 28
 mainSections = ["posts"]
 keywords = ["Java", "Kafka", "分布式系统", "机器学习", "RAG", "Agent", "Agent Infra", "源码解析"]
 images = ["images/og.png"]
@@ -53,6 +48,11 @@ hidemeta = false
 hideSummary = false
 ShowToc = true
 TocOpen = true
+
+[params.label]
+text = "keleBlog"
+icon = "favicon.svg"
+iconHeight = 28
 
 [[params.socialIcons]]
 name = "github"
