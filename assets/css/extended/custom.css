@@ -1468,39 +1468,77 @@ body.series-doc-drawer-open {
   background: rgba(96, 165, 250, 0.12);
 }
 
-/* ---------------- 9. 分类 / 标签索引 ---------------- */
+/* ---------------- 9. 分类 / 标签胶囊 ---------------- */
 
-.tag-index {
-  list-style: none;
-  margin: 0.25rem 0 2.5rem;
+.term-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.6rem;
+  margin: 0.35rem 0 1.5rem;
   padding: 0;
+  list-style: none;
 }
 
-.tag-index a {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1.5rem;
-  padding: 0.7rem 0.15rem;
-  border-bottom: 1px solid var(--border);
-  color: var(--content);
+.term-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.28rem 0.4rem 0.28rem 0.72rem;
+  border-radius: 999px;
+  background: var(--pill-bg);
+  color: var(--pill-fg);
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.3;
   text-decoration: none;
 }
 
-.tag-index a:hover,
-.tag-index a:focus-visible {
-  color: var(--primary);
+.term-pill-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding: 0 0.32rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--pill-fg) 12%, #fff);
+  color: var(--pill-fg);
+  font-size: 0.72rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
-.tag-index-name {
+.term-pill.is-active {
+  box-shadow: inset 0 0 0 1.5px var(--pill-fg);
+}
+
+.term-pill:hover,
+.term-pill:focus-visible {
+  color: var(--pill-fg);
+  filter: brightness(0.97);
+}
+
+.term-pills-inline {
+  gap: 0.35rem;
+  margin: 0.55rem 0 0;
+}
+
+.term-pills-inline .term-pill {
+  padding: 0.12rem 0.55rem;
+  font-size: 0.78rem;
   font-weight: 500;
 }
 
-.tag-index-count {
-  flex: none;
-  min-width: 1.5rem;
-  color: var(--secondary);
-  font-variant-numeric: tabular-nums;
-  font-size: 0.92rem;
-  text-align: end;
+.post-entry .term-pills {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+}
+
+[data-theme="dark"] .term-pill {
+  background: color-mix(in srgb, var(--pill-fg) 24%, transparent);
+}
+
+[data-theme="dark"] .term-pill-count {
+  background: color-mix(in srgb, var(--pill-fg) 18%, transparent);
 }

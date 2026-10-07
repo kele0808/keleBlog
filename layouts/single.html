@@ -46,6 +46,7 @@
           {{- partial "post_canonical.html" . -}}
         </div>
         {{- end }}
+        {{- partial "term_pills.html" (dict "page" . "mode" "inline") }}
         {{- if .Description }}
         <div class="post-description">
           {{ .Description }}
@@ -115,6 +116,7 @@
       {{- partial "post_canonical.html" . -}}
     </div>
     {{- end }}
+    {{- partial "term_pills.html" (dict "page" . "mode" "inline") }}
     {{- if .Description }}
     <div class="post-description">
       {{ .Description }}

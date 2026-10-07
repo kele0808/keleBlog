@@ -1,0 +1,60 @@
+{{- $page := .page }}
+{{- $mode := .mode | default "index" }}
+{{- $palette := slice
+  (dict "bg" "#fde2e8" "fg" "#be185d")
+  (dict "bg" "#dbeafe" "fg" "#1d4ed8")
+  (dict "bg" "#ffedd5" "fg" "#c2410c")
+  (dict "bg" "#dcfce7" "fg" "#15803d")
+  (dict "bg" "#f3e8ff" "fg" "#7e22ce")
+  (dict "bg" "#cffafe" "fg" "#0e7490")
+  (dict "bg" "#fef3c7" "fg" "#b45309")
+  (dict "bg" "#e0e7ff" "fg" "#4338ca")
+  (dict "bg" "#ccfbf1" "fg" "#0f766e")
+  (dict "bg" "#fee2e2" "fg" "#b91c1c")
+}}
+{{- if eq $mode "inline" }}
+{{- $terms := union ($page.GetTerms "categories") ($page.GetTerms "tags") }}
+{{- if gt (len $terms) 0 }}
+<ul class="term-pills term-pills-inline">
+  {{- range $page.GetTerms "categories" }}
+    {{- $color := index $palette (mod (int (hash.FNV32a .LinkTitle)) (len $palette)) }}
+    <li>
+      <a class="term-pill" href="{{ .RelPermalink }}" style="--pill-bg: {{ $color.bg }}; --pill-fg: {{ $color.fg }};">{{ .LinkTitle }}</a>
+    </li>
+  {{- end }}
+  {{- range $page.GetTerms "tags" }}
+    {{- $color := index $palette (mod (int (hash.FNV32a .LinkTitle)) (len $palette)) }}
+    <li>
+      <a class="term-pill" href="{{ .RelPermalink }}" style="--pill-bg: {{ $color.bg }}; --pill-fg: {{ $color.fg }};">{{ .LinkTitle }}</a>
+    </li>
+  {{- end }}
+</ul>
+{{- end }}
+{{- else }}
+{{- $tax := $page }}
+{{- if eq $page.Kind "term" }}{{ $tax = $page.Parent }}{{ end }}
+{{- $maxCount := 1 }}
+{{- range $tax.Data.Terms }}
+  {{- if gt .Count $maxCount }}{{ $maxCount = .Count }}{{ end }}
+{{- end }}
+<ul class="term-pills">
+  {{- $type := $tax.Type }}
+  {{- range $n := seq $maxCount -1 1 }}
+    {{- range $tax.Data.Terms.Alphabetical }}
+      {{- if eq .Count $n }}
+        {{- $name := .Name }}
+        {{- $count := .Count }}
+        {{- with site.GetPage (printf "/%s/%s" $type $name) }}
+          {{- $color := index $palette (mod (int (hash.FNV32a .LinkTitle)) (len $palette)) }}
+          <li>
+            <a class="term-pill{{ if eq .RelPermalink $page.RelPermalink }} is-active{{ end }}" href="{{ .RelPermalink }}" style="--pill-bg: {{ $color.bg }}; --pill-fg: {{ $color.fg }};">
+              <span>{{ .LinkTitle }}</span>
+              <span class="term-pill-count">{{ $count }}</span>
+            </a>
+          </li>
+        {{- end }}
+      {{- end }}
+    {{- end }}
+  {{- end }}
+</ul>
+{{- end }}

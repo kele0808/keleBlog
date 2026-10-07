@@ -30,6 +30,9 @@
   {{- if or (and (eq .Kind "section") (eq .Section "posts")) (eq .Kind "term") }}
   {{- partial "posts_tabs.html" . }}
   {{- end }}
+  {{- if and (eq .Kind "term") (in (slice "categories" "tags") .Type) }}
+  {{- partial "term_pills.html" (dict "page" . "mode" "index") }}
+  {{- end }}
 </header>
 {{- end }}
 

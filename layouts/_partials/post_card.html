@@ -18,14 +18,6 @@
     </h2>
   </header>
 
-  {{- with $page.GetTerms "tags" }}
-  <ul class="entry-tags">
-    {{- range . }}
-    <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
-    {{- end }}
-  </ul>
-  {{- end }}
-
   {{- if (ne ($page.Param "hideSummary") true) }}
   <div class="entry-content entry-summary-clamp">
     <p>{{ $page.Summary | plainify | htmlUnescape }}</p>
@@ -39,6 +31,7 @@
     {{- if ($page.Param "ShowReadingTime") | default site.Params.ShowReadingTime }}
     <span>{{- if eq site.Language.Lang "zh-cn" }}约 {{ $page.ReadingTime }} 分钟{{- else }}{{ $page.ReadingTime }} min read{{- end }}</span>
     {{- end }}
+    {{- partial "term_pills.html" (dict "page" $page "mode" "inline") }}
   </footer>
   <a class="entry-link" aria-label="post link to {{ $page.Title | plainify }}" href="{{ $page.Permalink }}"></a>
 </article>

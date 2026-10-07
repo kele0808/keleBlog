@@ -36,28 +36,6 @@
   {{- partial "posts_tabs.html" . }}
 </header>
 
-{{- $maxCount := 1 }}
-{{- range .Data.Terms }}
-  {{- if gt .Count $maxCount }}{{ $maxCount = .Count }}{{ end }}
-{{- end }}
-<ul class="tag-index">
-  {{- $type := .Type }}
-  {{- range $n := seq $maxCount -1 1 }}
-    {{- range $.Data.Terms.Alphabetical }}
-      {{- if eq .Count $n }}
-        {{- $name := .Name }}
-        {{- $count := .Count }}
-        {{- with site.GetPage (printf "/%s/%s" $type $name) }}
-        <li>
-          <a href="{{ .RelPermalink }}">
-            <span class="tag-index-name">{{ .LinkTitle }}</span>
-            <span class="tag-index-count">{{ $count }}</span>
-          </a>
-        </li>
-        {{- end }}
-      {{- end }}
-    {{- end }}
-  {{- end }}
-</ul>
+{{- partial "term_pills.html" (dict "page" . "mode" "index") }}
 
 {{- end }}

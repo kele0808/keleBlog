@@ -6,14 +6,6 @@
     {{- end }}
 {{- end }}
 
-{{- range .GetTerms "categories" }}
-    {{- $scratch.Add "meta" (slice (printf "<a href='%s'>%s</a>" .RelPermalink .LinkTitle)) }}
-{{- end }}
-
-{{- range .GetTerms "tags" }}
-    {{- $scratch.Add "meta" (slice (printf "<a href='%s'>%s</a>" .RelPermalink .LinkTitle)) }}
-{{- end }}
-
 {{- if not .Date.IsZero -}}
     {{- $dateFormat := default "2006-01-02" site.Params.DateFormat }}
     {{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" (.Date) (.Date | time.Format $dateFormat))) }}
