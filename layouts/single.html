@@ -38,17 +38,17 @@
 
         {{- partial "series_badge.html" . }}
 
-        {{- if .Description }}
-        <div class="post-description">
-          {{ .Description }}
-        </div>
-        {{- end }}
         {{- if not (.Param "hideMeta") }}
         <div class="post-meta">
           {{- partial "post_meta.html" . -}}
           {{- partial "translation_list.html" . -}}
           {{- partial "edit_post.html" . -}}
           {{- partial "post_canonical.html" . -}}
+        </div>
+        {{- end }}
+        {{- if .Description }}
+        <div class="post-description">
+          {{ .Description }}
         </div>
         {{- end }}
       </header>
@@ -69,14 +69,6 @@
       {{- partial "related_posts.html" . }}
 
       <footer class="post-footer">
-        {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
-        {{- with ($.GetTerms $tags) }}
-        <ul class="post-tags">
-          {{- range . }}
-          <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
-          {{- end }}
-        </ul>
-        {{- end }}
         {{- if (.Param "ShowPostNavLinks") }}
         {{- if $hasSeries }}
         {{- partial "series_nav_links.html" . }}
@@ -115,17 +107,17 @@
 
     {{- partial "series_badge.html" . }}
 
-    {{- if .Description }}
-    <div class="post-description">
-      {{ .Description }}
-    </div>
-    {{- end }}
     {{- if not (.Param "hideMeta") }}
     <div class="post-meta">
       {{- partial "post_meta.html" . -}}
       {{- partial "translation_list.html" . -}}
       {{- partial "edit_post.html" . -}}
       {{- partial "post_canonical.html" . -}}
+    </div>
+    {{- end }}
+    {{- if .Description }}
+    <div class="post-description">
+      {{ .Description }}
     </div>
     {{- end }}
   </header>
@@ -146,14 +138,6 @@
   {{- partial "extend_post_content.html" . }}
 
   <footer class="post-footer">
-    {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
-    {{- with ($.GetTerms $tags) }}
-    <ul class="post-tags">
-      {{- range . }}
-      <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
-      {{- end }}
-    </ul>
-    {{- end }}
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}
     {{- end }}

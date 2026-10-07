@@ -925,6 +925,15 @@ body.series-doc-page .main {
   font-weight: 600;
 }
 
+.post-single .post-meta {
+  margin-top: 0.7rem;
+  line-height: 1.75;
+}
+
+.post-single .post-description {
+  margin-top: 0.85rem;
+}
+
 .related-posts {
   margin: 2.5rem 0 1.5rem;
   padding-top: 1.5rem;
@@ -1457,4 +1466,41 @@ body.series-doc-drawer-open {
 [data-theme="dark"] .md-content blockquote {
   border-inline-start-color: #60a5fa;
   background: rgba(96, 165, 250, 0.12);
+}
+
+/* ---------------- 9. 分类 / 标签索引 ---------------- */
+
+.tag-index {
+  list-style: none;
+  margin: 0.25rem 0 2.5rem;
+  padding: 0;
+}
+
+.tag-index a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.7rem 0.15rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--content);
+  text-decoration: none;
+}
+
+.tag-index a:hover,
+.tag-index a:focus-visible {
+  color: var(--primary);
+}
+
+.tag-index-name {
+  font-weight: 500;
+}
+
+.tag-index-count {
+  flex: none;
+  min-width: 1.5rem;
+  color: var(--secondary);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.92rem;
+  text-align: end;
 }

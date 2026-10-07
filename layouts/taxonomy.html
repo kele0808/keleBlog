@@ -36,15 +36,26 @@
   {{- partial "posts_tabs.html" . }}
 </header>
 
-<ul class="terms-tags">
+{{- $maxCount := 1 }}
+{{- range .Data.Terms }}
+  {{- if gt .Count $maxCount }}{{ $maxCount = .Count }}{{ end }}
+{{- end }}
+<ul class="tag-index">
   {{- $type := .Type }}
-  {{- range .Data.Terms.Alphabetical }}
-    {{- $name := .Name }}
-    {{- $count := .Count }}
-    {{- with site.GetPage (printf "/%s/%s" $type $name) }}
-    <li>
-      <a href="{{ .RelPermalink }}">{{ .LinkTitle }} <sup><strong><sup>{{ $count }}</sup></strong></sup></a>
-    </li>
+  {{- range $n := seq $maxCount -1 1 }}
+    {{- range $.Data.Terms.Alphabetical }}
+      {{- if eq .Count $n }}
+        {{- $name := .Name }}
+        {{- $count := .Count }}
+        {{- with site.GetPage (printf "/%s/%s" $type $name) }}
+        <li>
+          <a href="{{ .RelPermalink }}">
+            <span class="tag-index-name">{{ .LinkTitle }}</span>
+            <span class="tag-index-count">{{ $count }}</span>
+          </a>
+        </li>
+        {{- end }}
+      {{- end }}
     {{- end }}
   {{- end }}
 </ul>
