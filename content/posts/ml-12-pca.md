@@ -3,7 +3,7 @@ title: "机器学习笔记 12 · PCA 降维"
 date: 2026-09-24T11:00:00+08:00
 draft: false
 math: true
-tags: ["机器学习", "无监督学习", "降维", "PCA", "线性代数"]
+tags: ["无监督学习"]
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 13

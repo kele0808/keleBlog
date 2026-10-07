@@ -3,7 +3,7 @@ title: "机器学习笔记 02 · 线性回归"
 date: 2026-09-24T09:20:00+08:00
 draft: false
 math: true
-tags: ["机器学习", "线性回归", "监督学习"]
+tags: ["监督学习"]
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 3

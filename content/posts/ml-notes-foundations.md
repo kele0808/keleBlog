@@ -3,7 +3,7 @@ title: "机器学习笔记 · 从线性回归到无监督学习"
 date: 2026-09-21T22:00:00+08:00
 draft: false
 math: true
-tags: ["机器学习", "深度学习", "监督学习", "梯度下降"]
+tags: ["深度学习", "监督学习", "梯度下降"]
 categories: ["机器学习"]
 series: "ml"
 seriesIntro: true

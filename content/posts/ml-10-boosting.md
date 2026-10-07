@@ -3,7 +3,6 @@ title: "机器学习笔记 10 · Boosting 模型"
 date: 2026-09-24T10:40:00+08:00
 draft: false
 math: true
-tags: ["机器学习", "Boosting", "GBDT", "XGBoost", "LightGBM", "CatBoost"]
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 11

@@ -3,7 +3,7 @@ title: "机器学习笔记 00 · 人工智能通识与机器学习是什么"
 date: 2026-09-24T09:00:00+08:00
 draft: false
 math: true
-tags: ["机器学习", "人工智能", "深度学习"]
+tags: ["深度学习"]
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 1

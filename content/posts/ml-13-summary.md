@@ -3,7 +3,7 @@ title: "机器学习笔记 结语 · 机器学习总结"
 date: 2026-09-24T11:10:00+08:00
 draft: false
 math: true
-tags: ["机器学习", "总结", "AutoML", "深度学习"]
+tags: ["深度学习"]
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 14

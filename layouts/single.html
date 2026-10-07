@@ -70,11 +70,13 @@
 
       <footer class="post-footer">
         {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
+        {{- with ($.GetTerms $tags) }}
         <ul class="post-tags">
-          {{- range ($.GetTerms $tags) }}
+          {{- range . }}
           <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
           {{- end }}
         </ul>
+        {{- end }}
         {{- if (.Param "ShowPostNavLinks") }}
         {{- if $hasSeries }}
         {{- partial "series_nav_links.html" . }}
@@ -87,9 +89,7 @@
         {{- end }}
       </footer>
 
-      {{- $showComments := true }}
-      {{- if isset .Params "comments" }}{{ $showComments = .Params.comments }}{{ end }}
-      {{- if $showComments }}
+      {{- if and (eq .Section "posts") (.Param "comments") }}
       {{- partial "comments.html" . }}
       {{- end }}
     </article>
@@ -147,11 +147,13 @@
 
   <footer class="post-footer">
     {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
+    {{- with ($.GetTerms $tags) }}
     <ul class="post-tags">
-      {{- range ($.GetTerms $tags) }}
+      {{- range . }}
       <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
       {{- end }}
     </ul>
+    {{- end }}
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}
     {{- end }}
@@ -160,7 +162,7 @@
     {{- end }}
   </footer>
 
-  {{- if (.Param "comments") }}
+  {{- if and (eq .Section "posts") (.Param "comments") }}
   {{- partial "comments.html" . }}
   {{- end }}
 </article>

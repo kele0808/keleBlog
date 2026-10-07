@@ -3,7 +3,6 @@ title: "机器学习笔记 09 · 随机森林"
 date: 2026-09-24T10:30:00+08:00
 draft: false
 math: true
-tags: ["机器学习", "随机森林", "集成学习", "Bagging", "特征重要性"]
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 10

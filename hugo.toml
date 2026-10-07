@@ -5,11 +5,15 @@ title = "keleBlog"
 theme = "PaperMod"
 
 enableRobotsTXT = true
+enableGitInfo = true
 buildDrafts = false
 buildFuture = false
 buildExpired = false
 
 pagination.pagerSize = 10
+
+[frontmatter]
+lastmod = [":git", "lastmod", "date", "publishDate"]
 
 [minify]
 disableXML = true
@@ -24,6 +28,7 @@ env = "production"
 author = "kele"
 mainSections = ["posts"]
 keywords = ["Java", "Kafka", "分布式系统", "机器学习", "RAG", "Agent", "Agent Infra", "源码解析"]
+images = ["images/og.png"]
 DateFormat = "2006-01-02"
 defaultTheme = "auto"
 disableThemeToggle = false
@@ -38,7 +43,7 @@ ShowRssButtonInSectionTermList = true
 UseHugoToc = true
 disableSpecial1stPost = false
 disableScrollToTop = true
-comments = false
+comments = true
 hidemeta = false
 hideSummary = false
 ShowToc = true

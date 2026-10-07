@@ -3,7 +3,7 @@ title: "机器学习笔记 03 · 梯度下降"
 date: 2026-09-24T09:30:00+08:00
 draft: false
 math: true
-tags: ["机器学习", "梯度下降", "优化器", "Adam"]
+tags: ["梯度下降"]
 categories: ["机器学习"]
 series: "ml"
 seriesOrder: 4

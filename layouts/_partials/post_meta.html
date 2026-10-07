@@ -1,7 +1,12 @@
 {{- $scratch := newScratch }}
 
 {{- if not .Date.IsZero -}}
-    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" (.Date) (.Date | time.Format (default ":date_long" site.Params.DateFormat)))) }}
+    {{- $dateFormat := default "2006-01-02" site.Params.DateFormat }}
+    {{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" (.Date) (.Date | time.Format $dateFormat))) }}
+    {{- $updated := .Lastmod }}
+    {{- if and (not $updated.IsZero) (gt $updated .Date) (ne ($updated.Format "2006-01-02") (.Date.Format "2006-01-02")) }}
+        {{- $scratch.Add "meta" (slice (printf "<span title='%s'>更新于 %s</span>" $updated ($updated | time.Format $dateFormat))) }}
+    {{- end }}
 {{- end }}
 
 {{- if (.Param "ShowReadingTime") -}}

@@ -2,7 +2,6 @@
 title: "Kafka 源码解析系列 · 开篇"
 date: 2026-08-04T22:30:00+08:00
 draft: false
-tags: ["Kafka", "架构"]
 categories: ["Kafka 源码解析"]
 series: "kafka"
 seriesOrder: 1

@@ -31,7 +31,7 @@
 
         const rect = cloud.getBoundingClientRect();
         const view = Math.min(window.innerWidth, document.documentElement.clientWidth);
-        const width = Math.min(cloud.clientWidth, view - Math.max(rect.left, 0) - 28);
+        const width = Math.min(cloud.clientWidth, Math.max(40, view - Math.max(rect.left, 0) - 16));
         if (width < 40) return;
 
         const pad = 16;
@@ -40,6 +40,16 @@
             const rand = rng(hash(el.dataset.name || el.textContent || ""));
             return { el, r: size / 2, rand, size };
         });
+        const maxSize = Math.max(...nodes.map((n) => n.size));
+        const fitTo = Math.min(maxSize, Math.max(120, (width - pad) / 2));
+        const fit = fitTo / maxSize;
+        if (fit < 0.995) {
+            for (const n of nodes) {
+                n.size *= fit;
+                n.r = n.size / 2;
+                n.el.style.setProperty("--size", n.size.toFixed(0) + "px");
+            }
+        }
 
         const maxR = Math.max(...nodes.map((n) => n.r));
         const area = nodes.reduce((sum, n) => sum + Math.PI * (n.r + pad) ** 2, 0);
