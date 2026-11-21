@@ -56,7 +56,7 @@ items:
     group: ai
     featured: true
     kind: 原创
-    status: 规划完成 · 实现未开始
+    status: 实现中 · 01 基础设施已完成
     tagline: 生产级 Text2SQL Agent：用元数据和语义层约束 LLM，而不是直接让模型写 SQL
     problem: 让业务人员用自然语言查 MySQL，同时保证结果口径一致、SQL 只读可控、权限与租户隔离可审计，并能用评测集量化准确率。
     role: 编写架构设计并拆成 9 份子 spec（基础设施、元数据、评测、Join 图、语义层、IR 编译器、执行网关、Agent、交付），严格按 spec 与 TDD 计划实现。
@@ -64,8 +64,8 @@ items:
       - 架构设计文档与 9 份子 spec（已确认）
       - 01 foundation 实施计划（11 个 TDD 任务）
       - 项目骨架：uv + Python 3.12，ruff / mypy strict / pytest
+      - 01 基础设施：配置、JSON 日志与 trace_id、FastAPI 骨架与统一错误、/healthz 与 /readyz、Alembic 迁移、PG 任务队列（SKIP LOCKED + 租约）与 worker、只读业务库连接、LangGraph echo 图（57 个单元测试 + 30 个集成测试）
     todo:
-      - 01 基础设施：配置、日志与 trace_id、FastAPI 骨架、PG 任务队列与 worker
       - 02 元数据采集与 04 Join 图
       - 05 语义层与 06 IR → SQL 编译（SQLGlot）
       - 07 只读执行网关与权限
@@ -73,7 +73,7 @@ items:
       - 03 合成工单库评测集
     stack: [Python, LangGraph, FastAPI, SQLGlot, PostgreSQL, pgvector, MySQL]
     github: https://github.com/kele0808/text2sql
-    verified: "2026-11-20"
+    verified: "2026-11-21"
 
   - id: kafka-guide
     name: kafkaGuide
