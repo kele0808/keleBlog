@@ -52,7 +52,7 @@ items:
     verified: "2026-09-29"
 
   - id: text2sql
-    name: text2sql
+    name: SQLClaw
     group: ai
     featured: true
     kind: 原创
@@ -72,7 +72,7 @@ items:
       - 08 LangGraph Agent 与 09 交付
       - 03 合成工单库评测集
     stack: [Python, LangGraph, FastAPI, SQLGlot, PostgreSQL, pgvector, MySQL]
-    github: https://github.com/kele0808/text2sql
+    github: https://github.com/kele0808/SQLClaw
     verified: "2026-11-21"
 
   - id: kafka-guide
